@@ -16,7 +16,7 @@ class ChuckNorrisService {
     }
     
     func getRandomJoke() async throws -> JokeResponse? {
-        let request = AF.request("\(baseUrl)/random")
+        let request = AF.request("\(baseUrl)/random", method: .get)
         return try await request.serializingDecodable(JokeResponse.self).value
     }
 }
