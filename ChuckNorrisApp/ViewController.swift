@@ -36,12 +36,17 @@ class ViewController: UIViewController {
 
 extension SwinjectStoryboard {
     @objc class func setup() {
-        defaultContainer.register(ChuckNorrisWebClient.self) { _ in ChuckNorrisWebClient() }
-        defaultContainer.register(MainViewModel.self) { r in
-            return MainViewModel(webClient: r.resolve(ChuckNorrisWebClient.self)!)
+        defaultContainer.register(ChuckNorrisService.self) { _ in
+            ChuckNorrisService(baseUrl: "https://api.chucknorris.io/jokes")
         }
-        defaultContainer.storyboardInitCompleted(ViewController.self) { r, c in
-            c.mainViewModel = r.resolve(MainViewModel.self)
+        defaultContainer.register(ChuckNorrisWebClient.self) { resolver in
+            ChuckNorrisWebClient(webService: resolver.resolve(ChuckNorrisService.self)!)
+        }
+        defaultContainer.register(MainViewModel.self) { resolver in
+            MainViewModel(webClient: resolver.resolve(ChuckNorrisWebClient.self)!)
+        }
+        defaultContainer.storyboardInitCompleted(ViewController.self) { resolver, viewController in
+            viewController.mainViewModel = resolver.resolve(MainViewModel.self)
         }
     }
 }

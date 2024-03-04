@@ -9,9 +9,13 @@ import Foundation
 import Alamofire
 
 class ChuckNorrisWebClient {
+    private var webService: ChuckNorrisService
+    
+    init(webService: ChuckNorrisService) {
+        self.webService = webService
+    }
     
     func getJoke() async throws -> JokeResponse? {
-        let request = AF.request("https://api.chucknorris.io/jokes/random")
-        return try await request.serializingDecodable(JokeResponse.self).value
+        return try await webService.getRandomJoke()
     }
 }
