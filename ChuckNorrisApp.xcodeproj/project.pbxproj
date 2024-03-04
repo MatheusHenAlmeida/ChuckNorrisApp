@@ -16,6 +16,7 @@
 		74926FC32B9612A00058D874 /* ChuckNorrisAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74926FC22B9612A00058D874 /* ChuckNorrisAppTests.swift */; };
 		74926FCD2B9612A00058D874 /* ChuckNorrisAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74926FCC2B9612A00058D874 /* ChuckNorrisAppUITests.swift */; };
 		74926FCF2B9612A00058D874 /* ChuckNorrisAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74926FCE2B9612A00058D874 /* ChuckNorrisAppUITestsLaunchTests.swift */; };
+		74926FDC2B9613C70058D874 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 74926FDB2B9613C70058D874 /* Podfile */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		74926FC82B9612A00058D874 /* ChuckNorrisAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChuckNorrisAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		74926FCC2B9612A00058D874 /* ChuckNorrisAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuckNorrisAppUITests.swift; sourceTree = "<group>"; };
 		74926FCE2B9612A00058D874 /* ChuckNorrisAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuckNorrisAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		74926FDB2B9613C70058D874 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 		74926F9F2B96129F0058D874 = {
 			isa = PBXGroup;
 			children = (
+				74926FDB2B9613C70058D874 /* Podfile */,
 				74926FAA2B96129F0058D874 /* ChuckNorrisApp */,
 				74926FC12B9612A00058D874 /* ChuckNorrisAppTests */,
 				74926FCB2B9612A00058D874 /* ChuckNorrisAppUITests */,
@@ -233,6 +236,7 @@
 			files = (
 				74926FB82B9612A00058D874 /* LaunchScreen.storyboard in Resources */,
 				74926FB52B9612A00058D874 /* Assets.xcassets in Resources */,
+				74926FDC2B9613C70058D874 /* Podfile in Resources */,
 				74926FB32B96129F0058D874 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
