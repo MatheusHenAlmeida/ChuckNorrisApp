@@ -10,10 +10,8 @@ import Alamofire
 
 class ChuckNorrisWebClient {
     
-    func getJoke() {
+    func getJoke() async throws -> JokeResponse? {
         let request = AF.request("https://api.chucknorris.io/jokes/random")
-        request.responseDecodable(of: JokeResponse.self) { joke in
-            print(joke)
-        }
+        return try await request.serializingDecodable(JokeResponse.self).value
     }
 }
