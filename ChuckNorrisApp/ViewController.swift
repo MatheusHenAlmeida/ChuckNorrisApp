@@ -26,7 +26,8 @@ class ViewController: UIViewController {
     
     @objc func askForJokeAction() {
         Task {
-            if let joke = try? await ChuckNorrisWebClient().getJoke() {
+            let webClient = AppDelegate.container.resolve(ChuckNorrisWebClient.self)
+            if let joke = try? await webClient?.getJoke() {
                 print(joke)
                 myLabel.text = joke.value ?? ""
             }

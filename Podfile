@@ -7,6 +7,7 @@ target 'ChuckNorrisApp' do
 
   # Pods for ChuckNorrisApp
   pod 'Alamofire', '~> 5.6'
+  pod 'Swinject'
 
   target 'ChuckNorrisAppTests' do
     inherit! :search_paths
