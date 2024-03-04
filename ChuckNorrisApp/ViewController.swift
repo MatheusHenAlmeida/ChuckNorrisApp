@@ -6,12 +6,15 @@
 //
 
 import UIKit
+import SwinjectStoryboard
 
 class ViewController: UIViewController {
 
     @IBOutlet weak var myLabel: UILabel!
     
     @IBOutlet weak var askForJokeButton: UIButton!
+    
+    var webClient: ChuckNorrisWebClient?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +29,6 @@ class ViewController: UIViewController {
     
     @objc func askForJokeAction() {
         Task {
-            let webClient = AppDelegate.container.resolve(ChuckNorrisWebClient.self)
             if let joke = try? await webClient?.getJoke() {
                 print(joke)
                 myLabel.text = joke.value ?? ""
@@ -35,3 +37,11 @@ class ViewController: UIViewController {
     }
 }
 
+extension SwinjectStoryboard {
+    @objc class func setup() {
+        defaultContainer.register(ChuckNorrisWebClient.self) { _ in ChuckNorrisWebClient() }
+        defaultContainer.storyboardInitCompleted(ViewController.self) { r, c in
+            c.webClient = r.resolve(ChuckNorrisWebClient.self)
+        }
+    }
+}
