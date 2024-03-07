@@ -7,7 +7,11 @@
 
 import Foundation
 
-class MainViewModel {
+protocol MainViewModel {
+    func getJoke() async throws -> JokeResponse?
+}
+
+class MainViewModelImpl: MainViewModel {
     var webClient: ChuckNorrisWebClient
     
     init(webClient: ChuckNorrisWebClient) {

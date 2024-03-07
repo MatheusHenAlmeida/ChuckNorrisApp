@@ -40,10 +40,10 @@ extension SwinjectStoryboard {
             ChuckNorrisService(baseUrl: "https://api.chucknorris.io/jokes")
         }
         defaultContainer.register(ChuckNorrisWebClient.self) { resolver in
-            ChuckNorrisWebClient(webService: resolver.resolve(ChuckNorrisService.self)!)
+            ChuckNorrisWebClientImpl(webService: resolver.resolve(ChuckNorrisService.self)!)
         }
         defaultContainer.register(MainViewModel.self) { resolver in
-            MainViewModel(webClient: resolver.resolve(ChuckNorrisWebClient.self)!)
+            MainViewModelImpl(webClient: resolver.resolve(ChuckNorrisWebClient.self)!)
         }
         defaultContainer.storyboardInitCompleted(ViewController.self) { resolver, viewController in
             viewController.mainViewModel = resolver.resolve(MainViewModel.self)

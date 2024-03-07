@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 class ChuckNorrisService {
-    var baseUrl: String
+    private var baseUrl: String
     
     init(baseUrl: String) {
         self.baseUrl = baseUrl
