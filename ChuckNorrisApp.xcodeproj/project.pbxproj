@@ -11,13 +11,13 @@
 		124290C3D3CB8879A6C3CB38 /* Pods_ChuckNorrisApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0543A94258DDF4377727E7E1 /* Pods_ChuckNorrisApp.framework */; };
 		2D81B00085997777D0154534 /* Pods_ChuckNorrisApp_ChuckNorrisAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53849B6865AD3B6C4D326D02 /* Pods_ChuckNorrisApp_ChuckNorrisAppUITests.framework */; };
 		741B84892BB34B9200B2CB88 /* MainViewModelImplTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741B84882BB34B9200B2CB88 /* MainViewModelImplTest.swift */; };
+		741B848B2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741B848A2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift */; };
 		74926FAC2B96129F0058D874 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74926FAB2B96129F0058D874 /* AppDelegate.swift */; };
 		74926FAE2B96129F0058D874 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74926FAD2B96129F0058D874 /* SceneDelegate.swift */; };
 		74926FB02B96129F0058D874 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74926FAF2B96129F0058D874 /* ViewController.swift */; };
 		74926FB32B96129F0058D874 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74926FB12B96129F0058D874 /* Main.storyboard */; };
 		74926FB52B9612A00058D874 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74926FB42B9612A00058D874 /* Assets.xcassets */; };
 		74926FB82B9612A00058D874 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74926FB62B9612A00058D874 /* LaunchScreen.storyboard */; };
-		74926FC32B9612A00058D874 /* ChuckNorrisAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74926FC22B9612A00058D874 /* ChuckNorrisAppTests.swift */; };
 		74926FCD2B9612A00058D874 /* ChuckNorrisAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74926FCC2B9612A00058D874 /* ChuckNorrisAppUITests.swift */; };
 		74926FCF2B9612A00058D874 /* ChuckNorrisAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74926FCE2B9612A00058D874 /* ChuckNorrisAppUITestsLaunchTests.swift */; };
 		74926FE72B9617620058D874 /* ChuckNorrisWebClientImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74926FE62B9617620058D874 /* ChuckNorrisWebClientImpl.swift */; };
@@ -50,6 +50,7 @@
 		43FD62CAAE656190C851A28E /* Pods-ChuckNorrisAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChuckNorrisAppTests.release.xcconfig"; path = "Target Support Files/Pods-ChuckNorrisAppTests/Pods-ChuckNorrisAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		53849B6865AD3B6C4D326D02 /* Pods_ChuckNorrisApp_ChuckNorrisAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChuckNorrisApp_ChuckNorrisAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		741B84882BB34B9200B2CB88 /* MainViewModelImplTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelImplTest.swift; sourceTree = "<group>"; };
+		741B848A2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuckNorrisWebClientImplTest.swift; sourceTree = "<group>"; };
 		74926FA82B96129F0058D874 /* ChuckNorrisApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChuckNorrisApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74926FAB2B96129F0058D874 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		74926FAD2B96129F0058D874 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,7 +60,6 @@
 		74926FB72B9612A00058D874 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		74926FB92B9612A00058D874 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		74926FBE2B9612A00058D874 /* ChuckNorrisAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChuckNorrisAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		74926FC22B9612A00058D874 /* ChuckNorrisAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuckNorrisAppTests.swift; sourceTree = "<group>"; };
 		74926FC82B9612A00058D874 /* ChuckNorrisAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChuckNorrisAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		74926FCC2B9612A00058D874 /* ChuckNorrisAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuckNorrisAppUITests.swift; sourceTree = "<group>"; };
 		74926FCE2B9612A00058D874 /* ChuckNorrisAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuckNorrisAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -166,8 +166,8 @@
 		74926FC12B9612A00058D874 /* ChuckNorrisAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				74926FC22B9612A00058D874 /* ChuckNorrisAppTests.swift */,
 				741B84882BB34B9200B2CB88 /* MainViewModelImplTest.swift */,
+				741B848A2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift */,
 			);
 			path = ChuckNorrisAppTests;
 			sourceTree = "<group>";
@@ -459,7 +459,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74926FC32B9612A00058D874 /* ChuckNorrisAppTests.swift in Sources */,
+				741B848B2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift in Sources */,
 				741B84892BB34B9200B2CB88 /* MainViewModelImplTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
