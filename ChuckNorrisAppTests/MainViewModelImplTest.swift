@@ -13,12 +13,6 @@ final class MainViewModelImplTest: XCTestCase {
     
     private var mainViewModelImpl: MainViewModelImpl? = nil
     
-//    private class MockedChuckNorrisWebClient: ChuckNorrisWebClient {
-//        func getJoke() async throws -> JokeResponse? {
-//            return JokeResponse(id: "1", iconUrl: "url", value: "Some joke")
-//        }
-//    }
-    
     private lazy var chuckNorrisWebClient = mock(ChuckNorrisWebClient.self)
 
     override func setUpWithError() throws {

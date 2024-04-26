@@ -37,7 +37,7 @@ class ViewController: UIViewController {
 extension SwinjectStoryboard {
     @objc class func setup() {
         defaultContainer.register(ChuckNorrisService.self) { _ in
-            ChuckNorrisService(baseUrl: "https://api.chucknorris.io/jokes")
+            ChuckNorrisServiceImpl(baseUrl: "https://api.chucknorris.io/jokes")
         }
         defaultContainer.register(ChuckNorrisWebClient.self) { resolver in
             ChuckNorrisWebClientImpl(webService: resolver.resolve(ChuckNorrisService.self)!)
