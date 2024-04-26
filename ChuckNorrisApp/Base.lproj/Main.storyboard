@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -28,6 +29,19 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Get a joke"/>
                             </button>
+                            <view hidden="YES" alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2v2-wI-wLp">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <subviews>
+                                    <activityIndicatorView contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="37y-kE-nck">
+                                        <rect key="frame" x="186.66666666666666" y="416" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                <constraints>
+                                    <constraint firstItem="37y-kE-nck" firstAttribute="centerY" secondItem="2v2-wI-wLp" secondAttribute="centerY" id="4Rq-Xa-4Kw"/>
+                                    <constraint firstItem="37y-kE-nck" firstAttribute="centerX" secondItem="2v2-wI-wLp" secondAttribute="centerX" id="vkB-G0-rRM"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.92941176889999999" green="0.55686277149999996" blue="0.30980393290000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -35,12 +49,17 @@
                             <constraint firstItem="Pxg-a4-yf0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="1FB-6a-VA7"/>
                             <constraint firstItem="5HV-99-Bow" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="96" id="6fz-m7-88J"/>
                             <constraint firstItem="5HV-99-Bow" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="60" id="CaR-mo-Wjc"/>
+                            <constraint firstAttribute="bottom" secondItem="2v2-wI-wLp" secondAttribute="bottom" id="Idk-DF-lkh"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2v2-wI-wLp" secondAttribute="trailing" id="WGN-2p-hBs"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="5HV-99-Bow" secondAttribute="trailing" constant="60" id="d0G-V5-gCf"/>
+                            <constraint firstItem="2v2-wI-wLp" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="nio-sY-Zl4"/>
                             <constraint firstItem="Pxg-a4-yf0" firstAttribute="top" secondItem="5HV-99-Bow" secondAttribute="bottom" constant="64" id="pEO-Tw-8Yk"/>
+                            <constraint firstItem="2v2-wI-wLp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="vs1-qO-hdJ"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="askForJokeButton" destination="Pxg-a4-yf0" id="5Wf-Rm-tef"/>
+                        <outlet property="loadingView" destination="2v2-wI-wLp" id="peY-cd-EKq"/>
                         <outlet property="myLabel" destination="5HV-99-Bow" id="NvA-MH-Kbn"/>
                     </connections>
                 </viewController>
@@ -49,4 +68,9 @@
             <point key="canvasLocation" x="48" y="-2"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

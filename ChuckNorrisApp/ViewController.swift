@@ -13,6 +13,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var myLabel: UILabel!
     
     @IBOutlet weak var askForJokeButton: UIButton!
+        
+    @IBOutlet weak var loadingView: UIView!
     
     var mainViewModel: MainViewModel?
     
@@ -26,12 +28,14 @@ class ViewController: UIViewController {
     }
     
     @objc func askForJokeAction() {
+        loadingView.isHidden = false
         Task {
             if let joke = try? await mainViewModel?.getJoke() {
                 myLabel.text = joke.value ?? DefaultMessages.tryItLater
             } else {
                 myLabel.text = DefaultMessages.tryItLater
             }
+            loadingView.isHidden = true
         }
     }
 }
