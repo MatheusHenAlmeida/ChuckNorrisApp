@@ -28,7 +28,9 @@ class ViewController: UIViewController {
     @objc func askForJokeAction() {
         Task {
             if let joke = try? await mainViewModel?.getJoke() {
-                myLabel.text = joke.value ?? ""
+                myLabel.text = joke.value ?? DefaultMessages.tryItLater
+            } else {
+                myLabel.text = DefaultMessages.tryItLater
             }
         }
     }
@@ -49,4 +51,8 @@ extension SwinjectStoryboard {
             viewController.mainViewModel = resolver.resolve(MainViewModel.self)
         }
     }
+}
+
+struct DefaultMessages {
+    static let tryItLater = "Try it later"
 }
