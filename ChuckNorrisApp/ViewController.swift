@@ -60,3 +60,15 @@ extension SwinjectStoryboard {
 struct DefaultMessages {
     static let tryItLater = "Try it later"
 }
+
+#if DEBUG
+extension ViewController {
+    public func clickAskForJokeButton() {
+        askForJokeAction()
+    }
+    
+    public func getLabel() async -> String? {
+        return myLabel.text
+    }
+}
+#endif

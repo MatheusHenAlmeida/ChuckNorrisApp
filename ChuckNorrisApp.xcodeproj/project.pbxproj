@@ -25,6 +25,7 @@
 		74926FEA2B961A820058D874 /* JokeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74926FE92B961A820058D874 /* JokeResponse.swift */; };
 		74926FF32B9658A60058D874 /* MainViewModelImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74926FF22B9658A60058D874 /* MainViewModelImpl.swift */; };
 		74926FF52B9659D50058D874 /* ChuckNorrisServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74926FF42B9659D50058D874 /* ChuckNorrisServiceImpl.swift */; };
+		74A5637C2BDB3E9800CB0AF1 /* ViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A5637B2BDB3E9800CB0AF1 /* ViewControllerTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		74926FE92B961A820058D874 /* JokeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeResponse.swift; sourceTree = "<group>"; };
 		74926FF22B9658A60058D874 /* MainViewModelImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelImpl.swift; sourceTree = "<group>"; };
 		74926FF42B9659D50058D874 /* ChuckNorrisServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuckNorrisServiceImpl.swift; sourceTree = "<group>"; };
+		74A5637B2BDB3E9800CB0AF1 /* ViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerTest.swift; sourceTree = "<group>"; };
 		94E555F4EFD7AB4FD435F958 /* Pods-ChuckNorrisApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChuckNorrisApp.release.xcconfig"; path = "Target Support Files/Pods-ChuckNorrisApp/Pods-ChuckNorrisApp.release.xcconfig"; sourceTree = "<group>"; };
 		A26FE45F132E27180BFEFB43 /* ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift"; path = "MockingbirdMocks/ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift"; sourceTree = "<group>"; };
 		ACA55F82B7EFEADE20F9B147 /* Pods_ChuckNorrisAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChuckNorrisAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -179,6 +181,7 @@
 			children = (
 				741B84882BB34B9200B2CB88 /* MainViewModelImplTest.swift */,
 				741B848A2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift */,
+				74A5637B2BDB3E9800CB0AF1 /* ViewControllerTest.swift */,
 			);
 			path = ChuckNorrisAppTests;
 			sourceTree = "<group>";
@@ -519,6 +522,7 @@
 			files = (
 				741B848B2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift in Sources */,
 				741B84892BB34B9200B2CB88 /* MainViewModelImplTest.swift in Sources */,
+				74A5637C2BDB3E9800CB0AF1 /* ViewControllerTest.swift in Sources */,
 				4EE04D3979EB82C4058AC018 /* ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
