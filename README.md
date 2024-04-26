@@ -4,9 +4,9 @@ This is a simple iOS/Swift appplication. Basicly, the user can click on a button
 ## Technologies
 1. Swift
 2. iOS
-3. Alamofire
-4. Swinject
-5. MockingBird
+3. [Alamofire](https://github.com/Alamofire/Alamofire)
+4. [Swinject](https://github.com/Swinject/Swinject)
+5. [MockingBird](https://mockingbirdswift.com)
 
 ## Instructions
 Follow the steps below to run the application:
