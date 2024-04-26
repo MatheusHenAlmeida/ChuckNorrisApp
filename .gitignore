@@ -1,1 +1,4 @@
 Pods/
+*.generated.swift
+Pods/MockingbirdFramework/mockingbird/bin/
+**/*.xcodeproj/MockingbirdCache/

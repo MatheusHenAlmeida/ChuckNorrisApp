@@ -13,6 +13,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var myLabel: UILabel!
     
     @IBOutlet weak var askForJokeButton: UIButton!
+        
+    @IBOutlet weak var loadingView: UIView!
     
     var mainViewModel: MainViewModel?
     
@@ -26,10 +28,14 @@ class ViewController: UIViewController {
     }
     
     @objc func askForJokeAction() {
+        loadingView.isHidden = false
         Task {
             if let joke = try? await mainViewModel?.getJoke() {
-                myLabel.text = joke.value ?? ""
+                myLabel.text = joke.value ?? DefaultMessages.tryItLater
+            } else {
+                myLabel.text = DefaultMessages.tryItLater
             }
+            loadingView.isHidden = true
         }
     }
 }
@@ -37,7 +43,7 @@ class ViewController: UIViewController {
 extension SwinjectStoryboard {
     @objc class func setup() {
         defaultContainer.register(ChuckNorrisService.self) { _ in
-            ChuckNorrisService(baseUrl: "https://api.chucknorris.io/jokes")
+            ChuckNorrisServiceImpl(baseUrl: "https://api.chucknorris.io/jokes")
         }
         defaultContainer.register(ChuckNorrisWebClient.self) { resolver in
             ChuckNorrisWebClientImpl(webService: resolver.resolve(ChuckNorrisService.self)!)
@@ -50,3 +56,19 @@ extension SwinjectStoryboard {
         }
     }
 }
+
+struct DefaultMessages {
+    static let tryItLater = "Try it later"
+}
+
+#if DEBUG
+extension ViewController {
+    public func clickAskForJokeButton() {
+        askForJokeAction()
+    }
+    
+    public func getLabel() async -> String? {
+        return myLabel.text
+    }
+}
+#endif
