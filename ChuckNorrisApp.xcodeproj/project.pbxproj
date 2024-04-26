@@ -10,6 +10,7 @@
 		08D85D0BBF8D42150A83CCC9 /* Pods_ChuckNorrisAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACA55F82B7EFEADE20F9B147 /* Pods_ChuckNorrisAppTests.framework */; };
 		124290C3D3CB8879A6C3CB38 /* Pods_ChuckNorrisApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0543A94258DDF4377727E7E1 /* Pods_ChuckNorrisApp.framework */; };
 		2D81B00085997777D0154534 /* Pods_ChuckNorrisApp_ChuckNorrisAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53849B6865AD3B6C4D326D02 /* Pods_ChuckNorrisApp_ChuckNorrisAppUITests.framework */; };
+		4EE04D3979EB82C4058AC018 /* ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26FE45F132E27180BFEFB43 /* ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift */; };
 		741B84892BB34B9200B2CB88 /* MainViewModelImplTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741B84882BB34B9200B2CB88 /* MainViewModelImplTest.swift */; };
 		741B848B2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741B848A2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift */; };
 		74926FAC2B96129F0058D874 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74926FAB2B96129F0058D874 /* AppDelegate.swift */; };
@@ -67,7 +68,9 @@
 		74926FE92B961A820058D874 /* JokeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeResponse.swift; sourceTree = "<group>"; };
 		74926FF22B9658A60058D874 /* MainViewModelImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelImpl.swift; sourceTree = "<group>"; };
 		74926FF42B9659D50058D874 /* ChuckNorrisService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuckNorrisService.swift; sourceTree = "<group>"; };
+		7FDD11C6DCE58020E739F5C4 /* ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; lastKnownFileType = sourcecode.swift; name = "ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift"; path = "MockingbirdMocks/ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift"; sourceTree = "<group>"; };
 		94E555F4EFD7AB4FD435F958 /* Pods-ChuckNorrisApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChuckNorrisApp.release.xcconfig"; path = "Target Support Files/Pods-ChuckNorrisApp/Pods-ChuckNorrisApp.release.xcconfig"; sourceTree = "<group>"; };
+		A26FE45F132E27180BFEFB43 /* ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; lastKnownFileType = sourcecode.swift; name = "ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift"; path = "MockingbirdMocks/ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift"; sourceTree = "<group>"; };
 		ACA55F82B7EFEADE20F9B147 /* Pods_ChuckNorrisAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChuckNorrisAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDF55427BDFFE86D367AA0F5 /* Pods-ChuckNorrisApp-ChuckNorrisAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChuckNorrisApp-ChuckNorrisAppUITests.release.xcconfig"; path = "Target Support Files/Pods-ChuckNorrisApp-ChuckNorrisAppUITests/Pods-ChuckNorrisApp-ChuckNorrisAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F3BFA4C7DCD23A5E8314E1A3 /* Pods-ChuckNorrisApp-ChuckNorrisAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChuckNorrisApp-ChuckNorrisAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-ChuckNorrisApp-ChuckNorrisAppUITests/Pods-ChuckNorrisApp-ChuckNorrisAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -114,6 +117,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		65916879A9BB8E86E5BE4676 /* Generated Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				A26FE45F132E27180BFEFB43 /* ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift */,
+			);
+			name = "Generated Mocks";
+			sourceTree = "<group>";
+		};
 		72DB3D1C597D126BFA701027 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -133,6 +144,7 @@
 				74926FA92B96129F0058D874 /* Products */,
 				46434DCF7B3193A9F899484E /* Pods */,
 				72DB3D1C597D126BFA701027 /* Frameworks */,
+				65916879A9BB8E86E5BE4676 /* Generated Mocks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -233,9 +245,11 @@
 			buildConfigurationList = 74926FD52B9612A00058D874 /* Build configuration list for PBXNativeTarget "ChuckNorrisAppTests" */;
 			buildPhases = (
 				C818F3F8FD27EDB7815D9C53 /* [CP] Check Pods Manifest.lock */,
+				C7AED8209F9DB2F28A6A80EA /* Generate Mockingbird Mocks */,
 				74926FBA2B9612A00058D874 /* Sources */,
 				74926FBB2B9612A00058D874 /* Frameworks */,
 				74926FBC2B9612A00058D874 /* Resources */,
+				90BAC038F04C57D6AC5DE51F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -338,6 +352,27 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		90BAC038F04C57D6AC5DE51F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChuckNorrisAppTests/Pods-ChuckNorrisAppTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChuckNorrisAppTests/Pods-ChuckNorrisAppTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChuckNorrisAppTests/Pods-ChuckNorrisAppTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		9142D668B8C9DBE0DF9191A8 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -346,9 +381,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ChuckNorrisApp-ChuckNorrisAppUITests/Pods-ChuckNorrisApp-ChuckNorrisAppUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ChuckNorrisApp-ChuckNorrisAppUITests/Pods-ChuckNorrisApp-ChuckNorrisAppUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -363,9 +402,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ChuckNorrisApp/Pods-ChuckNorrisApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ChuckNorrisApp/Pods-ChuckNorrisApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -393,6 +436,22 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		C7AED8209F9DB2F28A6A80EA /* Generate Mockingbird Mocks */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Mockingbird Mocks";
+			outputPaths = (
+				"$(SRCROOT)/MockingbirdMocks/ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -eu\n\n# Prevent Xcode 13 from running this script while indexing.\n[[ \"${ACTION}\" == \"indexbuild\" ]] && exit 0\n\n\"${SRCROOT}/Pods/MockingbirdFramework/mockingbird\" generate --targets \"ChuckNorrisApp\" --outputs \"${SRCROOT}/MockingbirdMocks/ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift\"";
 		};
 		C818F3F8FD27EDB7815D9C53 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -461,6 +520,7 @@
 			files = (
 				741B848B2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift in Sources */,
 				741B84892BB34B9200B2CB88 /* MainViewModelImplTest.swift in Sources */,
+				4EE04D3979EB82C4058AC018 /* ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
