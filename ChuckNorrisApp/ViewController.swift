@@ -60,7 +60,6 @@ class ViewController: UIViewController {
                 let jokeText = joke.value ?? DefaultMessages.tryItLater
                 myLabel.text = jokeText
                 
-                // Speak the joke using SpeechService
                 speechService?.speech(message: jokeText)
             } else {
                 myLabel.text = DefaultMessages.tryItLater
