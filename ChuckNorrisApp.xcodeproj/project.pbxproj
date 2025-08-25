@@ -14,7 +14,6 @@
 		741B84892BB34B9200B2CB88 /* MainViewModelImplTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741B84882BB34B9200B2CB88 /* MainViewModelImplTest.swift */; };
 		741B848B2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741B848A2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift */; };
 		745E21402E5C9A9800517F23 /* SpeechService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745E213F2E5C9A9800517F23 /* SpeechService.swift */; };
-		745E21432E5C9EC500517F23 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 745E21412E5C9EC500517F23 /* Localizable.strings */; };
 		74926FAC2B96129F0058D874 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74926FAB2B96129F0058D874 /* AppDelegate.swift */; };
 		74926FAE2B96129F0058D874 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74926FAD2B96129F0058D874 /* SceneDelegate.swift */; };
 		74926FB02B96129F0058D874 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74926FAF2B96129F0058D874 /* ViewController.swift */; };
@@ -56,7 +55,6 @@
 		741B84882BB34B9200B2CB88 /* MainViewModelImplTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelImplTest.swift; sourceTree = "<group>"; };
 		741B848A2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuckNorrisWebClientImplTest.swift; sourceTree = "<group>"; };
 		745E213F2E5C9A9800517F23 /* SpeechService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechService.swift; sourceTree = "<group>"; };
-		745E21422E5C9EC500517F23 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		74926FA82B96129F0058D874 /* ChuckNorrisApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChuckNorrisApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74926FAB2B96129F0058D874 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		74926FAD2B96129F0058D874 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -174,7 +172,6 @@
 		74926FAA2B96129F0058D874 /* ChuckNorrisApp */ = {
 			isa = PBXGroup;
 			children = (
-				745E21412E5C9EC500517F23 /* Localizable.strings */,
 				745E213E2E5C99BA00517F23 /* services */,
 				74926FF12B9658950058D874 /* viewModels */,
 				74926FE82B961A6B0058D874 /* domain */,
@@ -346,7 +343,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				74926FB82B9612A00058D874 /* LaunchScreen.storyboard in Resources */,
-				745E21432E5C9EC500517F23 /* Localizable.strings in Resources */,
 				74926FB52B9612A00058D874 /* Assets.xcassets in Resources */,
 				74926FB32B96129F0058D874 /* Main.storyboard in Resources */,
 			);
@@ -568,14 +564,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		745E21412E5C9EC500517F23 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				745E21422E5C9EC500517F23 /* en */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
 		74926FB12B96129F0058D874 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
