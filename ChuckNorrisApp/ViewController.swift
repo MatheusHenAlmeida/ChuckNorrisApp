@@ -31,6 +31,7 @@ class ViewController: UIViewController {
     
     private func setIds() {
         askForJokeButton.accessibilityIdentifier = "ask_joke_button"
+        tellJokeButton.accessibilityIdentifier = "tell_joke_button"
         myLabel.accessibilityIdentifier = "joke_label"
     }
     
