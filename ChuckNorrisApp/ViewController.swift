@@ -20,8 +20,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var loadingView: UIView!
     
     var mainViewModel: MainViewModel?
-    
-    private let speechSynthesizer = AVSpeechSynthesizer()
+    var speechService: SpeechService?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,11 +58,8 @@ class ViewController: UIViewController {
                 let jokeText = joke.value ?? DefaultMessages.tryItLater
                 myLabel.text = jokeText
                 
-                // Speak the joke
-                let utterance = AVSpeechUtterance(string: jokeText)
-                utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-                utterance.rate = 0.5
-                speechSynthesizer.speak(utterance)
+                // Speak the joke using SpeechService
+                speechService?.speech(message: jokeText)
             } else {
                 myLabel.text = DefaultMessages.tryItLater
             }
@@ -83,8 +79,12 @@ extension SwinjectStoryboard {
         defaultContainer.register(MainViewModel.self) { resolver in
             MainViewModelImpl(webClient: resolver.resolve(ChuckNorrisWebClient.self)!)
         }
+        defaultContainer.register(SpeechService.self) { _ in
+            SpeechService(speechSynthesizer: AVSpeechSynthesizer())
+        }
         defaultContainer.storyboardInitCompleted(ViewController.self) { resolver, viewController in
             viewController.mainViewModel = resolver.resolve(MainViewModel.self)
+            viewController.speechService = resolver.resolve(SpeechService.self)
         }
     }
 }
