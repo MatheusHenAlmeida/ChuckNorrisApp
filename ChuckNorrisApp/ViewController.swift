@@ -7,6 +7,7 @@
 
 import UIKit
 import SwinjectStoryboard
+import AVFoundation
 
 class ViewController: UIViewController {
 
@@ -19,6 +20,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var loadingView: UIView!
     
     var mainViewModel: MainViewModel?
+    
+    private let speechSynthesizer = AVSpeechSynthesizer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +55,14 @@ class ViewController: UIViewController {
         loadingView.isHidden = false
         Task {
             if let joke = try? await mainViewModel?.getJoke() {
-                myLabel.text = joke.value ?? DefaultMessages.tryItLater
+                let jokeText = joke.value ?? DefaultMessages.tryItLater
+                myLabel.text = jokeText
+                
+                // Speak the joke
+                let utterance = AVSpeechUtterance(string: jokeText)
+                utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+                utterance.rate = 0.5
+                speechSynthesizer.speak(utterance)
             } else {
                 myLabel.text = DefaultMessages.tryItLater
             }
