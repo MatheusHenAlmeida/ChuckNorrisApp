@@ -22,6 +22,8 @@ class ViewController: UIViewController {
     var mainViewModel: MainViewModel?
     var speechService: SpeechService?
     
+    private let speechSynthesizer = AVSpeechSynthesizer()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setIds()
@@ -35,6 +37,8 @@ class ViewController: UIViewController {
     }
     
     private func setButton() {
+        askForJokeButton.setTitle(NSLocalizedString("get_a_joke_button", comment: "Button to get a joke"), for: .normal)
+        tellJokeButton.setTitle(NSLocalizedString("tell_me_a_joke_button", comment: "Button to tell a joke"), for: .normal)
         askForJokeButton.addTarget(self, action: #selector(askForJokeAction), for: .touchDown)
         tellJokeButton.addTarget(self, action: #selector(tellJokeAction), for: .touchUpInside)
     }
@@ -90,7 +94,7 @@ extension SwinjectStoryboard {
 }
 
 struct DefaultMessages {
-    static let tryItLater = "Try it later"
+    static let tryItLater = NSLocalizedString("try_it_later", comment: "Default message when joke cannot be fetched")
 }
 
 #if DEBUG
