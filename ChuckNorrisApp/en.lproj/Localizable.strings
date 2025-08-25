@@ -1,0 +1,6 @@
+/* Button titles */
+"get_a_joke_button" = "Get a joke";
+"tell_me_a_joke_button" = "Tell me a joke";
+
+/* Default messages */
+"try_it_later" = "Try it later";
