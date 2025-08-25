@@ -19,8 +19,14 @@ class ViewController: UIViewController {
     var mainViewModel: MainViewModel?
     
     override func viewDidLoad() {
-        super.viewDidLoad()        
+        super.viewDidLoad()
+        setIds()
         setButton()
+    }
+    
+    private func setIds() {
+        askForJokeButton.accessibilityIdentifier = "ask_joke_button"
+        myLabel.accessibilityIdentifier = "joke_label"
     }
     
     private func setButton() {
