@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var askForJokeButton: UIButton!
         
+    @IBOutlet weak var tellJokeButton: UIButton!
+    
     @IBOutlet weak var loadingView: UIView!
     
     var mainViewModel: MainViewModel?
@@ -31,9 +33,22 @@ class ViewController: UIViewController {
     
     private func setButton() {
         askForJokeButton.addTarget(self, action: #selector(askForJokeAction), for: .touchDown)
+        tellJokeButton.addTarget(self, action: #selector(tellJokeAction), for: .touchUpInside)
     }
     
     @objc func askForJokeAction() {
+        loadingView.isHidden = false
+        Task {
+            if let joke = try? await mainViewModel?.getJoke() {
+                myLabel.text = joke.value ?? DefaultMessages.tryItLater
+            } else {
+                myLabel.text = DefaultMessages.tryItLater
+            }
+            loadingView.isHidden = true
+        }
+    }
+    
+    @objc func tellJokeAction() {
         loadingView.isHidden = false
         Task {
             if let joke = try? await mainViewModel?.getJoke() {
