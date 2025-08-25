@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,16 +18,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5HV-99-Bow">
-                                <rect key="frame" x="60" y="155" width="273" height="0.0"/>
+                                <rect key="frame" x="60" y="214" width="273" height="0.0"/>
                                 <accessibility key="accessibilityConfiguration" identifier="JokeLabel"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pxg-a4-yf0">
-                                <rect key="frame" x="146.66666666666666" y="219" width="100" height="35"/>
+                                <rect key="frame" x="146.66666666666666" y="278" width="100" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Get a joke"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oyr-zA-StU" userLabel="Tell A Joke Button">
+                                <rect key="frame" x="133.33333333333334" y="337" width="126.66666666666666" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Tell me a joke"/>
                             </button>
                             <view hidden="YES" alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2v2-wI-wLp">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
@@ -52,7 +57,9 @@
                             <constraint firstAttribute="bottom" secondItem="2v2-wI-wLp" secondAttribute="bottom" id="Idk-DF-lkh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2v2-wI-wLp" secondAttribute="trailing" id="WGN-2p-hBs"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="5HV-99-Bow" secondAttribute="trailing" constant="60" id="d0G-V5-gCf"/>
+                            <constraint firstItem="oyr-zA-StU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hyz-bw-cIt"/>
                             <constraint firstItem="2v2-wI-wLp" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="nio-sY-Zl4"/>
+                            <constraint firstItem="oyr-zA-StU" firstAttribute="top" secondItem="Pxg-a4-yf0" secondAttribute="bottom" constant="24" id="oUS-cb-SjZ"/>
                             <constraint firstItem="Pxg-a4-yf0" firstAttribute="top" secondItem="5HV-99-Bow" secondAttribute="bottom" constant="64" id="pEO-Tw-8Yk"/>
                             <constraint firstItem="2v2-wI-wLp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="vs1-qO-hdJ"/>
                         </constraints>
@@ -61,6 +68,7 @@
                         <outlet property="askForJokeButton" destination="Pxg-a4-yf0" id="5Wf-Rm-tef"/>
                         <outlet property="loadingView" destination="2v2-wI-wLp" id="peY-cd-EKq"/>
                         <outlet property="myLabel" destination="5HV-99-Bow" id="NvA-MH-Kbn"/>
+                        <outlet property="tellJokeButton" destination="oyr-zA-StU" id="AvX-xQ-UgO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
