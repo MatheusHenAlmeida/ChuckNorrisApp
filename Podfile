@@ -7,6 +7,7 @@ target 'ChuckNorrisApp' do
 
   # Pods for ChuckNorrisApp
   pod 'Alamofire', '~> 5.6'
+  pod 'Google-Mobile-Ads-SDK'
   pod 'SwinjectStoryboard'
 
   target 'ChuckNorrisAppTests' do

@@ -27,6 +27,14 @@
 		74926FEA2B961A820058D874 /* JokeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74926FE92B961A820058D874 /* JokeResponse.swift */; };
 		74926FF32B9658A60058D874 /* MainViewModelImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74926FF22B9658A60058D874 /* MainViewModelImpl.swift */; };
 		74926FF52B9659D50058D874 /* ChuckNorrisServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74926FF42B9659D50058D874 /* ChuckNorrisServiceImpl.swift */; };
+		74A2A63D2F4DDB2500ECDC1D /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A2A6392F4DDB2500ECDC1D /* AboutView.swift */; };
+		74A2A63E2F4DDB2500ECDC1D /* AlarmEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A2A63A2F4DDB2500ECDC1D /* AlarmEditView.swift */; };
+		74A2A63F2F4DDB2500ECDC1D /* AlarmListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A2A63B2F4DDB2500ECDC1D /* AlarmListView.swift */; };
+		74A2A6412F4DDB4D00ECDC1D /* AlarmViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A2A6402F4DDB4D00ECDC1D /* AlarmViewModel.swift */; };
+		74A2A6432F4DDB5A00ECDC1D /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A2A6422F4DDB5A00ECDC1D /* Alarm.swift */; };
+		74A2A6472F4DDB7000ECDC1D /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A2A6462F4DDB7000ECDC1D /* NotificationManager.swift */; };
+		74A2A6482F4DDB7000ECDC1D /* AlarmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A2A6442F4DDB7000ECDC1D /* AlarmRepository.swift */; };
+		74A2A6492F4DDB7000ECDC1D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A2A6452F4DDB7000ECDC1D /* CoreDataManager.swift */; };
 		74A5637C2BDB3E9800CB0AF1 /* ViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A5637B2BDB3E9800CB0AF1 /* ViewControllerTest.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +81,14 @@
 		74926FE92B961A820058D874 /* JokeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeResponse.swift; sourceTree = "<group>"; };
 		74926FF22B9658A60058D874 /* MainViewModelImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelImpl.swift; sourceTree = "<group>"; };
 		74926FF42B9659D50058D874 /* ChuckNorrisServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuckNorrisServiceImpl.swift; sourceTree = "<group>"; };
+		74A2A6392F4DDB2500ECDC1D /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		74A2A63A2F4DDB2500ECDC1D /* AlarmEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmEditView.swift; sourceTree = "<group>"; };
+		74A2A63B2F4DDB2500ECDC1D /* AlarmListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmListView.swift; sourceTree = "<group>"; };
+		74A2A6402F4DDB4D00ECDC1D /* AlarmViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmViewModel.swift; sourceTree = "<group>"; };
+		74A2A6422F4DDB5A00ECDC1D /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
+		74A2A6442F4DDB7000ECDC1D /* AlarmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmRepository.swift; sourceTree = "<group>"; };
+		74A2A6452F4DDB7000ECDC1D /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		74A2A6462F4DDB7000ECDC1D /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		74A5637B2BDB3E9800CB0AF1 /* ViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerTest.swift; sourceTree = "<group>"; };
 		94E555F4EFD7AB4FD435F958 /* Pods-ChuckNorrisApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChuckNorrisApp.release.xcconfig"; path = "Target Support Files/Pods-ChuckNorrisApp/Pods-ChuckNorrisApp.release.xcconfig"; sourceTree = "<group>"; };
 		A26FE45F132E27180BFEFB43 /* ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift"; path = "MockingbirdMocks/ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift"; sourceTree = "<group>"; };
@@ -143,6 +159,9 @@
 		745E213E2E5C99BA00517F23 /* services */ = {
 			isa = PBXGroup;
 			children = (
+				74A2A6442F4DDB7000ECDC1D /* AlarmRepository.swift */,
+				74A2A6452F4DDB7000ECDC1D /* CoreDataManager.swift */,
+				74A2A6462F4DDB7000ECDC1D /* NotificationManager.swift */,
 				745E213F2E5C9A9800517F23 /* SpeechService.swift */,
 			);
 			path = services;
@@ -179,6 +198,7 @@
 				74926FF12B9658950058D874 /* viewModels */,
 				74926FE82B961A6B0058D874 /* domain */,
 				74926FE52B9617470058D874 /* web */,
+				74A2A63C2F4DDB2500ECDC1D /* views */,
 				74926FAB2B96129F0058D874 /* AppDelegate.swift */,
 				74926FAD2B96129F0058D874 /* SceneDelegate.swift */,
 				74926FAF2B96129F0058D874 /* ViewController.swift */,
@@ -221,6 +241,7 @@
 		74926FE82B961A6B0058D874 /* domain */ = {
 			isa = PBXGroup;
 			children = (
+				74A2A6422F4DDB5A00ECDC1D /* Alarm.swift */,
 				74926FE92B961A820058D874 /* JokeResponse.swift */,
 			);
 			path = domain;
@@ -229,9 +250,20 @@
 		74926FF12B9658950058D874 /* viewModels */ = {
 			isa = PBXGroup;
 			children = (
+				74A2A6402F4DDB4D00ECDC1D /* AlarmViewModel.swift */,
 				74926FF22B9658A60058D874 /* MainViewModelImpl.swift */,
 			);
 			path = viewModels;
+			sourceTree = "<group>";
+		};
+		74A2A63C2F4DDB2500ECDC1D /* views */ = {
+			isa = PBXGroup;
+			children = (
+				74A2A6392F4DDB2500ECDC1D /* AboutView.swift */,
+				74A2A63A2F4DDB2500ECDC1D /* AlarmEditView.swift */,
+				74A2A63B2F4DDB2500ECDC1D /* AlarmListView.swift */,
+			);
+			path = views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,6 +278,7 @@
 				74926FA52B96129F0058D874 /* Frameworks */,
 				74926FA62B96129F0058D874 /* Resources */,
 				9571B105E480A76CAEFEC6B1 /* [CP] Embed Pods Frameworks */,
+				6C189243C468D66D89DF9145 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -286,6 +319,7 @@
 				74926FC52B9612A00058D874 /* Frameworks */,
 				74926FC62B9612A00058D874 /* Resources */,
 				9142D668B8C9DBE0DF9191A8 /* [CP] Embed Pods Frameworks */,
+				CBB30EB86495E9BA6D9AA801 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -369,6 +403,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		6C189243C468D66D89DF9145 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChuckNorrisApp/Pods-ChuckNorrisApp-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChuckNorrisApp/Pods-ChuckNorrisApp-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChuckNorrisApp/Pods-ChuckNorrisApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		90BAC038F04C57D6AC5DE51F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -377,13 +428,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ChuckNorrisAppTests/Pods-ChuckNorrisAppTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ChuckNorrisAppTests/Pods-ChuckNorrisAppTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -398,13 +445,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ChuckNorrisApp-ChuckNorrisAppUITests/Pods-ChuckNorrisApp-ChuckNorrisAppUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ChuckNorrisApp-ChuckNorrisAppUITests/Pods-ChuckNorrisApp-ChuckNorrisAppUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -419,13 +462,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ChuckNorrisApp/Pods-ChuckNorrisApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ChuckNorrisApp/Pods-ChuckNorrisApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -492,6 +531,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		CBB30EB86495E9BA6D9AA801 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChuckNorrisApp-ChuckNorrisAppUITests/Pods-ChuckNorrisApp-ChuckNorrisAppUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChuckNorrisApp-ChuckNorrisAppUITests/Pods-ChuckNorrisApp-ChuckNorrisAppUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChuckNorrisApp-ChuckNorrisAppUITests/Pods-ChuckNorrisApp-ChuckNorrisAppUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		F92A97116AAB81C1949E294D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -521,10 +577,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74A2A63D2F4DDB2500ECDC1D /* AboutView.swift in Sources */,
+				74A2A63E2F4DDB2500ECDC1D /* AlarmEditView.swift in Sources */,
+				74A2A63F2F4DDB2500ECDC1D /* AlarmListView.swift in Sources */,
 				74926FB02B96129F0058D874 /* ViewController.swift in Sources */,
+				74A2A6412F4DDB4D00ECDC1D /* AlarmViewModel.swift in Sources */,
 				74926FE72B9617620058D874 /* ChuckNorrisWebClientImpl.swift in Sources */,
 				74926FF52B9659D50058D874 /* ChuckNorrisServiceImpl.swift in Sources */,
+				74A2A6472F4DDB7000ECDC1D /* NotificationManager.swift in Sources */,
+				74A2A6482F4DDB7000ECDC1D /* AlarmRepository.swift in Sources */,
+				74A2A6492F4DDB7000ECDC1D /* CoreDataManager.swift in Sources */,
 				74926FEA2B961A820058D874 /* JokeResponse.swift in Sources */,
+				74A2A6432F4DDB5A00ECDC1D /* Alarm.swift in Sources */,
 				74926FAC2B96129F0058D874 /* AppDelegate.swift in Sources */,
 				74926FAE2B96129F0058D874 /* SceneDelegate.swift in Sources */,
 				74926FF32B9658A60058D874 /* MainViewModelImpl.swift in Sources */,

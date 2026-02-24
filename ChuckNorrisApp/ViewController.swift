@@ -8,6 +8,8 @@
 import UIKit
 import SwinjectStoryboard
 import AVFoundation
+import SwiftUI
+import GoogleMobileAds
 
 class ViewController: UIViewController {
 
@@ -66,6 +68,67 @@ class ViewController: UIViewController {
             }
             loadingView.isHidden = true
         }
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setupAdditionalUI()
+    }
+    
+    private var bannerView: BannerView!
+    private var didSetupUI = false
+
+    private func setupAdditionalUI() {
+        guard !didSetupUI else { return }
+        didSetupUI = true
+        
+        // Add Alarms Button
+        let alarmsButton = UIButton(type: .system)
+        alarmsButton.setTitle("Alarms", for: .normal)
+        alarmsButton.addTarget(self, action: #selector(openAlarms), for: .touchUpInside)
+        alarmsButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(alarmsButton)
+        
+        // Add About Button
+        let aboutButton = UIButton(type: .system)
+        aboutButton.setTitle("About", for: .normal)
+        aboutButton.addTarget(self, action: #selector(openAbout), for: .touchUpInside)
+        aboutButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(aboutButton)
+        
+        // Setup AdBanner
+        bannerView = BannerView(adSize: AdSizeBanner)
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716" // Test ID
+        bannerView.rootViewController = self
+        bannerView.load(Request())
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bannerView)
+        
+        // Layout
+        NSLayoutConstraint.activate([
+            // Banner at bottom safely
+            bannerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            bannerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            // Buttons at top safely (left and right)
+            alarmsButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            alarmsButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            
+            aboutButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            aboutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+        ])
+    }
+    
+    @objc func openAlarms() {
+        let alarmView = AlarmListView()
+        let hostingController = UIHostingController(rootView: alarmView)
+        present(hostingController, animated: true, completion: nil)
+    }
+    
+    @objc func openAbout() {
+        let aboutView = AboutView()
+        let hostingController = UIHostingController(rootView: aboutView)
+        present(hostingController, animated: true, completion: nil)
     }
 }
 
