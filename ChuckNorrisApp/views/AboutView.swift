@@ -20,7 +20,7 @@ struct AboutView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
-                Image("chuck_norris") // Assuming an asset named chuck_norris exists, or use system icon
+                Image("app_icon")
                     .resizable()
                     .scaledToFit()
                     .frame(height: 150)
