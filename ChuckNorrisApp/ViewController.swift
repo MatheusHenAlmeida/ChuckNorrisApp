@@ -69,6 +69,13 @@ class ViewController: UIViewController {
             loadingView.isHidden = true
         }
     }
+    
+    func displayJoke(text: String, speak: Bool) {
+        myLabel.text = text
+        if speak {
+            speechService?.speech(message: text)
+        }
+    }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

@@ -8,6 +8,7 @@
 import Foundation
 import UserNotifications
 import AVFoundation
+import UIKit
 
 class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
     static let shared = NotificationManager()
@@ -24,7 +25,7 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
         let tellJokeAction = UNNotificationAction(
             identifier: "TELL_JOKE_ACTION",
             title: "Tell me the joke",
-            options: []
+            options: [.foreground]
         )
         
         let category = UNNotificationCategory(
@@ -115,9 +116,26 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        if response.actionIdentifier == "TELL_JOKE_ACTION" {
+        let action = response.actionIdentifier
+        if action == "TELL_JOKE_ACTION" || action == UNNotificationDefaultActionIdentifier {
             let joke = response.notification.request.content.userInfo["joke"] as? String ?? response.notification.request.content.body
-            speechService.speech(message: joke)
+            let shouldSpeak = (action == "TELL_JOKE_ACTION")
+            
+            DispatchQueue.main.async {
+                guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                      let window = scene.windows.first(where: { $0.isKeyWindow }),
+                      let rootVC = window.rootViewController as? ViewController else {
+                    return
+                }
+                
+                if rootVC.presentedViewController != nil {
+                    rootVC.dismiss(animated: true) {
+                        rootVC.displayJoke(text: joke, speak: shouldSpeak)
+                    }
+                } else {
+                    rootVC.displayJoke(text: joke, speak: shouldSpeak)
+                }
+            }
         }
         completionHandler()
     }
