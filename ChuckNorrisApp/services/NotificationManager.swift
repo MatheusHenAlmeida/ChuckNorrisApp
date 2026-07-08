@@ -19,6 +19,8 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
         super.init()
         UNUserNotificationCenter.current().delegate = self
         setupNotificationCategories()
+        setupLifecycleObservers()
+        cleanUpExpiredSingleRunAlarms()
     }
     
     private func setupNotificationCategories() {
@@ -36,6 +38,48 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
         )
         
         UNUserNotificationCenter.current().setNotificationCategories([category])
+    }
+    
+    private func setupLifecycleObservers() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleAppForeground),
+            name: UIApplication.willEnterForegroundNotification,
+            object: nil
+        )
+    }
+    
+    @objc private func handleAppForeground() {
+        cleanUpExpiredSingleRunAlarms()
+    }
+    
+    private func checkAndDeleteSingleRunAlarm(id: UUID) {
+        let repository: AlarmRepository = AlarmRepositoryImpl()
+        let alarms = repository.getAll()
+        if let alarm = alarms.first(where: { $0.id == id }) {
+            if alarm.days.isEmpty {
+                print("Deleting single-run alarm: \(id)")
+                repository.delete(id: id)
+            }
+        }
+    }
+    
+    func cleanUpExpiredSingleRunAlarms() {
+        UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
+            let pendingIds = Set(requests.map { $0.identifier })
+            
+            let repository: AlarmRepository = AlarmRepositoryImpl()
+            let alarms = repository.getAll()
+            
+            for alarm in alarms {
+                if alarm.days.isEmpty && alarm.isEnabled {
+                    if !pendingIds.contains(alarm.id.uuidString) {
+                        print("Cleaning up expired single-run alarm: \(alarm.id)")
+                        repository.delete(id: alarm.id)
+                    }
+                }
+            }
+        }
     }
     
     func requestPermission() {
@@ -112,13 +156,22 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
     // MARK: - UNUserNotificationCenterDelegate
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        let userInfo = notification.request.content.userInfo
+        if let alarmIdString = userInfo["alarmId"] as? String, let alarmId = UUID(uuidString: alarmIdString) {
+            checkAndDeleteSingleRunAlarm(id: alarmId)
+        }
         completionHandler([.banner, .sound])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let action = response.actionIdentifier
+        let userInfo = response.notification.request.content.userInfo
+        if let alarmIdString = userInfo["alarmId"] as? String, let alarmId = UUID(uuidString: alarmIdString) {
+            checkAndDeleteSingleRunAlarm(id: alarmId)
+        }
+        
         if action == "TELL_JOKE_ACTION" || action == UNNotificationDefaultActionIdentifier {
-            let joke = response.notification.request.content.userInfo["joke"] as? String ?? response.notification.request.content.body
+            let joke = userInfo["joke"] as? String ?? response.notification.request.content.body
             let shouldSpeak = (action == "TELL_JOKE_ACTION")
             
             DispatchQueue.main.async {

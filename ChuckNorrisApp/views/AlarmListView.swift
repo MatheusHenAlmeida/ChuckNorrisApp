@@ -51,6 +51,11 @@ struct AlarmListView: View {
             viewModel.fetchAlarms()
             NotificationManager.shared.requestPermission()
         }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                viewModel.fetchAlarms()
+            }
+        }
     }
 }
 
