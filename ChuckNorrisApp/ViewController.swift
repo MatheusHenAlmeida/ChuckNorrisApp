@@ -200,9 +200,9 @@ class ViewController: UIViewController {
             return button
         }
         
-        let createAlarmBtn = createMenuItem(title: "Criar Alarme", iconName: "plus.circle", action: #selector(menuCreateAlarmTapped))
-        let savedAlarmsBtn = createMenuItem(title: "Alarmes Salvos", iconName: "alarm", action: #selector(menuSavedAlarmsTapped))
-        let aboutBtn = createMenuItem(title: "Sobre o App", iconName: "info.circle", action: #selector(menuAboutTapped))
+        let createAlarmBtn = createMenuItem(title: "Create an alarm", iconName: "plus.circle", action: #selector(menuCreateAlarmTapped))
+        let savedAlarmsBtn = createMenuItem(title: "Manage alarms", iconName: "alarm", action: #selector(menuSavedAlarmsTapped))
+        let aboutBtn = createMenuItem(title: "About", iconName: "info.circle", action: #selector(menuAboutTapped))
         
         itemsStackView.addArrangedSubview(createAlarmBtn)
         itemsStackView.addArrangedSubview(savedAlarmsBtn)
@@ -275,7 +275,14 @@ class ViewController: UIViewController {
     
     @objc func menuCreateAlarmTapped() {
         closeSideMenu()
-        openAlarms(showAddAlarmInitially: true)
+        openCreateAlarm()
+    }
+    
+    func openCreateAlarm() {
+        let alarmViewModel = AlarmViewModel()
+        let editView = AlarmEditView(viewModel: alarmViewModel, alarm: nil)
+        let hostingController = UIHostingController(rootView: editView)
+        present(hostingController, animated: true, completion: nil)
     }
     
     @objc func menuSavedAlarmsTapped() {
