@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AlarmListView: View {
+    @Environment(\.presentationMode) var presentationMode
     @StateObject private var viewModel = AlarmViewModel()
     @State private var showingAddAlarm = false
     @State private var selectedAlarm: Alarm?
@@ -23,12 +24,17 @@ struct AlarmListView: View {
                 .onDelete(perform: viewModel.deleteAlarm)
             }
             .navigationTitle("Alarms")
-            .navigationBarItems(trailing: Button(action: {
-                selectedAlarm = nil
-                showingAddAlarm = true
-            }) {
-                Image(systemName: "plus")
-            })
+            .navigationBarItems(
+                leading: Button("Close") {
+                    presentationMode.wrappedValue.dismiss()
+                },
+                trailing: Button(action: {
+                    selectedAlarm = nil
+                    showingAddAlarm = true
+                }) {
+                    Image(systemName: "plus")
+                }
+            )
             .sheet(isPresented: $showingAddAlarm) {
                 AlarmEditView(viewModel: viewModel, alarm: nil)
             }

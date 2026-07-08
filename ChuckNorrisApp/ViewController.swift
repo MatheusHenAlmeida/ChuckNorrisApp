@@ -122,6 +122,7 @@ class ViewController: UIViewController {
     @objc func openAlarms() {
         let alarmView = AlarmListView()
         let hostingController = UIHostingController(rootView: alarmView)
+        hostingController.modalPresentationStyle = .fullScreen
         present(hostingController, animated: true, completion: nil)
     }
     
