@@ -10,8 +10,13 @@ import SwiftUI
 struct AlarmListView: View {
     @Environment(\.presentationMode) var presentationMode
     @StateObject private var viewModel = AlarmViewModel()
-    @State private var showingAddAlarm = false
+    @State private var showingAddAlarm: Bool
     @State private var selectedAlarm: Alarm?
+    
+    init(showAddAlarmInitially: Bool = false) {
+        _showingAddAlarm = State(initialValue: showAddAlarmInitially)
+        _selectedAlarm = State(initialValue: nil)
+    }
     
     var body: some View {
         NavigationView {

@@ -14,15 +14,21 @@ import GoogleMobileAds
 class ViewController: UIViewController {
 
     @IBOutlet weak var myLabel: UILabel!
-    
     @IBOutlet weak var askForJokeButton: UIButton!
-        
     @IBOutlet weak var tellJokeButton: UIButton!
-    
     @IBOutlet weak var loadingView: UIView!
     
     var mainViewModel: MainViewModel?
     var speechService: SpeechService?
+    
+    private var dimmingView: UIView!
+    private var sideMenuContainerView: UIView!
+    private var sideMenuLeadingConstraint: NSLayoutConstraint!
+    private let sideMenuWidthMultiplier: CGFloat = 0.75
+    
+    private var bannerView: BannerView!
+    private var didSetupUI = false
+    private var menuButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,27 +87,19 @@ class ViewController: UIViewController {
         super.viewDidLayoutSubviews()
         setupAdditionalUI()
     }
-    
-    private var bannerView: BannerView!
-    private var didSetupUI = false
 
     private func setupAdditionalUI() {
         guard !didSetupUI else { return }
         didSetupUI = true
         
-        // Add Alarms Button
-        let alarmsButton = UIButton(type: .system)
-        alarmsButton.setTitle("Alarms", for: .normal)
-        alarmsButton.addTarget(self, action: #selector(openAlarms), for: .touchUpInside)
-        alarmsButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(alarmsButton)
-        
-        // Add About Button
-        let aboutButton = UIButton(type: .system)
-        aboutButton.setTitle("About", for: .normal)
-        aboutButton.addTarget(self, action: #selector(openAbout), for: .touchUpInside)
-        aboutButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(aboutButton)
+        // Add Hamburger Menu Button
+        menuButton = UIButton(type: .system)
+        let menuImage = UIImage(systemName: "line.3.horizontal")
+        menuButton.setImage(menuImage, for: .normal)
+        menuButton.tintColor = .white
+        menuButton.addTarget(self, action: #selector(openSideMenu), for: .touchUpInside)
+        menuButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(menuButton)
         
         // Setup AdBanner
         bannerView = BannerView(adSize: AdSizeBanner)
@@ -111,23 +109,191 @@ class ViewController: UIViewController {
         bannerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(bannerView)
         
-        // Layout
+        configAdditionalUIConstraints()
+        
+        setupSideMenu()
+    }
+    
+    private func configAdditionalUIConstraints() {
         NSLayoutConstraint.activate([
             // Banner at bottom safely
             bannerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             bannerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            // Buttons at top safely (left and right)
-            alarmsButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            alarmsButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            
-            aboutButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            aboutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+            // Menu Button at top left safely
+            menuButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            menuButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            menuButton.widthAnchor.constraint(equalToConstant: 44),
+            menuButton.heightAnchor.constraint(equalToConstant: 44),
         ])
     }
     
+    private func setupSideMenu() {
+        // 1. Create Dimming Backdrop View
+        dimmingView = UIView()
+        dimmingView.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        dimmingView.alpha = 0
+        dimmingView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(dimmingView)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(closeSideMenu))
+        dimmingView.addGestureRecognizer(tapGesture)
+        
+        // 2. Create Side Menu Container View
+        sideMenuContainerView = UIView()
+        sideMenuContainerView.backgroundColor = .systemBackground
+        sideMenuContainerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Add shadow for premium feel
+        sideMenuContainerView.layer.shadowColor = UIColor.black.cgColor
+        sideMenuContainerView.layer.shadowOpacity = 0.25
+        sideMenuContainerView.layer.shadowOffset = CGSize(width: 4, height: 0)
+        sideMenuContainerView.layer.shadowRadius = 8
+        
+        view.addSubview(sideMenuContainerView)
+        
+        // 3. Setup Side Menu Header with Orange Background and App Icon + Name
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor(red: 0.929, green: 0.557, blue: 0.310, alpha: 1.0)
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        sideMenuContainerView.addSubview(headerView)
+        
+        let headerIconImageView = UIImageView()
+        headerIconImageView.contentMode = .scaleAspectFit
+        headerIconImageView.clipsToBounds = true
+        headerIconImageView.layer.cornerRadius = 6
+        headerIconImageView.translatesAutoresizingMaskIntoConstraints = false
+        if let appIcon = UIImage(named: "AppIcon") ?? UIImage(named: "app_icon") {
+            headerIconImageView.image = appIcon
+        } else {
+            headerIconImageView.image = UIImage(systemName: "face.smiling")
+            headerIconImageView.tintColor = .white
+        }
+        headerView.addSubview(headerIconImageView)
+        
+        let headerTitleLabel = UILabel()
+        headerTitleLabel.text = "Chuck Norris App"
+        headerTitleLabel.textColor = .white
+        headerTitleLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        headerTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        headerView.addSubview(headerTitleLabel)
+        
+        // 4. Create Vertical UIStackView for Menu Items
+        let itemsStackView = UIStackView()
+        itemsStackView.axis = .vertical
+        itemsStackView.spacing = 8
+        itemsStackView.alignment = .fill
+        itemsStackView.distribution = .fillEqually
+        itemsStackView.translatesAutoresizingMaskIntoConstraints = false
+        sideMenuContainerView.addSubview(itemsStackView)
+        
+        // Create Menu Item Helper
+        func createMenuItem(title: String, iconName: String, action: Selector) -> UIButton {
+            let button = UIButton(type: .system)
+            button.setTitle("  " + title, for: .normal)
+            button.setImage(UIImage(systemName: iconName), for: .normal)
+            button.tintColor = .label
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+            button.contentHorizontalAlignment = .left
+            button.contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
+            button.addTarget(self, action: action, for: .touchUpInside)
+            return button
+        }
+        
+        let createAlarmBtn = createMenuItem(title: "Criar Alarme", iconName: "plus.circle", action: #selector(menuCreateAlarmTapped))
+        let savedAlarmsBtn = createMenuItem(title: "Alarmes Salvos", iconName: "alarm", action: #selector(menuSavedAlarmsTapped))
+        let aboutBtn = createMenuItem(title: "Sobre o App", iconName: "info.circle", action: #selector(menuAboutTapped))
+        
+        itemsStackView.addArrangedSubview(createAlarmBtn)
+        itemsStackView.addArrangedSubview(savedAlarmsBtn)
+        itemsStackView.addArrangedSubview(aboutBtn)
+        
+        // 5. Constraints Configuration
+        let menuWidth = view.frame.width * sideMenuWidthMultiplier
+        sideMenuLeadingConstraint = sideMenuContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: -menuWidth)
+        
+        NSLayoutConstraint.activate([
+            // Dimming View covers the full view
+            dimmingView.topAnchor.constraint(equalTo: view.topAnchor),
+            dimmingView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            dimmingView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            dimmingView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            // Side Menu Container View
+            sideMenuContainerView.topAnchor.constraint(equalTo: view.topAnchor),
+            sideMenuContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            sideMenuLeadingConstraint,
+            sideMenuContainerView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: sideMenuWidthMultiplier),
+            
+            // Header View
+            headerView.topAnchor.constraint(equalTo: sideMenuContainerView.topAnchor),
+            headerView.leadingAnchor.constraint(equalTo: sideMenuContainerView.leadingAnchor),
+            headerView.trailingAnchor.constraint(equalTo: sideMenuContainerView.trailingAnchor),
+            headerView.heightAnchor.constraint(equalToConstant: 120), // Height of orange header
+            
+            // Header Icon Image View
+            headerIconImageView.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -16),
+            headerIconImageView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16),
+            headerIconImageView.widthAnchor.constraint(equalToConstant: 32),
+            headerIconImageView.heightAnchor.constraint(equalToConstant: 32),
+            
+            // Header Title Label
+            headerTitleLabel.centerYAnchor.constraint(equalTo: headerIconImageView.centerYAnchor),
+            headerTitleLabel.leadingAnchor.constraint(equalTo: headerIconImageView.trailingAnchor, constant: 10),
+            headerTitleLabel.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -16),
+            
+            // Items Stack View
+            itemsStackView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 16),
+            itemsStackView.leadingAnchor.constraint(equalTo: sideMenuContainerView.leadingAnchor),
+            itemsStackView.trailingAnchor.constraint(equalTo: sideMenuContainerView.trailingAnchor),
+        ])
+    }
+    
+    @objc func openSideMenu() {
+        view.bringSubviewToFront(dimmingView)
+        view.bringSubviewToFront(sideMenuContainerView)
+        dimmingView.isHidden = false
+        sideMenuLeadingConstraint.constant = 0
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
+            self.dimmingView.alpha = 1.0
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    @objc func closeSideMenu() {
+        let menuWidth = view.frame.width * sideMenuWidthMultiplier
+        sideMenuLeadingConstraint.constant = -menuWidth
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
+            self.dimmingView.alpha = 0.0
+            self.view.layoutIfNeeded()
+        }, completion: { _ in
+            self.dimmingView.isHidden = true
+        })
+    }
+    
+    @objc func menuCreateAlarmTapped() {
+        closeSideMenu()
+        openAlarms(showAddAlarmInitially: true)
+    }
+    
+    @objc func menuSavedAlarmsTapped() {
+        closeSideMenu()
+        openAlarms(showAddAlarmInitially: false)
+    }
+    
+    @objc func menuAboutTapped() {
+        closeSideMenu()
+        openAbout()
+    }
+    
     @objc func openAlarms() {
-        let alarmView = AlarmListView()
+        openAlarms(showAddAlarmInitially: false)
+    }
+    
+    func openAlarms(showAddAlarmInitially: Bool) {
+        let alarmView = AlarmListView(showAddAlarmInitially: showAddAlarmInitially)
         let hostingController = UIHostingController(rootView: alarmView)
         hostingController.modalPresentationStyle = .fullScreen
         present(hostingController, animated: true, completion: nil)
