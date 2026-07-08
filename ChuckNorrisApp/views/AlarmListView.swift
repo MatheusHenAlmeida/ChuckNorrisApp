@@ -12,6 +12,8 @@ struct AlarmListView: View {
     @StateObject private var viewModel = AlarmViewModel()
     @State private var showingAddAlarm: Bool
     @State private var selectedAlarm: Alarm?
+    @State private var showingDeleteConfirmation = false
+    @State private var alarmToDelete: Alarm?
     
     init(showAddAlarmInitially: Bool = false) {
         _showingAddAlarm = State(initialValue: showAddAlarmInitially)
@@ -22,9 +24,17 @@ struct AlarmListView: View {
         NavigationView {
             List {
                 ForEach(viewModel.alarms) { alarm in
-                    AlarmRow(alarm: alarm, viewModel: viewModel) {
-                        selectedAlarm = alarm
-                    }
+                    AlarmRow(
+                        alarm: alarm,
+                        viewModel: viewModel,
+                        onEdit: {
+                            selectedAlarm = alarm
+                        },
+                        onDelete: {
+                            alarmToDelete = alarm
+                            showingDeleteConfirmation = true
+                        }
+                    )
                 }
                 .onDelete(perform: viewModel.deleteAlarm)
             }
@@ -46,6 +56,21 @@ struct AlarmListView: View {
             .sheet(item: $selectedAlarm) { alarm in
                 AlarmEditView(viewModel: viewModel, alarm: alarm)
             }
+            .alert(isPresented: $showingDeleteConfirmation) {
+                Alert(
+                    title: Text("Delete Alarm"),
+                    message: Text("Are you sure you want to delete this alarm?"),
+                    primaryButton: .destructive(Text("Confirm")) {
+                        if let alarm = alarmToDelete {
+                            viewModel.deleteAlarm(alarm)
+                        }
+                        alarmToDelete = nil
+                    },
+                    secondaryButton: .cancel(Text("Cancel")) {
+                        alarmToDelete = nil
+                    }
+                )
+            }
         }
         .onAppear {
             viewModel.fetchAlarms()
@@ -62,7 +87,8 @@ struct AlarmListView: View {
 struct AlarmRow: View {
     let alarm: Alarm
     @ObservedObject var viewModel: AlarmViewModel
-    let onTap: () -> Void
+    let onEdit: () -> Void
+    let onDelete: () -> Void
     
     var body: some View {
         HStack {
@@ -74,15 +100,21 @@ struct AlarmRow: View {
                     .foregroundColor(.secondary)
             }
             Spacer()
-            Toggle("", isOn: Binding(
-                get: { alarm.isEnabled },
-                set: { _ in viewModel.toggleAlarm(alarm) }
-            ))
-            .labelsHidden()
-        }
-        .contentShape(Rectangle())
-        .onTapGesture {
-            onTap()
+            HStack(spacing: 20) {
+                Button(action: onEdit) {
+                    Image(systemName: "pencil")
+                        .foregroundColor(.blue)
+                        .font(.title2)
+                }
+                .buttonStyle(PlainButtonStyle())
+                
+                Button(action: onDelete) {
+                    Image(systemName: "trash")
+                        .foregroundColor(.red)
+                        .font(.title2)
+                }
+                .buttonStyle(PlainButtonStyle())
+            }
         }
     }
     
