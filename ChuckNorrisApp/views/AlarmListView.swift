@@ -9,15 +9,16 @@ import SwiftUI
 
 struct AlarmListView: View {
     @Environment(\.presentationMode) var presentationMode
-    @StateObject private var viewModel = AlarmViewModel()
+    @StateObject private var viewModel: AlarmViewModel
     @State private var showingAddAlarm: Bool
     @State private var selectedAlarm: Alarm?
     @State private var showingDeleteConfirmation = false
     @State private var alarmToDelete: Alarm?
     
-    init(showAddAlarmInitially: Bool = false) {
+    init(showAddAlarmInitially: Bool = false, viewModel: AlarmViewModel = AlarmViewModel()) {
         _showingAddAlarm = State(initialValue: showAddAlarmInitially)
         _selectedAlarm = State(initialValue: nil)
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
     
     var body: some View {
@@ -131,3 +132,37 @@ struct AlarmRow: View {
         return days.sorted().map { symbols[$0 - 1] }.joined(separator: ", ")
     }
 }
+
+#if DEBUG
+class MockAlarmRepository: AlarmRepository {
+    var alarms: [Alarm] = [
+        Alarm(id: UUID(), hour: 8, minute: 0, days: [2, 3, 4, 5, 6], isEnabled: true),
+        Alarm(id: UUID(), hour: 10, minute: 30, days: [], isEnabled: false),
+        Alarm(id: UUID(), hour: 19, minute: 15, days: [1, 7], isEnabled: true)
+    ]
+    
+    func getAll() -> [Alarm] {
+        return alarms
+    }
+    
+    func save(alarm: Alarm) {}
+    func delete(id: UUID) {}
+}
+
+struct AlarmListView_Previews: PreviewProvider {
+    static var previews: some View {
+        let mockRepository = MockAlarmRepository()
+        let viewModel = AlarmViewModel(repository: mockRepository)
+        AlarmListView(showAddAlarmInitially: false, viewModel: viewModel)
+    }
+}
+
+struct AlarmRowView_Previews: PreviewProvider {
+    static var previews: some View {
+        let alarm = Alarm(id: UUID(), hour: 8, minute: 0, days: [2, 3, 4, 5, 6], isEnabled: true)
+        let mockRepository = MockAlarmRepository()
+        let viewModel = AlarmViewModel(repository: mockRepository)
+        AlarmRow(alarm: alarm, viewModel: viewModel, onEdit: {}, onDelete: {})
+    }
+}
+#endif

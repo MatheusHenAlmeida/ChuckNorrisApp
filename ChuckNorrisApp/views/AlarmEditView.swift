@@ -112,3 +112,13 @@ struct MultipleSelectionRow: View {
         .foregroundColor(.primary)
     }
 }
+
+#if DEBUG
+struct AlarmEditView_Previews: PreviewProvider {
+    static var previews: some View {
+        let mockRepository = MockAlarmRepository()
+        let viewModel = AlarmViewModel(repository: mockRepository)
+        AlarmEditView(viewModel: viewModel, alarm: nil)
+    }
+}
+#endif
