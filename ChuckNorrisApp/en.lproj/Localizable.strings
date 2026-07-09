@@ -16,3 +16,12 @@
 "about_description" = "This app provides unlimited Chuck Norris jokes for your entertainment. Scheduled them to never miss a laugh!";
 "about_version_format" = "Version %@ (%@)";
 "about_close_button" = "Close";
+
+/* Alarm Edit screen */
+"alarm_edit_time_section" = "Time";
+"alarm_edit_select_time" = "Select Time";
+"alarm_edit_repeat_section" = "Repeat";
+"alarm_edit_add_title" = "Add Alarm";
+"alarm_edit_edit_title" = "Edit Alarm";
+"alarm_edit_cancel_button" = "Cancel";
+"alarm_edit_save_button" = "Save";

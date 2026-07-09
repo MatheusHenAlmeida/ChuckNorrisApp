@@ -35,13 +35,13 @@ struct AlarmEditView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Time")) {
-                    DatePicker("Select Time", selection: $date, displayedComponents: .hourAndMinute)
+                Section(header: Text(NSLocalizedString("alarm_edit_time_section", comment: "Time section header"))) {
+                    DatePicker(NSLocalizedString("alarm_edit_select_time", comment: "Time picker label"), selection: $date, displayedComponents: .hourAndMinute)
                         .datePickerStyle(WheelDatePickerStyle())
                         .labelsHidden()
                 }
                 
-                Section(header: Text("Repeat")) {
+                Section(header: Text(NSLocalizedString("alarm_edit_repeat_section", comment: "Repeat section header"))) {
                     ForEach(1...7, id: \.self) { day in
                         MultipleSelectionRow(title: dayName(for: day), isSelected: selectedDays.contains(day)) {
                             if selectedDays.contains(day) {
@@ -53,12 +53,12 @@ struct AlarmEditView: View {
                     }
                 }
             }
-            .navigationTitle(existingAlarm == nil ? "Add Alarm" : "Edit Alarm")
+            .navigationTitle(existingAlarm == nil ? NSLocalizedString("alarm_edit_add_title", comment: "Add alarm title") : NSLocalizedString("alarm_edit_edit_title", comment: "Edit alarm title"))
             .navigationBarItems(
-                leading: Button("Cancel") {
+                leading: Button(NSLocalizedString("alarm_edit_cancel_button", comment: "Cancel button")) {
                     presentationMode.wrappedValue.dismiss()
                 },
-                trailing: Button("Save") {
+                trailing: Button(NSLocalizedString("alarm_edit_save_button", comment: "Save button")) {
                     saveAlarm()
                     presentationMode.wrappedValue.dismiss()
                 }
