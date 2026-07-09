@@ -24,19 +24,19 @@ The project follows a clean, decoupled design based on the **MVVM (Model-View-Vi
 
 ```mermaid
 graph TD
-    subgraph UI (Presentation Layer)
+    subgraph UI ["UI (Presentation Layer)"]
         VC[ViewController - UIKit]
         ALV[AlarmListView - SwiftUI]
         AEV[AlarmEditView - SwiftUI]
         AV[AboutView - SwiftUI]
     end
     
-    subgraph ViewModels
+    subgraph ViewModels ["ViewModels"]
         MVM[MainViewModel]
         AVM[AlarmViewModel]
     end
     
-    subgraph Services & Data Layers
+    subgraph Services ["Services & Data Layers"]
         CD[CoreDataManager - Core Data]
         AR[AlarmRepository]
         NM[NotificationManager]
