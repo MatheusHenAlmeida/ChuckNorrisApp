@@ -172,7 +172,9 @@ class ViewController: UIViewController {
         headerView.addSubview(headerIconImageView)
         
         let headerTitleLabel = UILabel()
-        headerTitleLabel.text = "Chuck Norris App"
+        headerTitleLabel.text = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String
+            ?? Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String
+            ?? "Chuck Norris App"
         headerTitleLabel.textColor = .white
         headerTitleLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         headerTitleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -200,9 +202,9 @@ class ViewController: UIViewController {
             return button
         }
         
-        let createAlarmBtn = createMenuItem(title: "Create an alarm", iconName: "plus.circle", action: #selector(menuCreateAlarmTapped))
-        let savedAlarmsBtn = createMenuItem(title: "Manage alarms", iconName: "alarm", action: #selector(menuSavedAlarmsTapped))
-        let aboutBtn = createMenuItem(title: "About", iconName: "info.circle", action: #selector(menuAboutTapped))
+        let createAlarmBtn = createMenuItem(title: NSLocalizedString("menu_create_alarm", comment: "Side menu item to create an alarm"), iconName: "plus.circle", action: #selector(menuCreateAlarmTapped))
+        let savedAlarmsBtn = createMenuItem(title: NSLocalizedString("menu_manage_alarms", comment: "Side menu item to manage alarms"), iconName: "alarm", action: #selector(menuSavedAlarmsTapped))
+        let aboutBtn = createMenuItem(title: NSLocalizedString("menu_about", comment: "Side menu item about the app"), iconName: "info.circle", action: #selector(menuAboutTapped))
         
         itemsStackView.addArrangedSubview(createAlarmBtn)
         itemsStackView.addArrangedSubview(savedAlarmsBtn)

@@ -6,3 +6,8 @@
 /* Default messages */
 "try_it_later" = "Try it later";
 "time_for_chuck_norris_joke" = "Time for a Chuck Norris Joke!";
+
+/* Side menu items */
+"menu_create_alarm" = "Create an alarm";
+"menu_manage_alarms" = "Manage alarms";
+"menu_about" = "About";
