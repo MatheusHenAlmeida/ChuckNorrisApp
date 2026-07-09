@@ -36,7 +36,10 @@
 		74A2A6482F4DDB7000ECDC1D /* AlarmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A2A6442F4DDB7000ECDC1D /* AlarmRepository.swift */; };
 		74A2A6492F4DDB7000ECDC1D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A2A6452F4DDB7000ECDC1D /* CoreDataManager.swift */; };
 		74A5637C2BDB3E9800CB0AF1 /* ViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A5637B2BDB3E9800CB0AF1 /* ViewControllerTest.swift */; };
-		74E400062E5C9A9800517F23 /* AppUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E400072E5C9A9800517F23 /* AppUnitTests.swift */; };
+		74E4000C2E5C9A9800517F23 /* AlarmRepositoryImplTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E4000B2E5C9A9800517F23 /* AlarmRepositoryImplTest.swift */; };
+		74E4000E2E5C9A9800517F23 /* SpeechServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E4000D2E5C9A9800517F23 /* SpeechServiceTest.swift */; };
+		74E400102E5C9A9800517F23 /* AlarmViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E4000F2E5C9A9800517F23 /* AlarmViewModelTest.swift */; };
+		74E400122E5C9A9800517F23 /* SystemHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E400112E5C9A9800517F23 /* SystemHelperTest.swift */; };
 		74E400012E5C9A9800517F23 /* SystemHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E400022E5C9A9800517F23 /* SystemHelper.swift */; };
 /* End PBXBuildFile section */
 
@@ -92,7 +95,10 @@
 		74A2A6452F4DDB7000ECDC1D /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		74A2A6462F4DDB7000ECDC1D /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		74A5637B2BDB3E9800CB0AF1 /* ViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerTest.swift; sourceTree = "<group>"; };
-		74E400072E5C9A9800517F23 /* AppUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUnitTests.swift; sourceTree = "<group>"; };
+		74E4000B2E5C9A9800517F23 /* AlarmRepositoryImplTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmRepositoryImplTest.swift; sourceTree = "<group>"; };
+		74E4000D2E5C9A9800517F23 /* SpeechServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechServiceTest.swift; sourceTree = "<group>"; };
+		74E4000F2E5C9A9800517F23 /* AlarmViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmViewModelTest.swift; sourceTree = "<group>"; };
+		74E400112E5C9A9800517F23 /* SystemHelperTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemHelperTest.swift; sourceTree = "<group>"; };
 		74E400022E5C9A9800517F23 /* SystemHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemHelper.swift; sourceTree = "<group>"; };
 		74E400042E5C9A9800517F23 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		94E555F4EFD7AB4FD435F958 /* Pods-ChuckNorrisApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChuckNorrisApp.release.xcconfig"; path = "Target Support Files/Pods-ChuckNorrisApp/Pods-ChuckNorrisApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -223,7 +229,10 @@
 				741B84882BB34B9200B2CB88 /* MainViewModelImplTest.swift */,
 				741B848A2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift */,
 				74A5637B2BDB3E9800CB0AF1 /* ViewControllerTest.swift */,
-				74E400072E5C9A9800517F23 /* AppUnitTests.swift */,
+				74E4000B2E5C9A9800517F23 /* AlarmRepositoryImplTest.swift */,
+				74E4000D2E5C9A9800517F23 /* SpeechServiceTest.swift */,
+				74E4000F2E5C9A9800517F23 /* AlarmViewModelTest.swift */,
+				74E400112E5C9A9800517F23 /* SystemHelperTest.swift */,
 			);
 			path = ChuckNorrisAppTests;
 			sourceTree = "<group>";
@@ -640,7 +649,10 @@
 				741B848B2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift in Sources */,
 				741B84892BB34B9200B2CB88 /* MainViewModelImplTest.swift in Sources */,
 				74A5637C2BDB3E9800CB0AF1 /* ViewControllerTest.swift in Sources */,
-				74E400062E5C9A9800517F23 /* AppUnitTests.swift in Sources */,
+				74E4000C2E5C9A9800517F23 /* AlarmRepositoryImplTest.swift in Sources */,
+				74E4000E2E5C9A9800517F23 /* SpeechServiceTest.swift in Sources */,
+				74E400102E5C9A9800517F23 /* AlarmViewModelTest.swift in Sources */,
+				74E400122E5C9A9800517F23 /* SystemHelperTest.swift in Sources */,
 				4EE04D3979EB82C4058AC018 /* ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
