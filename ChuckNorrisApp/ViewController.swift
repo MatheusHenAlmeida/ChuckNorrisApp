@@ -103,7 +103,8 @@ class ViewController: UIViewController {
         
         // Setup AdBanner
         bannerView = BannerView(adSize: AdSizeBanner)
-        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716" // Test ID
+        bannerView.adUnitID = Bundle.main.object(forInfoDictionaryKey: "AdUnitID") as? String
+            ?? "ca-app-pub-3940256099942544/2934735716" // Fallback to Test ID
         bannerView.rootViewController = self
         bannerView.load(Request())
         bannerView.translatesAutoresizingMaskIntoConstraints = false

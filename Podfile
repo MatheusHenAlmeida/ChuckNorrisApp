@@ -29,4 +29,15 @@ post_install do |installer|
             end
         end
     end
+
+    installer.aggregate_targets.each do |target|
+        target.xcconfigs.each_key do |config_name|
+            xcconfig_path = target.xcconfig_path(config_name)
+            if File.exist?(xcconfig_path)
+                File.open(xcconfig_path, 'a') do |file|
+                    file.puts "\n#include \"../../../Secrets.xcconfig\""
+                end
+            end
+        end
+    end
 end

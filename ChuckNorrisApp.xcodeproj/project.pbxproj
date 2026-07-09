@@ -36,6 +36,7 @@
 		74A2A6482F4DDB7000ECDC1D /* AlarmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A2A6442F4DDB7000ECDC1D /* AlarmRepository.swift */; };
 		74A2A6492F4DDB7000ECDC1D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A2A6452F4DDB7000ECDC1D /* CoreDataManager.swift */; };
 		74A5637C2BDB3E9800CB0AF1 /* ViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A5637B2BDB3E9800CB0AF1 /* ViewControllerTest.swift */; };
+		74E400012E5C9A9800517F23 /* SystemHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E400022E5C9A9800517F23 /* SystemHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,8 @@
 		74A2A6452F4DDB7000ECDC1D /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		74A2A6462F4DDB7000ECDC1D /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		74A5637B2BDB3E9800CB0AF1 /* ViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerTest.swift; sourceTree = "<group>"; };
+		74E400022E5C9A9800517F23 /* SystemHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemHelper.swift; sourceTree = "<group>"; };
+		74E400042E5C9A9800517F23 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		94E555F4EFD7AB4FD435F958 /* Pods-ChuckNorrisApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChuckNorrisApp.release.xcconfig"; path = "Target Support Files/Pods-ChuckNorrisApp/Pods-ChuckNorrisApp.release.xcconfig"; sourceTree = "<group>"; };
 		A26FE45F132E27180BFEFB43 /* ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift"; path = "MockingbirdMocks/ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift"; sourceTree = "<group>"; };
 		ACA55F82B7EFEADE20F9B147 /* Pods_ChuckNorrisAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChuckNorrisAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -170,6 +173,7 @@
 		74926F9F2B96129F0058D874 = {
 			isa = PBXGroup;
 			children = (
+				74E400042E5C9A9800517F23 /* Secrets.xcconfig */,
 				74926FAA2B96129F0058D874 /* ChuckNorrisApp */,
 				74926FC12B9612A00058D874 /* ChuckNorrisAppTests */,
 				74926FCB2B9612A00058D874 /* ChuckNorrisAppUITests */,
@@ -199,6 +203,7 @@
 				74926FE82B961A6B0058D874 /* domain */,
 				74926FE52B9617470058D874 /* web */,
 				74A2A63C2F4DDB2500ECDC1D /* views */,
+				74E400032E5C9A9800517F23 /* utils */,
 				74926FAB2B96129F0058D874 /* AppDelegate.swift */,
 				74926FAD2B96129F0058D874 /* SceneDelegate.swift */,
 				74926FAF2B96129F0058D874 /* ViewController.swift */,
@@ -264,6 +269,14 @@
 				74A2A63B2F4DDB2500ECDC1D /* AlarmListView.swift */,
 			);
 			path = views;
+			sourceTree = "<group>";
+		};
+		74E400032E5C9A9800517F23 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				74E400022E5C9A9800517F23 /* SystemHelper.swift */,
+			);
+			path = utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -613,6 +626,7 @@
 				74926FAE2B96129F0058D874 /* SceneDelegate.swift in Sources */,
 				74926FF32B9658A60058D874 /* MainViewModelImpl.swift in Sources */,
 				745E21402E5C9A9800517F23 /* SpeechService.swift in Sources */,
+				74E400012E5C9A9800517F23 /* SystemHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
