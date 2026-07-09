@@ -11,17 +11,11 @@ struct AboutView: View {
     @Environment(\.presentationMode) var presentationMode
     
     var appName: String {
-        Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String
-            ?? Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String
-            ?? "Chuck Norris App"
+        SystemHelper.getAppName()
     }
     
     var version: String {
-        let dictionary = Bundle.main.infoDictionary
-        let version = dictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
-        let build = dictionary?["CFBundleVersion"] as? String ?? "1"
-        let format = NSLocalizedString("about_version_format", comment: "Format for app version and build")
-        return String(format: format, version, build)
+        SystemHelper.getFormattedAppVersion()
     }
     
     var body: some View {

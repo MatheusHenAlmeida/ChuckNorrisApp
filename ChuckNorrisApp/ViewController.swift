@@ -172,9 +172,7 @@ class ViewController: UIViewController {
         headerView.addSubview(headerIconImageView)
         
         let headerTitleLabel = UILabel()
-        headerTitleLabel.text = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String
-            ?? Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String
-            ?? "Chuck Norris App"
+        headerTitleLabel.text = SystemHelper.getAppName()
         headerTitleLabel.textColor = .white
         headerTitleLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         headerTitleLabel.translatesAutoresizingMaskIntoConstraints = false
