@@ -10,7 +10,12 @@ import UserNotifications
 import AVFoundation
 import UIKit
 
-class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
+protocol NotificationManaging {
+    func scheduleAlarm(alarm: Alarm)
+    func cancelAlarm(id: UUID)
+}
+
+class NotificationManager: NSObject, UNUserNotificationCenterDelegate, NotificationManaging {
     static let shared = NotificationManager()
     
     private let speechService = SpeechService(speechSynthesizer: AVSpeechSynthesizer())

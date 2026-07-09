@@ -12,9 +12,9 @@ class AlarmViewModel: ObservableObject {
     @Published var alarms: [Alarm] = []
     
     private let repository: AlarmRepository
-    private let notificationManager: NotificationManager
+    private let notificationManager: NotificationManaging
     
-    init(repository: AlarmRepository = AlarmRepositoryImpl(), notificationManager: NotificationManager = NotificationManager.shared) {
+    init(repository: AlarmRepository = AlarmRepositoryImpl(), notificationManager: NotificationManaging = NotificationManager.shared) {
         self.repository = repository
         self.notificationManager = notificationManager
         fetchAlarms()
