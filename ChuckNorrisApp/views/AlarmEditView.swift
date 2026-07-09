@@ -57,11 +57,13 @@ struct AlarmEditView: View {
             .navigationBarItems(
                 leading: Button(NSLocalizedString("alarm_edit_cancel_button", comment: "Cancel button")) {
                     presentationMode.wrappedValue.dismiss()
-                },
+                }
+                .accessibilityIdentifier("alarm_edit_cancel_button"),
                 trailing: Button(NSLocalizedString("alarm_edit_save_button", comment: "Save button")) {
                     saveAlarm()
                     presentationMode.wrappedValue.dismiss()
                 }
+                .accessibilityIdentifier("alarm_edit_save_button")
             )
         }
     }

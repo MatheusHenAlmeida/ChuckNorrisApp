@@ -98,6 +98,7 @@ class ViewController: UIViewController {
         menuButton.setImage(menuImage, for: .normal)
         menuButton.tintColor = .white
         menuButton.addTarget(self, action: #selector(openSideMenu), for: .touchUpInside)
+        menuButton.accessibilityIdentifier = "menu_button"
         menuButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(menuButton)
         
@@ -202,8 +203,13 @@ class ViewController: UIViewController {
         }
         
         let createAlarmBtn = createMenuItem(title: NSLocalizedString("menu_create_alarm", comment: "Side menu item to create an alarm"), iconName: "plus.circle", action: #selector(menuCreateAlarmTapped))
+        createAlarmBtn.accessibilityIdentifier = "menu_create_alarm_button"
+        
         let savedAlarmsBtn = createMenuItem(title: NSLocalizedString("menu_manage_alarms", comment: "Side menu item to manage alarms"), iconName: "alarm", action: #selector(menuSavedAlarmsTapped))
+        savedAlarmsBtn.accessibilityIdentifier = "menu_manage_alarms_button"
+        
         let aboutBtn = createMenuItem(title: NSLocalizedString("menu_about", comment: "Side menu item about the app"), iconName: "info.circle", action: #selector(menuAboutTapped))
+        aboutBtn.accessibilityIdentifier = "menu_about_button"
         
         itemsStackView.addArrangedSubview(createAlarmBtn)
         itemsStackView.addArrangedSubview(savedAlarmsBtn)

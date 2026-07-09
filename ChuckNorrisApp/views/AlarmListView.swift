@@ -43,13 +43,15 @@ struct AlarmListView: View {
             .navigationBarItems(
                 leading: Button(NSLocalizedString("alarm_list_close_button", comment: "Close button title")) {
                     presentationMode.wrappedValue.dismiss()
-                },
+                }
+                .accessibilityIdentifier("alarm_list_close_button"),
                 trailing: Button(action: {
                     selectedAlarm = nil
                     showingAddAlarm = true
                 }) {
                     Image(systemName: "plus")
                 }
+                .accessibilityIdentifier("alarm_list_add_button")
             )
             .sheet(isPresented: $showingAddAlarm) {
                 AlarmEditView(viewModel: viewModel, alarm: nil)
@@ -108,6 +110,7 @@ struct AlarmRow: View {
                         .font(.title2)
                 }
                 .buttonStyle(PlainButtonStyle())
+                .accessibilityIdentifier("alarm_row_edit_button")
                 
                 Button(action: onDelete) {
                     Image(systemName: "trash")
@@ -115,6 +118,7 @@ struct AlarmRow: View {
                         .font(.title2)
                 }
                 .buttonStyle(PlainButtonStyle())
+                .accessibilityIdentifier("alarm_row_delete_button")
             }
         }
     }

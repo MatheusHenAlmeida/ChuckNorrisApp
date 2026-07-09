@@ -32,6 +32,7 @@ struct AboutView: View {
                 Text(appName)
                     .font(.title)
                     .fontWeight(.bold)
+                    .accessibilityIdentifier("about_app_name")
                 
                 Text(NSLocalizedString("about_description", comment: "Description of the app on the About screen"))
                     .multilineTextAlignment(.center)
@@ -40,13 +41,15 @@ struct AboutView: View {
                 Text(version)
                     .font(.footnote)
                     .foregroundColor(.secondary)
+                    .accessibilityIdentifier("about_app_version")
                 
                 Spacer()
             }
             .padding()
             .navigationBarItems(trailing: Button(NSLocalizedString("about_close_button", comment: "Close button title")) {
                 presentationMode.wrappedValue.dismiss()
-            })
+            }
+            .accessibilityIdentifier("about_close_button"))
         }
     }
 }
