@@ -25,3 +25,13 @@
 "alarm_edit_edit_title" = "Edit Alarm";
 "alarm_edit_cancel_button" = "Cancel";
 "alarm_edit_save_button" = "Save";
+
+/* Alarm List screen */
+"alarm_list_title" = "Alarms";
+"alarm_list_close_button" = "Close";
+"alarm_list_delete_title" = "Delete Alarm";
+"alarm_list_delete_message" = "Are you sure you want to delete this alarm?";
+"alarm_list_confirm_button" = "Confirm";
+"alarm_list_cancel_button" = "Cancel";
+"alarm_list_one_time" = "One time";
+"alarm_list_every_day" = "Every day";

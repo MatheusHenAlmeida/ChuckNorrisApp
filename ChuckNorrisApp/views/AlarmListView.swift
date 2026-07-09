@@ -39,9 +39,9 @@ struct AlarmListView: View {
                 }
                 .onDelete(perform: viewModel.deleteAlarm)
             }
-            .navigationTitle("Alarms")
+            .navigationTitle(NSLocalizedString("alarm_list_title", comment: "Alarm list navigation title"))
             .navigationBarItems(
-                leading: Button("Close") {
+                leading: Button(NSLocalizedString("alarm_list_close_button", comment: "Close button title")) {
                     presentationMode.wrappedValue.dismiss()
                 },
                 trailing: Button(action: {
@@ -59,15 +59,15 @@ struct AlarmListView: View {
             }
             .alert(isPresented: $showingDeleteConfirmation) {
                 Alert(
-                    title: Text("Delete Alarm"),
-                    message: Text("Are you sure you want to delete this alarm?"),
-                    primaryButton: .destructive(Text("Confirm")) {
+                    title: Text(NSLocalizedString("alarm_list_delete_title", comment: "Delete alarm alert title")),
+                    message: Text(NSLocalizedString("alarm_list_delete_message", comment: "Delete alarm alert message")),
+                    primaryButton: .destructive(Text(NSLocalizedString("alarm_list_confirm_button", comment: "Confirm button title"))) {
                         if let alarm = alarmToDelete {
                             viewModel.deleteAlarm(alarm)
                         }
                         alarmToDelete = nil
                     },
-                    secondaryButton: .cancel(Text("Cancel")) {
+                    secondaryButton: .cancel(Text(NSLocalizedString("alarm_list_cancel_button", comment: "Cancel button title"))) {
                         alarmToDelete = nil
                     }
                 )
@@ -121,10 +121,10 @@ struct AlarmRow: View {
     
     private func daysText(for days: [Int]) -> String {
         if days.isEmpty {
-            return "One time"
+            return NSLocalizedString("alarm_list_one_time", comment: "Label for non-repeating alarm")
         }
         if days.count == 7 {
-            return "Every day"
+            return NSLocalizedString("alarm_list_every_day", comment: "Label for alarm repeating every day")
         }
         // Map 1-7 to Sun-Sat
         let formatter = DateFormatter()
