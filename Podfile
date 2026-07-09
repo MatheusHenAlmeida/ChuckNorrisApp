@@ -7,6 +7,7 @@ target 'ChuckNorrisApp' do
 
   # Pods for ChuckNorrisApp
   pod 'Alamofire', '~> 5.6'
+  pod 'Google-Mobile-Ads-SDK'
   pod 'SwinjectStoryboard'
 
   target 'ChuckNorrisAppTests' do
@@ -25,6 +26,17 @@ post_install do |installer|
         project.targets.each do |target|
             target.build_configurations.each do |config|
                 config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+            end
+        end
+    end
+
+    installer.aggregate_targets.each do |target|
+        target.xcconfigs.each_key do |config_name|
+            xcconfig_path = target.xcconfig_path(config_name)
+            if File.exist?(xcconfig_path)
+                File.open(xcconfig_path, 'a') do |file|
+                    file.puts "\n#include \"../../../Secrets.xcconfig\""
+                end
             end
         end
     end

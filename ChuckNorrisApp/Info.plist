@@ -27,5 +27,13 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+	</array>
+	<key>GADApplicationIdentifier</key>
+	<string>$(AD_APP_ID)</string>
+	<key>AdUnitID</key>
+	<string>$(AD_UNIT_ID)</string>
 </dict>
 </plist>

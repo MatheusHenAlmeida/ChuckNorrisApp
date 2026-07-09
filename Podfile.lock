@@ -1,5 +1,8 @@
 PODS:
   - Alamofire (5.9.0)
+  - Google-Mobile-Ads-SDK (13.0.0):
+    - GoogleUserMessagingPlatform (>= 1.1)
+  - GoogleUserMessagingPlatform (3.1.0)
   - MockingbirdFramework (0.20.0)
   - Swinject (2.7.1)
   - SwinjectStoryboard (2.2.2):
@@ -7,22 +10,27 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 5.6)
+  - Google-Mobile-Ads-SDK
   - MockingbirdFramework (~> 0.20)
   - SwinjectStoryboard
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Google-Mobile-Ads-SDK
+    - GoogleUserMessagingPlatform
     - MockingbirdFramework
     - Swinject
     - SwinjectStoryboard
 
 SPEC CHECKSUMS:
   Alamofire: 02b772c9910e8eba1a079227c32fbd9e46c90a24
+  Google-Mobile-Ads-SDK: 96498d53355e438e2d932277e5e8e41a824fe4d4
+  GoogleUserMessagingPlatform: befe603da6501006420c206222acd449bba45a9c
   MockingbirdFramework: 54e35fbbb47b806c1a1fae2cf3ef99f6eceb55e5
   Swinject: ddf78b8486dd9b71a667b852cad919ab4484478e
   SwinjectStoryboard: 240ce371396da09a4c43c72ee5c148108500e184
 
-PODFILE CHECKSUM: cb4216768791584d609dc0d4c7496caf0791353c
+PODFILE CHECKSUM: ba5812a2c28e38f63e5b3af924adc88a33cb86de
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2
