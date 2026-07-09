@@ -10,11 +10,18 @@ import SwiftUI
 struct AboutView: View {
     @Environment(\.presentationMode) var presentationMode
     
+    var appName: String {
+        Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String
+            ?? Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String
+            ?? "Chuck Norris App"
+    }
+    
     var version: String {
         let dictionary = Bundle.main.infoDictionary
         let version = dictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
         let build = dictionary?["CFBundleVersion"] as? String ?? "1"
-        return "Version \(version) (\(build))"
+        let format = NSLocalizedString("about_version_format", comment: "Format for app version and build")
+        return String(format: format, version, build)
     }
     
     var body: some View {
@@ -28,11 +35,11 @@ struct AboutView: View {
                     .overlay(Circle().stroke(Color.gray, lineWidth: 4))
                     .shadow(radius: 10)
                 
-                Text("Chuck Norris Jokes")
+                Text(appName)
                     .font(.title)
                     .fontWeight(.bold)
                 
-                Text("This app provides unlimited Chuck Norris jokes for your entertainment. Scheduled them to never miss a laugh!")
+                Text(NSLocalizedString("about_description", comment: "Description of the app on the About screen"))
                     .multilineTextAlignment(.center)
                     .padding()
                 
@@ -43,7 +50,7 @@ struct AboutView: View {
                 Spacer()
             }
             .padding()
-            .navigationBarItems(trailing: Button("Close") {
+            .navigationBarItems(trailing: Button(NSLocalizedString("about_close_button", comment: "Close button title")) {
                 presentationMode.wrappedValue.dismiss()
             })
         }
