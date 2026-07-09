@@ -26,7 +26,7 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
     private func setupNotificationCategories() {
         let tellJokeAction = UNNotificationAction(
             identifier: "TELL_JOKE_ACTION",
-            title: "Tell me the joke",
+            title: NSLocalizedString("tell_me_the_joke_action", comment: "Notification action button title to tell the joke"),
             options: [.foreground]
         )
         
@@ -97,7 +97,7 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
         cancelAlarm(id: alarm.id)
         
         Task {
-            var jokeText = "Time for a Chuck Norris Joke!"
+            var jokeText = NSLocalizedString("time_for_chuck_norris_joke", comment: "Default body text for Chuck Norris joke alarm notification")
             do {
                 let service = ChuckNorrisServiceImpl(baseUrl: "https://api.chucknorris.io/jokes")
                 let client = ChuckNorrisWebClientImpl(webService: service)
@@ -109,7 +109,7 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
             }
             
             let content = UNMutableNotificationContent()
-            content.title = "Time for a Chuck Norris Joke!"
+            content.title = NSLocalizedString("time_for_chuck_norris_joke", comment: "Title for Chuck Norris joke alarm notification")
             content.body = jokeText
             content.sound = .default
             content.categoryIdentifier = "ALARM_CATEGORY"
