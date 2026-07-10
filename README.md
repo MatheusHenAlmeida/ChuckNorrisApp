@@ -52,7 +52,6 @@ graph TD
     MVM --> WC
     AVM --> AR
     AVM --> NM
-    NM --> SS
     AR --> CD
 ```
 
