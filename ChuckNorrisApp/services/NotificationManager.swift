@@ -18,8 +18,6 @@ protocol NotificationManaging {
 class NotificationManager: NSObject, UNUserNotificationCenterDelegate, NotificationManaging {
     static let shared = NotificationManager()
     
-    private let speechService = SpeechService(speechSynthesizer: AVSpeechSynthesizer())
-    
     override private init() {
         super.init()
         UNUserNotificationCenter.current().delegate = self
