@@ -6,31 +6,44 @@
 //
 
 import XCTest
-import Mockingbird
 @testable import ChuckNorrisApp
+
+final class ChuckNorrisWebClientMock: ChuckNorrisWebClient {
+    var getJokeReturnValue: JokeResponse?
+    var getJokeCalled = false
+    var getJokeShouldThrow = false
+    
+    func getJoke() async throws -> JokeResponse? {
+        getJokeCalled = true
+        if getJokeShouldThrow {
+            throw NSError(domain: "test", code: -1, userInfo: nil)
+        }
+        return getJokeReturnValue
+    }
+}
 
 final class MainViewModelImplTest: XCTestCase {
     
     private var mainViewModelImpl: MainViewModelImpl? = nil
-    
-    private lazy var chuckNorrisWebClient = mock(ChuckNorrisWebClient.self)
+    private var chuckNorrisWebClient = ChuckNorrisWebClientMock()
 
     override func setUpWithError() throws {
+        chuckNorrisWebClient = ChuckNorrisWebClientMock()
         mainViewModelImpl = MainViewModelImpl(webClient: chuckNorrisWebClient)
     }
 
     func testGetJoke_mustReturnJoke() async throws {
-        given(await chuckNorrisWebClient.getJoke()).willReturn(JokeResponse(id: "1", iconUrl: "url", value: "Some joke"))
+        chuckNorrisWebClient.getJokeReturnValue = JokeResponse(id: "1", iconUrl: "url", value: "Some joke")
         
         let joke = try? await mainViewModelImpl?.getJoke()
         
         XCTAssertEqual("1", joke?.id)
         XCTAssertEqual("url", joke?.iconUrl)
         XCTAssertEqual("Some joke", joke?.value)
-        verify(await chuckNorrisWebClient.getJoke()).wasCalled()
+        XCTAssertTrue(chuckNorrisWebClient.getJokeCalled)
     }
     
     override func tearDown() {
-        clearStubs(on: chuckNorrisWebClient)
+        // No-op
     }
 }
