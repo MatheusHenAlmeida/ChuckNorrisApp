@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import Swinject
 import SwinjectStoryboard
 import AVFoundation
 import SwiftUI
 import GoogleMobileAds
+import CoreData
 
 class ViewController: UIViewController {
 
@@ -18,8 +20,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var tellJokeButton: UIButton!
     @IBOutlet weak var loadingView: UIView!
     
-    var mainViewModel: MainViewModel?
-    var speechService: SpeechService?
+    var mainViewModel: MainViewModelType?
     
     private var dimmingView: UIView!
     private var sideMenuContainerView: UIView!
@@ -68,7 +69,7 @@ class ViewController: UIViewController {
                 let jokeText = joke.value ?? DefaultMessages.tryItLater
                 myLabel.text = jokeText
                 
-                speechService?.speech(message: jokeText)
+                mainViewModel?.speech(message: jokeText)
             } else {
                 myLabel.text = DefaultMessages.tryItLater
             }
@@ -79,7 +80,7 @@ class ViewController: UIViewController {
     func displayJoke(text: String, speak: Bool) {
         myLabel.text = text
         if speak {
-            speechService?.speech(message: text)
+            mainViewModel?.speech(message: text)
         }
     }
 
@@ -286,7 +287,8 @@ class ViewController: UIViewController {
     }
     
     func openCreateAlarm() {
-        let alarmViewModel = AlarmViewModel()
+        let childContainer = Container(parent: SwinjectStoryboard.defaultContainer)
+        let alarmViewModel = childContainer.resolve(AlarmViewModelType.self)!
         let editView = AlarmEditView(viewModel: alarmViewModel, alarm: nil)
         let hostingController = UIHostingController(rootView: editView)
         present(hostingController, animated: true, completion: nil)
@@ -307,37 +309,20 @@ class ViewController: UIViewController {
     }
     
     func openAlarms(showAddAlarmInitially: Bool) {
-        let alarmView = AlarmListView(showAddAlarmInitially: showAddAlarmInitially)
+        let childContainer = Container(parent: SwinjectStoryboard.defaultContainer)
+        let viewModel = childContainer.resolve(AlarmViewModelType.self)!
+        let alarmView = AlarmListView(showAddAlarmInitially: showAddAlarmInitially, viewModel: viewModel)
         let hostingController = UIHostingController(rootView: alarmView)
         hostingController.modalPresentationStyle = .fullScreen
         present(hostingController, animated: true, completion: nil)
     }
     
     @objc func openAbout() {
-        let aboutView = AboutView()
+        let childContainer = Container(parent: SwinjectStoryboard.defaultContainer)
+        let systemHelper = childContainer.resolve(SystemHelping.self)!
+        let aboutView = AboutView(systemHelper: systemHelper)
         let hostingController = UIHostingController(rootView: aboutView)
         present(hostingController, animated: true, completion: nil)
-    }
-}
-
-extension SwinjectStoryboard {
-    @objc class func setup() {
-        defaultContainer.register(ChuckNorrisService.self) { _ in
-            ChuckNorrisServiceImpl(baseUrl: "https://api.chucknorris.io/jokes")
-        }
-        defaultContainer.register(ChuckNorrisWebClient.self) { resolver in
-            ChuckNorrisWebClientImpl(webService: resolver.resolve(ChuckNorrisService.self)!)
-        }
-        defaultContainer.register(MainViewModel.self) { resolver in
-            MainViewModelImpl(webClient: resolver.resolve(ChuckNorrisWebClient.self)!)
-        }
-        defaultContainer.register(SpeechService.self) { _ in
-            SpeechService(speechSynthesizer: AVSpeechSynthesizer())
-        }
-        defaultContainer.storyboardInitCompleted(ViewController.self) { resolver, viewController in
-            viewController.mainViewModel = resolver.resolve(MainViewModel.self)
-            viewController.speechService = resolver.resolve(SpeechService.self)
-        }
     }
 }
 
@@ -356,3 +341,47 @@ extension ViewController {
     }
 }
 #endif
+
+// MARK: Default DI Container
+
+extension SwinjectStoryboard {
+    @objc class func setup() {
+        defaultContainer.register(ChuckNorrisService.self) { _ in
+            ChuckNorrisServiceImpl(baseUrl: "https://api.chucknorris.io/jokes")
+        }
+        defaultContainer.register(ChuckNorrisWebClient.self) { resolver in
+            ChuckNorrisWebClientImpl(webService: resolver.resolve(ChuckNorrisService.self)!)
+        }
+        defaultContainer.register(MainViewModelType.self) { resolver in
+            MainViewModel(
+                webClient: resolver.resolve(ChuckNorrisWebClient.self)!,
+                speechService: resolver.resolve(SpeechService.self)!
+            )
+        }
+        defaultContainer.register(SpeechService.self) { _ in
+            SpeechService(speechSynthesizer: AVSpeechSynthesizer())
+        }
+        defaultContainer.register(SystemHelping.self) { _ in
+            SystemHelperImpl()
+        }
+        defaultContainer.register(NSManagedObjectContext.self) { _ in
+            CoreDataManager.shared.context
+        }
+        defaultContainer.register(AlarmRepository.self) { resolver in
+            AlarmRepositoryImpl(context: resolver.resolve(NSManagedObjectContext.self)!)
+        }
+        defaultContainer.register(NotificationManager.self) { _ in
+            NotificationManagerImpl.shared
+        }
+        defaultContainer.register(AlarmViewModelType.self) { resolver in
+            AlarmViewModel(
+                repository: resolver.resolve(AlarmRepository.self)!,
+                notificationManager: resolver.resolve(NotificationManager.self)!,
+                speechService: resolver.resolve(SpeechService.self)!
+            )
+        }
+        defaultContainer.storyboardInitCompleted(ViewController.self) { resolver, viewController in
+            viewController.mainViewModel = resolver.resolve(MainViewModelType.self)
+        }
+    }
+}

@@ -8,12 +8,12 @@
 import Foundation
 import Alamofire
 
-protocol ChuckNorrisWebClient {
+protocol ChuckNorrisWebClient: Sendable {
     func getJoke() async throws -> JokeResponse?
 }
 
-class ChuckNorrisWebClientImpl: ChuckNorrisWebClient {
-    private var webService: ChuckNorrisService
+class ChuckNorrisWebClientImpl: ChuckNorrisWebClient, @unchecked Sendable {
+    private let webService: ChuckNorrisService
     
     init(webService: ChuckNorrisService) {
         self.webService = webService

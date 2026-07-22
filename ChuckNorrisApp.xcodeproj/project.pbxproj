@@ -10,8 +10,7 @@
 		08D85D0BBF8D42150A83CCC9 /* Pods_ChuckNorrisAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACA55F82B7EFEADE20F9B147 /* Pods_ChuckNorrisAppTests.framework */; };
 		124290C3D3CB8879A6C3CB38 /* Pods_ChuckNorrisApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0543A94258DDF4377727E7E1 /* Pods_ChuckNorrisApp.framework */; };
 		2D81B00085997777D0154534 /* Pods_ChuckNorrisApp_ChuckNorrisAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53849B6865AD3B6C4D326D02 /* Pods_ChuckNorrisApp_ChuckNorrisAppUITests.framework */; };
-		4EE04D3979EB82C4058AC018 /* ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26FE45F132E27180BFEFB43 /* ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift */; };
-		741B84892BB34B9200B2CB88 /* MainViewModelImplTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741B84882BB34B9200B2CB88 /* MainViewModelImplTest.swift */; };
+		741B84892BB34B9200B2CB88 /* MainViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741B84882BB34B9200B2CB88 /* MainViewModelTest.swift */; };
 		741B848B2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741B848A2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift */; };
 		745E21402E5C9A9800517F23 /* SpeechService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745E213F2E5C9A9800517F23 /* SpeechService.swift */; };
 		745E21432E5C9EC500517F23 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 745E21412E5C9EC500517F23 /* Localizable.strings */; };
@@ -23,10 +22,10 @@
 		74926FB82B9612A00058D874 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74926FB62B9612A00058D874 /* LaunchScreen.storyboard */; };
 		74926FCD2B9612A00058D874 /* ChuckNorrisAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74926FCC2B9612A00058D874 /* ChuckNorrisAppUITests.swift */; };
 		74926FCF2B9612A00058D874 /* ChuckNorrisAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74926FCE2B9612A00058D874 /* ChuckNorrisAppUITestsLaunchTests.swift */; };
-		74926FE72B9617620058D874 /* ChuckNorrisWebClientImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74926FE62B9617620058D874 /* ChuckNorrisWebClientImpl.swift */; };
+		74926FE72B9617620058D874 /* ChuckNorrisWebClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74926FE62B9617620058D874 /* ChuckNorrisWebClient.swift */; };
 		74926FEA2B961A820058D874 /* JokeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74926FE92B961A820058D874 /* JokeResponse.swift */; };
-		74926FF32B9658A60058D874 /* MainViewModelImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74926FF22B9658A60058D874 /* MainViewModelImpl.swift */; };
-		74926FF52B9659D50058D874 /* ChuckNorrisServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74926FF42B9659D50058D874 /* ChuckNorrisServiceImpl.swift */; };
+		74926FF32B9658A60058D874 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74926FF22B9658A60058D874 /* MainViewModel.swift */; };
+		74926FF52B9659D50058D874 /* ChuckNorrisService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74926FF42B9659D50058D874 /* ChuckNorrisService.swift */; };
 		74A2A63D2F4DDB2500ECDC1D /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A2A6392F4DDB2500ECDC1D /* AboutView.swift */; };
 		74A2A63E2F4DDB2500ECDC1D /* AlarmEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A2A63A2F4DDB2500ECDC1D /* AlarmEditView.swift */; };
 		74A2A63F2F4DDB2500ECDC1D /* AlarmListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A2A63B2F4DDB2500ECDC1D /* AlarmListView.swift */; };
@@ -67,7 +66,7 @@
 		43FD62CAAE656190C851A28E /* Pods-ChuckNorrisAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChuckNorrisAppTests.release.xcconfig"; path = "Target Support Files/Pods-ChuckNorrisAppTests/Pods-ChuckNorrisAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		53849B6865AD3B6C4D326D02 /* Pods_ChuckNorrisApp_ChuckNorrisAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChuckNorrisApp_ChuckNorrisAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7405279F300176CF00465A5A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		741B84882BB34B9200B2CB88 /* MainViewModelImplTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelImplTest.swift; sourceTree = "<group>"; };
+		741B84882BB34B9200B2CB88 /* MainViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTest.swift; sourceTree = "<group>"; };
 		741B848A2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuckNorrisWebClientImplTest.swift; sourceTree = "<group>"; };
 		745E213F2E5C9A9800517F23 /* SpeechService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechService.swift; sourceTree = "<group>"; };
 		745E21422E5C9EC500517F23 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -83,10 +82,10 @@
 		74926FC82B9612A00058D874 /* ChuckNorrisAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChuckNorrisAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		74926FCC2B9612A00058D874 /* ChuckNorrisAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuckNorrisAppUITests.swift; sourceTree = "<group>"; };
 		74926FCE2B9612A00058D874 /* ChuckNorrisAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuckNorrisAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		74926FE62B9617620058D874 /* ChuckNorrisWebClientImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuckNorrisWebClientImpl.swift; sourceTree = "<group>"; };
+		74926FE62B9617620058D874 /* ChuckNorrisWebClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuckNorrisWebClient.swift; sourceTree = "<group>"; };
 		74926FE92B961A820058D874 /* JokeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeResponse.swift; sourceTree = "<group>"; };
-		74926FF22B9658A60058D874 /* MainViewModelImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelImpl.swift; sourceTree = "<group>"; };
-		74926FF42B9659D50058D874 /* ChuckNorrisServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuckNorrisServiceImpl.swift; sourceTree = "<group>"; };
+		74926FF22B9658A60058D874 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		74926FF42B9659D50058D874 /* ChuckNorrisService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuckNorrisService.swift; sourceTree = "<group>"; };
 		74A2A6392F4DDB2500ECDC1D /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		74A2A63A2F4DDB2500ECDC1D /* AlarmEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmEditView.swift; sourceTree = "<group>"; };
 		74A2A63B2F4DDB2500ECDC1D /* AlarmListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmListView.swift; sourceTree = "<group>"; };
@@ -103,7 +102,6 @@
 		74E4000F2E5C9A9800517F23 /* AlarmViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmViewModelTest.swift; sourceTree = "<group>"; };
 		74E400112E5C9A9800517F23 /* SystemHelperTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemHelperTest.swift; sourceTree = "<group>"; };
 		94E555F4EFD7AB4FD435F958 /* Pods-ChuckNorrisApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChuckNorrisApp.release.xcconfig"; path = "Target Support Files/Pods-ChuckNorrisApp/Pods-ChuckNorrisApp.release.xcconfig"; sourceTree = "<group>"; };
-		A26FE45F132E27180BFEFB43 /* ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift"; path = "MockingbirdMocks/ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift"; sourceTree = "<group>"; };
 		ACA55F82B7EFEADE20F9B147 /* Pods_ChuckNorrisAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChuckNorrisAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDF55427BDFFE86D367AA0F5 /* Pods-ChuckNorrisApp-ChuckNorrisAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChuckNorrisApp-ChuckNorrisAppUITests.release.xcconfig"; path = "Target Support Files/Pods-ChuckNorrisApp-ChuckNorrisAppUITests/Pods-ChuckNorrisApp-ChuckNorrisAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F3BFA4C7DCD23A5E8314E1A3 /* Pods-ChuckNorrisApp-ChuckNorrisAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChuckNorrisApp-ChuckNorrisAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-ChuckNorrisApp-ChuckNorrisAppUITests/Pods-ChuckNorrisApp-ChuckNorrisAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -150,14 +148,6 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		65916879A9BB8E86E5BE4676 /* Generated Mocks */ = {
-			isa = PBXGroup;
-			children = (
-				A26FE45F132E27180BFEFB43 /* ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift */,
-			);
-			name = "Generated Mocks";
-			sourceTree = "<group>";
-		};
 		72DB3D1C597D126BFA701027 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,7 +180,6 @@
 				74926FA92B96129F0058D874 /* Products */,
 				46434DCF7B3193A9F899484E /* Pods */,
 				72DB3D1C597D126BFA701027 /* Frameworks */,
-				65916879A9BB8E86E5BE4676 /* Generated Mocks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -228,7 +217,7 @@
 		74926FC12B9612A00058D874 /* ChuckNorrisAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				741B84882BB34B9200B2CB88 /* MainViewModelImplTest.swift */,
+				741B84882BB34B9200B2CB88 /* MainViewModelTest.swift */,
 				741B848A2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift */,
 				74A5637B2BDB3E9800CB0AF1 /* ViewControllerTest.swift */,
 				74E4000B2E5C9A9800517F23 /* AlarmRepositoryImplTest.swift */,
@@ -251,8 +240,8 @@
 		74926FE52B9617470058D874 /* web */ = {
 			isa = PBXGroup;
 			children = (
-				74926FE62B9617620058D874 /* ChuckNorrisWebClientImpl.swift */,
-				74926FF42B9659D50058D874 /* ChuckNorrisServiceImpl.swift */,
+				74926FE62B9617620058D874 /* ChuckNorrisWebClient.swift */,
+				74926FF42B9659D50058D874 /* ChuckNorrisService.swift */,
 			);
 			path = web;
 			sourceTree = "<group>";
@@ -270,7 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				74A2A6402F4DDB4D00ECDC1D /* AlarmViewModel.swift */,
-				74926FF22B9658A60058D874 /* MainViewModelImpl.swift */,
+				74926FF22B9658A60058D874 /* MainViewModel.swift */,
 			);
 			path = viewModels;
 			sourceTree = "<group>";
@@ -321,11 +310,9 @@
 			buildConfigurationList = 74926FD52B9612A00058D874 /* Build configuration list for PBXNativeTarget "ChuckNorrisAppTests" */;
 			buildPhases = (
 				C818F3F8FD27EDB7815D9C53 /* [CP] Check Pods Manifest.lock */,
-				C7AED8209F9DB2F28A6A80EA /* Generate Mockingbird Mocks */,
 				74926FBA2B9612A00058D874 /* Sources */,
 				74926FBB2B9612A00058D874 /* Frameworks */,
 				74926FBC2B9612A00058D874 /* Resources */,
-				90BAC038F04C57D6AC5DE51F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -451,27 +438,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChuckNorrisApp/Pods-ChuckNorrisApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		90BAC038F04C57D6AC5DE51F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ChuckNorrisAppTests/Pods-ChuckNorrisAppTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ChuckNorrisAppTests/Pods-ChuckNorrisAppTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChuckNorrisAppTests/Pods-ChuckNorrisAppTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		9142D668B8C9DBE0DF9191A8 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -535,22 +501,6 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
-		};
-		C7AED8209F9DB2F28A6A80EA /* Generate Mockingbird Mocks */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Generate Mockingbird Mocks";
-			outputPaths = (
-				"$(SRCROOT)/MockingbirdMocks/ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -eu\n\n# Prevent Xcode 13 from running this script while indexing.\n[[ \"${ACTION}\" == \"indexbuild\" ]] && exit 0\n\n\"${SRCROOT}/Pods/MockingbirdFramework/mockingbird\" generate --targets \"ChuckNorrisApp\" --outputs \"${SRCROOT}/MockingbirdMocks/ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift\"";
 		};
 		C818F3F8FD27EDB7815D9C53 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -629,8 +579,8 @@
 				74A2A63F2F4DDB2500ECDC1D /* AlarmListView.swift in Sources */,
 				74926FB02B96129F0058D874 /* ViewController.swift in Sources */,
 				74A2A6412F4DDB4D00ECDC1D /* AlarmViewModel.swift in Sources */,
-				74926FE72B9617620058D874 /* ChuckNorrisWebClientImpl.swift in Sources */,
-				74926FF52B9659D50058D874 /* ChuckNorrisServiceImpl.swift in Sources */,
+				74926FE72B9617620058D874 /* ChuckNorrisWebClient.swift in Sources */,
+				74926FF52B9659D50058D874 /* ChuckNorrisService.swift in Sources */,
 				74A2A6472F4DDB7000ECDC1D /* NotificationManager.swift in Sources */,
 				74A2A6482F4DDB7000ECDC1D /* AlarmRepository.swift in Sources */,
 				74A2A6492F4DDB7000ECDC1D /* CoreDataManager.swift in Sources */,
@@ -638,7 +588,7 @@
 				74A2A6432F4DDB5A00ECDC1D /* Alarm.swift in Sources */,
 				74926FAC2B96129F0058D874 /* AppDelegate.swift in Sources */,
 				74926FAE2B96129F0058D874 /* SceneDelegate.swift in Sources */,
-				74926FF32B9658A60058D874 /* MainViewModelImpl.swift in Sources */,
+				74926FF32B9658A60058D874 /* MainViewModel.swift in Sources */,
 				745E21402E5C9A9800517F23 /* SpeechService.swift in Sources */,
 				74E400012E5C9A9800517F23 /* SystemHelper.swift in Sources */,
 			);
@@ -649,13 +599,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				741B848B2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift in Sources */,
-				741B84892BB34B9200B2CB88 /* MainViewModelImplTest.swift in Sources */,
+				741B84892BB34B9200B2CB88 /* MainViewModelTest.swift in Sources */,
 				74A5637C2BDB3E9800CB0AF1 /* ViewControllerTest.swift in Sources */,
 				74E4000C2E5C9A9800517F23 /* AlarmRepositoryImplTest.swift in Sources */,
 				74E4000E2E5C9A9800517F23 /* SpeechServiceTest.swift in Sources */,
 				74E400102E5C9A9800517F23 /* AlarmViewModelTest.swift in Sources */,
 				74E400122E5C9A9800517F23 /* SystemHelperTest.swift in Sources */,
-				4EE04D3979EB82C4058AC018 /* ChuckNorrisAppTests-ChuckNorrisAppMocks.generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -763,7 +712,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -820,7 +769,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -842,21 +791,22 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChuckNorrisApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Chuck Norris Jokes";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mha.ChuckNorrisApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -873,21 +823,22 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChuckNorrisApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Chuck Norris Jokes";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mha.ChuckNorrisApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -901,12 +852,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mha.ChuckNorrisAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChuckNorrisApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ChuckNorrisApp";
 			};
@@ -921,12 +872,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mha.ChuckNorrisAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChuckNorrisApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ChuckNorrisApp";
 			};
@@ -944,7 +895,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mha.ChuckNorrisAppUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = ChuckNorrisApp;
 			};
@@ -962,7 +913,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mha.ChuckNorrisAppUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = ChuckNorrisApp;
 			};

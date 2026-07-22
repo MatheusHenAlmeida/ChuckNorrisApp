@@ -10,12 +10,18 @@ import SwiftUI
 struct AboutView: View {
     @Environment(\.presentationMode) var presentationMode
     
+    let systemHelper: SystemHelping
+    
+    init(systemHelper: SystemHelping) {
+        self.systemHelper = systemHelper
+    }
+    
     var appName: String {
-        SystemHelper.getAppName()
+        systemHelper.getAppName()
     }
     
     var version: String {
-        SystemHelper.getFormattedAppVersion()
+        systemHelper.getFormattedAppVersion()
     }
     
     var body: some View {
@@ -56,6 +62,6 @@ struct AboutView: View {
 
 struct AboutView_Previews: PreviewProvider {
     static var previews: some View {
-        AboutView()
+        AboutView(systemHelper: SystemHelperImpl())
     }
 }

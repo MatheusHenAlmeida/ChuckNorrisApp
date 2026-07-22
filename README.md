@@ -24,11 +24,11 @@ The project follows a clean, decoupled design based on the **MVVM (Model-View-Vi
 
 ```mermaid
 graph TD
-    subgraph UI ["UI (Presentation Layer)"]
+    subgraph UI ["Presentation Layer (UI)"]
+        AV[AboutView - SwiftUI]
         VC[ViewController - UIKit]
         ALV[AlarmListView - SwiftUI]
         AEV[AlarmEditView - SwiftUI]
-        AV[AboutView - SwiftUI]
     end
     
     subgraph ViewModels ["ViewModels"]
@@ -36,28 +36,42 @@ graph TD
         AVM[AlarmViewModel]
     end
     
-    subgraph Services ["Services & Data Layers"]
-        CD[CoreDataManager - Core Data]
-        AR[AlarmRepository]
-        NM[NotificationManager]
-        SS[SpeechService]
+    subgraph Services ["Services & Core Layers"]
+        CS[ChuckNorrisService - API Service]
         WC[ChuckNorrisWebClient]
+        SS[SpeechService - TTS Engine]
+        NM[NotificationManager - Local Notifications]
+        AR[AlarmRepository - Local Persistence]
+        CD[CoreDataManager - Core Data]
+        
+    end
+    
+    subgraph Utils ["Utils"]
+        SH[SystemHelper]
     end
 
+    %% UI to ViewModel / Helper relations
     VC --> MVM
+    VC --> SH
     ALV --> AVM
     AEV --> AVM
-    AV --> SystemHelper
+    AV --> SH
     
+    %% ViewModel relations
     MVM --> WC
+    MVM --> SS
     AVM --> AR
     AVM --> NM
+    AVM --> SS
+    
+    %% Service & Data relations
+    WC --> CS
     AR --> CD
 ```
 
 * **Dependency Injection**: Centrally managed using the **Swinject** container and loaded via Storyboard (`SwinjectStoryboard`).
 * **Hybrid Layout**: The primary main view and hamburger menu slide drawer are written in UIKit, whereas the Alarms and About screens are written in SwiftUI, seamlessly presented using `UIHostingController`.
-* **Testing Isolation**: Key dependencies are decoupled through protocols (such as `NotificationManaging`), allowing clean, automated mock generation with **Mockingbird**.
+* **Testing Isolation**: Key dependencies are decoupled through protocols (such as `NotificationManager`), allowing clean, decoupled testing using **Native Manual Mocks**.
 
 ---
 
@@ -89,7 +103,7 @@ pod install
 
 ## 🧪 How to Execute Tests Locally
 
-The app features comprehensive code coverage for unit testing and end-to-end interface testing (UI Tests) leveraging **Mockingbird** and **XCTest**.
+The app features comprehensive code coverage for unit testing and end-to-end interface testing (UI Tests) leveraging **Native Manual Mocks** and **XCTest**.
 
 ### Running from Xcode
 * Open the workspace, select the main scheme, and press `Cmd + U` to run all unit and UI tests.

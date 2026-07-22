@@ -13,7 +13,7 @@ final class AlarmRepositoryImplTest: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        repository = AlarmRepositoryImpl()
+        repository = AlarmRepositoryImpl(context: CoreDataManager.shared.context)
     }
     
     func testSaveAndFetchAndDelete() {

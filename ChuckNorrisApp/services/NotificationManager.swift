@@ -10,13 +10,14 @@ import UserNotifications
 import AVFoundation
 import UIKit
 
-protocol NotificationManaging {
+protocol NotificationManager {
     func scheduleAlarm(alarm: Alarm)
     func cancelAlarm(id: UUID)
+    func requestPermission()
 }
 
-class NotificationManager: NSObject, UNUserNotificationCenterDelegate, NotificationManaging {
-    static let shared = NotificationManager()
+class NotificationManagerImpl: NSObject, UNUserNotificationCenterDelegate, NotificationManager {
+    nonisolated(unsafe) static let shared = NotificationManagerImpl()
     
     override private init() {
         super.init()
@@ -57,7 +58,7 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate, Notificat
     }
     
     private func checkAndDeleteSingleRunAlarm(id: UUID) {
-        let repository: AlarmRepository = AlarmRepositoryImpl()
+        let repository: AlarmRepository = AlarmRepositoryImpl(context: CoreDataManager.shared.context)
         let alarms = repository.getAll()
         if let alarm = alarms.first(where: { $0.id == id }) {
             if alarm.days.isEmpty {
@@ -71,7 +72,7 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate, Notificat
         UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
             let pendingIds = Set(requests.map { $0.identifier })
             
-            let repository: AlarmRepository = AlarmRepositoryImpl()
+            let repository: AlarmRepository = AlarmRepositoryImpl(context: CoreDataManager.shared.context)
             let alarms = repository.getAll()
             
             for alarm in alarms {
