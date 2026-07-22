@@ -74,7 +74,7 @@ final class NotificationManagerMock: NotificationManager {
 
 @MainActor
 final class AlarmViewModelTest: XCTestCase {
-    private var viewModel: AlarmViewModelImpl!
+    private var viewModel: AlarmViewModel!
     private var repository = AlarmRepositoryMock()
     private var notificationManager = NotificationManagerMock()
     
@@ -82,7 +82,7 @@ final class AlarmViewModelTest: XCTestCase {
         super.setUp()
         repository.reset()
         notificationManager.reset()
-        viewModel = AlarmViewModelImpl(
+        viewModel = AlarmViewModel(
             repository: repository,
             notificationManager: notificationManager,
             speechService: SpeechService(speechSynthesizer: AVSpeechSynthesizer())

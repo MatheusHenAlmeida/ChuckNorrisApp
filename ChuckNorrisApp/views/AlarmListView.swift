@@ -10,7 +10,7 @@ import AVFoundation
 
 struct AlarmListView: View {
     @Environment(\.presentationMode) var presentationMode
-    @StateObject private var viewModel: AlarmViewModelImpl
+    @StateObject private var viewModel: AlarmViewModel
     @State private var showingAddAlarm: Bool
     @State private var selectedAlarm: Alarm?
     @State private var showingDeleteConfirmation = false
@@ -18,11 +18,11 @@ struct AlarmListView: View {
     
     init(
         showAddAlarmInitially: Bool = false,
-        viewModel: AlarmViewModelImpl
+        viewModel: AlarmViewModelType
     ) {
         _showingAddAlarm = State(initialValue: showAddAlarmInitially)
         _selectedAlarm = State(initialValue: nil)
-        _viewModel = StateObject(wrappedValue: viewModel)
+        _viewModel = StateObject(wrappedValue: viewModel as! AlarmViewModel)
     }
     
     var body: some View {
@@ -93,7 +93,7 @@ struct AlarmListView: View {
 
 struct AlarmRow: View {
     let alarm: Alarm
-    @ObservedObject var viewModel: AlarmViewModelImpl
+    @ObservedObject var viewModel: AlarmViewModel
     let onEdit: () -> Void
     let onDelete: () -> Void
     
@@ -160,7 +160,7 @@ class MockAlarmRepository: AlarmRepository {
 struct AlarmListView_Previews: PreviewProvider {
     static var previews: some View {
         let mockRepository = MockAlarmRepository()
-        let viewModel = AlarmViewModelImpl(
+        let viewModel = AlarmViewModel(
             repository: mockRepository,
             notificationManager: NotificationManagerImpl.shared,
             speechService: SpeechService(speechSynthesizer: AVSpeechSynthesizer())
@@ -173,7 +173,7 @@ struct AlarmRowView_Previews: PreviewProvider {
     static var previews: some View {
         let alarm = Alarm(id: UUID(), hour: 8, minute: 0, days: [2, 3, 4, 5, 6], isEnabled: true)
         let mockRepository = MockAlarmRepository()
-        let viewModel = AlarmViewModelImpl(
+        let viewModel = AlarmViewModel(
             repository: mockRepository,
             notificationManager: NotificationManagerImpl.shared,
             speechService: SpeechService(speechSynthesizer: AVSpeechSynthesizer())

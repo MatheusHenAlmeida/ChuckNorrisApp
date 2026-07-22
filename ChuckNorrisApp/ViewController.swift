@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var tellJokeButton: UIButton!
     @IBOutlet weak var loadingView: UIView!
     
-    var mainViewModel: MainViewModel?
+    var mainViewModel: MainViewModelType?
     var speechService: SpeechService?
     
     private var dimmingView: UIView!
@@ -289,7 +289,7 @@ class ViewController: UIViewController {
     
     func openCreateAlarm() {
         let childContainer = Container(parent: SwinjectStoryboard.defaultContainer)
-        let alarmViewModel = childContainer.resolve(AlarmViewModel.self) as! AlarmViewModelImpl
+        let alarmViewModel = childContainer.resolve(AlarmViewModelType.self)!
         let editView = AlarmEditView(viewModel: alarmViewModel, alarm: nil)
         let hostingController = UIHostingController(rootView: editView)
         present(hostingController, animated: true, completion: nil)
@@ -311,7 +311,7 @@ class ViewController: UIViewController {
     
     func openAlarms(showAddAlarmInitially: Bool) {
         let childContainer = Container(parent: SwinjectStoryboard.defaultContainer)
-        let viewModel = childContainer.resolve(AlarmViewModel.self) as! AlarmViewModelImpl
+        let viewModel = childContainer.resolve(AlarmViewModelType.self)!
         let alarmView = AlarmListView(showAddAlarmInitially: showAddAlarmInitially, viewModel: viewModel)
         let hostingController = UIHostingController(rootView: alarmView)
         hostingController.modalPresentationStyle = .fullScreen
@@ -335,8 +335,8 @@ extension SwinjectStoryboard {
         defaultContainer.register(ChuckNorrisWebClient.self) { resolver in
             ChuckNorrisWebClientImpl(webService: resolver.resolve(ChuckNorrisService.self)!)
         }
-        defaultContainer.register(MainViewModel.self) { resolver in
-            MainViewModelImpl(webClient: resolver.resolve(ChuckNorrisWebClient.self)!)
+        defaultContainer.register(MainViewModelType.self) { resolver in
+            MainViewModel(webClient: resolver.resolve(ChuckNorrisWebClient.self)!)
         }
         defaultContainer.register(SpeechService.self) { _ in
             SpeechService(speechSynthesizer: AVSpeechSynthesizer())
@@ -353,15 +353,15 @@ extension SwinjectStoryboard {
         defaultContainer.register(NotificationManager.self) { _ in
             NotificationManagerImpl.shared
         }
-        defaultContainer.register(AlarmViewModel.self) { resolver in
-            AlarmViewModelImpl(
+        defaultContainer.register(AlarmViewModelType.self) { resolver in
+            AlarmViewModel(
                 repository: resolver.resolve(AlarmRepository.self)!,
                 notificationManager: resolver.resolve(NotificationManager.self)!,
                 speechService: resolver.resolve(SpeechService.self)!
             )
         }
         defaultContainer.storyboardInitCompleted(ViewController.self) { resolver, viewController in
-            viewController.mainViewModel = resolver.resolve(MainViewModel.self)
+            viewController.mainViewModel = resolver.resolve(MainViewModelType.self)
             viewController.speechService = resolver.resolve(SpeechService.self)
         }
     }

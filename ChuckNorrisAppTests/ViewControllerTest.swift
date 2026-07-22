@@ -8,7 +8,7 @@
 import XCTest
 @testable import ChuckNorrisApp
 
-final class MainViewModelMock: MainViewModel {
+final class MainViewModelMock: MainViewModelType {
     var getJokeReturnValue: JokeResponse?
     var getJokeCalled = false
     var getJokeShouldThrow = false

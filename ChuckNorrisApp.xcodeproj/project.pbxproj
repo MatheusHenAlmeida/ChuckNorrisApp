@@ -10,7 +10,7 @@
 		08D85D0BBF8D42150A83CCC9 /* Pods_ChuckNorrisAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACA55F82B7EFEADE20F9B147 /* Pods_ChuckNorrisAppTests.framework */; };
 		124290C3D3CB8879A6C3CB38 /* Pods_ChuckNorrisApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0543A94258DDF4377727E7E1 /* Pods_ChuckNorrisApp.framework */; };
 		2D81B00085997777D0154534 /* Pods_ChuckNorrisApp_ChuckNorrisAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53849B6865AD3B6C4D326D02 /* Pods_ChuckNorrisApp_ChuckNorrisAppUITests.framework */; };
-		741B84892BB34B9200B2CB88 /* MainViewModelImplTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741B84882BB34B9200B2CB88 /* MainViewModelImplTest.swift */; };
+		741B84892BB34B9200B2CB88 /* MainViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741B84882BB34B9200B2CB88 /* MainViewModelTest.swift */; };
 		741B848B2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741B848A2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift */; };
 		745E21402E5C9A9800517F23 /* SpeechService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745E213F2E5C9A9800517F23 /* SpeechService.swift */; };
 		745E21432E5C9EC500517F23 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 745E21412E5C9EC500517F23 /* Localizable.strings */; };
@@ -66,7 +66,7 @@
 		43FD62CAAE656190C851A28E /* Pods-ChuckNorrisAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChuckNorrisAppTests.release.xcconfig"; path = "Target Support Files/Pods-ChuckNorrisAppTests/Pods-ChuckNorrisAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		53849B6865AD3B6C4D326D02 /* Pods_ChuckNorrisApp_ChuckNorrisAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChuckNorrisApp_ChuckNorrisAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7405279F300176CF00465A5A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		741B84882BB34B9200B2CB88 /* MainViewModelImplTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelImplTest.swift; sourceTree = "<group>"; };
+		741B84882BB34B9200B2CB88 /* MainViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTest.swift; sourceTree = "<group>"; };
 		741B848A2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuckNorrisWebClientImplTest.swift; sourceTree = "<group>"; };
 		745E213F2E5C9A9800517F23 /* SpeechService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechService.swift; sourceTree = "<group>"; };
 		745E21422E5C9EC500517F23 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -217,7 +217,7 @@
 		74926FC12B9612A00058D874 /* ChuckNorrisAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				741B84882BB34B9200B2CB88 /* MainViewModelImplTest.swift */,
+				741B84882BB34B9200B2CB88 /* MainViewModelTest.swift */,
 				741B848A2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift */,
 				74A5637B2BDB3E9800CB0AF1 /* ViewControllerTest.swift */,
 				74E4000B2E5C9A9800517F23 /* AlarmRepositoryImplTest.swift */,
@@ -599,7 +599,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				741B848B2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift in Sources */,
-				741B84892BB34B9200B2CB88 /* MainViewModelImplTest.swift in Sources */,
+				741B84892BB34B9200B2CB88 /* MainViewModelTest.swift in Sources */,
 				74A5637C2BDB3E9800CB0AF1 /* ViewControllerTest.swift in Sources */,
 				74E4000C2E5C9A9800517F23 /* AlarmRepositoryImplTest.swift in Sources */,
 				74E4000E2E5C9A9800517F23 /* SpeechServiceTest.swift in Sources */,

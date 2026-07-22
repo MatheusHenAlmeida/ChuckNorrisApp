@@ -8,12 +8,12 @@
 import Foundation
 
 @MainActor
-protocol MainViewModel {
+protocol MainViewModelType {
     func getJoke() async throws -> JokeResponse?
 }
 
 @MainActor
-class MainViewModelImpl: MainViewModel {
+class MainViewModel: MainViewModelType {
     var webClient: ChuckNorrisWebClient
     
     init(webClient: ChuckNorrisWebClient) {

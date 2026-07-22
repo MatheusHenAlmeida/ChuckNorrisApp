@@ -10,7 +10,7 @@ import Combine
 import AVFoundation
 
 @MainActor
-protocol AlarmViewModel {
+protocol AlarmViewModelType {
     var alarms: [Alarm] { get set }
     func fetchAlarms()
     func addAlarm(hour: Int, minute: Int, days: [Int], isEnabled: Bool)
@@ -21,7 +21,7 @@ protocol AlarmViewModel {
 }
 
 @MainActor
-class AlarmViewModelImpl: ObservableObject, AlarmViewModel {
+class AlarmViewModel: ObservableObject, AlarmViewModelType {
     @Published var alarms: [Alarm] = []
     
     private let repository: AlarmRepository
