@@ -25,10 +25,10 @@ The project follows a clean, decoupled design based on the **MVVM (Model-View-Vi
 ```mermaid
 graph TD
     subgraph UI ["Presentation Layer (UI)"]
+        AV[AboutView - SwiftUI]
         VC[ViewController - UIKit]
         ALV[AlarmListView - SwiftUI]
         AEV[AlarmEditView - SwiftUI]
-        AV[AboutView - SwiftUI]
     end
     
     subgraph ViewModels ["ViewModels"]
@@ -39,10 +39,11 @@ graph TD
     subgraph Services ["Services & Core Layers"]
         CS[ChuckNorrisService - API Service]
         WC[ChuckNorrisWebClient]
+        SS[SpeechService - TTS Engine]
         NM[NotificationManager - Local Notifications]
         AR[AlarmRepository - Local Persistence]
         CD[CoreDataManager - Core Data]
-        SS[SpeechService - TTS Engine]
+        
     end
     
     subgraph Utils ["Utils"]
@@ -58,6 +59,7 @@ graph TD
     
     %% ViewModel relations
     MVM --> WC
+    MVM --> SS
     AVM --> AR
     AVM --> NM
     AVM --> SS
