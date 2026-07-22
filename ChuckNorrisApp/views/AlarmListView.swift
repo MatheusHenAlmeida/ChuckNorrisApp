@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct AlarmListView: View {
     @Environment(\.presentationMode) var presentationMode
@@ -15,7 +16,10 @@ struct AlarmListView: View {
     @State private var showingDeleteConfirmation = false
     @State private var alarmToDelete: Alarm?
     
-    init(showAddAlarmInitially: Bool = false, viewModel: AlarmViewModel = AlarmViewModel()) {
+    init(
+        showAddAlarmInitially: Bool = false,
+        viewModel: AlarmViewModel
+    ) {
         _showingAddAlarm = State(initialValue: showAddAlarmInitially)
         _selectedAlarm = State(initialValue: nil)
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -156,7 +160,11 @@ class MockAlarmRepository: AlarmRepository {
 struct AlarmListView_Previews: PreviewProvider {
     static var previews: some View {
         let mockRepository = MockAlarmRepository()
-        let viewModel = AlarmViewModel(repository: mockRepository)
+        let viewModel = AlarmViewModel(
+            repository: mockRepository,
+            notificationManager: NotificationManager.shared,
+            speechService: SpeechService(speechSynthesizer: AVSpeechSynthesizer())
+        )
         AlarmListView(showAddAlarmInitially: false, viewModel: viewModel)
     }
 }
@@ -165,7 +173,11 @@ struct AlarmRowView_Previews: PreviewProvider {
     static var previews: some View {
         let alarm = Alarm(id: UUID(), hour: 8, minute: 0, days: [2, 3, 4, 5, 6], isEnabled: true)
         let mockRepository = MockAlarmRepository()
-        let viewModel = AlarmViewModel(repository: mockRepository)
+        let viewModel = AlarmViewModel(
+            repository: mockRepository,
+            notificationManager: NotificationManager.shared,
+            speechService: SpeechService(speechSynthesizer: AVSpeechSynthesizer())
+        )
         AlarmRow(alarm: alarm, viewModel: viewModel, onEdit: {}, onDelete: {})
     }
 }

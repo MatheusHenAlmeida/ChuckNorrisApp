@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct AlarmEditView: View {
     @Environment(\.presentationMode) var presentationMode
@@ -119,7 +120,11 @@ struct MultipleSelectionRow: View {
 struct AlarmEditView_Previews: PreviewProvider {
     static var previews: some View {
         let mockRepository = MockAlarmRepository()
-        let viewModel = AlarmViewModel(repository: mockRepository)
+        let viewModel = AlarmViewModel(
+            repository: mockRepository,
+            notificationManager: NotificationManager.shared,
+            speechService: SpeechService(speechSynthesizer: AVSpeechSynthesizer())
+        )
         AlarmEditView(viewModel: viewModel, alarm: nil)
     }
 }

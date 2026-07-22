@@ -7,6 +7,13 @@
 
 import Foundation
 
+protocol SystemHelping {
+    func getAppName() -> String
+    func getAppVersion() -> String
+    func getAppBuild() -> String
+    func getFormattedAppVersion() -> String
+}
+
 class SystemHelper {
     static func getAppName() -> String {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String
@@ -27,5 +34,23 @@ class SystemHelper {
         let build = getAppBuild()
         let format = NSLocalizedString("about_version_format", comment: "Format for app version and build")
         return String(format: format, version, build)
+    }
+}
+
+class SystemHelperImpl: SystemHelping {
+    func getAppName() -> String {
+        return SystemHelper.getAppName()
+    }
+    
+    func getAppVersion() -> String {
+        return SystemHelper.getAppVersion()
+    }
+    
+    func getAppBuild() -> String {
+        return SystemHelper.getAppBuild()
+    }
+    
+    func getFormattedAppVersion() -> String {
+        return SystemHelper.getFormattedAppVersion()
     }
 }

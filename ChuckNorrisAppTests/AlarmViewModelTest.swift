@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import AVFoundation
 @testable import ChuckNorrisApp
 
 final class AlarmRepositoryMock: AlarmRepository {
@@ -74,7 +75,11 @@ final class AlarmViewModelTest: XCTestCase {
         super.setUp()
         repository.reset()
         notificationManager.reset()
-        viewModel = AlarmViewModel(repository: repository, notificationManager: notificationManager)
+        viewModel = AlarmViewModel(
+            repository: repository,
+            notificationManager: notificationManager,
+            speechService: SpeechService(speechSynthesizer: AVSpeechSynthesizer())
+        )
     }
     
     override func tearDown() {

@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import Swinject
 import SwinjectStoryboard
 import AVFoundation
 import SwiftUI
 import GoogleMobileAds
+import CoreData
 
 class ViewController: UIViewController {
 
@@ -286,7 +288,8 @@ class ViewController: UIViewController {
     }
     
     func openCreateAlarm() {
-        let alarmViewModel = AlarmViewModel()
+        let childContainer = Container(parent: SwinjectStoryboard.defaultContainer)
+        let alarmViewModel = childContainer.resolve(AlarmViewModel.self)!
         let editView = AlarmEditView(viewModel: alarmViewModel, alarm: nil)
         let hostingController = UIHostingController(rootView: editView)
         present(hostingController, animated: true, completion: nil)
@@ -307,14 +310,18 @@ class ViewController: UIViewController {
     }
     
     func openAlarms(showAddAlarmInitially: Bool) {
-        let alarmView = AlarmListView(showAddAlarmInitially: showAddAlarmInitially)
+        let childContainer = Container(parent: SwinjectStoryboard.defaultContainer)
+        let viewModel = childContainer.resolve(AlarmViewModel.self)!
+        let alarmView = AlarmListView(showAddAlarmInitially: showAddAlarmInitially, viewModel: viewModel)
         let hostingController = UIHostingController(rootView: alarmView)
         hostingController.modalPresentationStyle = .fullScreen
         present(hostingController, animated: true, completion: nil)
     }
     
     @objc func openAbout() {
-        let aboutView = AboutView()
+        let childContainer = Container(parent: SwinjectStoryboard.defaultContainer)
+        let systemHelper = childContainer.resolve(SystemHelping.self)!
+        let aboutView = AboutView(systemHelper: systemHelper)
         let hostingController = UIHostingController(rootView: aboutView)
         present(hostingController, animated: true, completion: nil)
     }
@@ -333,6 +340,25 @@ extension SwinjectStoryboard {
         }
         defaultContainer.register(SpeechService.self) { _ in
             SpeechService(speechSynthesizer: AVSpeechSynthesizer())
+        }
+        defaultContainer.register(SystemHelping.self) { _ in
+            SystemHelperImpl()
+        }
+        defaultContainer.register(NSManagedObjectContext.self) { _ in
+            CoreDataManager.shared.context
+        }
+        defaultContainer.register(AlarmRepository.self) { resolver in
+            AlarmRepositoryImpl(context: resolver.resolve(NSManagedObjectContext.self)!)
+        }
+        defaultContainer.register(NotificationManaging.self) { _ in
+            NotificationManager.shared
+        }
+        defaultContainer.register(AlarmViewModel.self) { resolver in
+            AlarmViewModel(
+                repository: resolver.resolve(AlarmRepository.self)!,
+                notificationManager: resolver.resolve(NotificationManaging.self)!,
+                speechService: resolver.resolve(SpeechService.self)!
+            )
         }
         defaultContainer.storyboardInitCompleted(ViewController.self) { resolver, viewController in
             viewController.mainViewModel = resolver.resolve(MainViewModel.self)

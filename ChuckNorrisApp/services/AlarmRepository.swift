@@ -15,7 +15,11 @@ protocol AlarmRepository {
 }
 
 class AlarmRepositoryImpl: AlarmRepository {
-    private let context = CoreDataManager.shared.context
+    private let context: NSManagedObjectContext
+    
+    init(context: NSManagedObjectContext) {
+        self.context = context
+    }
     
     func getAll() -> [Alarm] {
         let request = NSFetchRequest<NSManagedObject>(entityName: "AlarmEntity")

@@ -17,9 +17,9 @@ class AlarmViewModel: ObservableObject {
     private let speechService: SpeechService
     
     init(
-        repository: AlarmRepository = AlarmRepositoryImpl(),
-        notificationManager: NotificationManaging = NotificationManager.shared,
-        speechService: SpeechService = SpeechService(speechSynthesizer: AVSpeechSynthesizer())
+        repository: AlarmRepository,
+        notificationManager: NotificationManaging,
+        speechService: SpeechService
     ) {
         self.repository = repository
         self.notificationManager = notificationManager
