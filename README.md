@@ -51,21 +51,19 @@ graph TD
 
     %% UI to ViewModel / Helper relations
     VC --> MVM
-    VC --> SS
+    VC --> SH
     ALV --> AVM
     AEV --> AVM
     AV --> SH
-    VC --> SH
     
     %% ViewModel relations
     MVM --> WC
     AVM --> AR
     AVM --> NM
+    AVM --> SS
     
     %% Service & Data relations
     WC --> CS
-    NM --> WC
-    NM --> AR
     AR --> CD
 ```
 
