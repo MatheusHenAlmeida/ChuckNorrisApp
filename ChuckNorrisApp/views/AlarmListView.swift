@@ -10,7 +10,7 @@ import AVFoundation
 
 struct AlarmListView: View {
     @Environment(\.presentationMode) var presentationMode
-    @StateObject private var viewModel: AlarmViewModel
+    @StateObject private var viewModel: AlarmViewModelImpl
     @State private var showingAddAlarm: Bool
     @State private var selectedAlarm: Alarm?
     @State private var showingDeleteConfirmation = false
@@ -18,7 +18,7 @@ struct AlarmListView: View {
     
     init(
         showAddAlarmInitially: Bool = false,
-        viewModel: AlarmViewModel
+        viewModel: AlarmViewModelImpl
     ) {
         _showingAddAlarm = State(initialValue: showAddAlarmInitially)
         _selectedAlarm = State(initialValue: nil)
@@ -81,7 +81,7 @@ struct AlarmListView: View {
         }
         .onAppear {
             viewModel.fetchAlarms()
-            NotificationManager.shared.requestPermission()
+            NotificationManagerImpl.shared.requestPermission()
         }
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -93,7 +93,7 @@ struct AlarmListView: View {
 
 struct AlarmRow: View {
     let alarm: Alarm
-    @ObservedObject var viewModel: AlarmViewModel
+    @ObservedObject var viewModel: AlarmViewModelImpl
     let onEdit: () -> Void
     let onDelete: () -> Void
     
@@ -160,9 +160,9 @@ class MockAlarmRepository: AlarmRepository {
 struct AlarmListView_Previews: PreviewProvider {
     static var previews: some View {
         let mockRepository = MockAlarmRepository()
-        let viewModel = AlarmViewModel(
+        let viewModel = AlarmViewModelImpl(
             repository: mockRepository,
-            notificationManager: NotificationManager.shared,
+            notificationManager: NotificationManagerImpl.shared,
             speechService: SpeechService(speechSynthesizer: AVSpeechSynthesizer())
         )
         AlarmListView(showAddAlarmInitially: false, viewModel: viewModel)
@@ -173,9 +173,9 @@ struct AlarmRowView_Previews: PreviewProvider {
     static var previews: some View {
         let alarm = Alarm(id: UUID(), hour: 8, minute: 0, days: [2, 3, 4, 5, 6], isEnabled: true)
         let mockRepository = MockAlarmRepository()
-        let viewModel = AlarmViewModel(
+        let viewModel = AlarmViewModelImpl(
             repository: mockRepository,
-            notificationManager: NotificationManager.shared,
+            notificationManager: NotificationManagerImpl.shared,
             speechService: SpeechService(speechSynthesizer: AVSpeechSynthesizer())
         )
         AlarmRow(alarm: alarm, viewModel: viewModel, onEdit: {}, onDelete: {})

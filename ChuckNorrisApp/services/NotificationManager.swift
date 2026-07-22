@@ -10,13 +10,14 @@ import UserNotifications
 import AVFoundation
 import UIKit
 
-protocol NotificationManaging {
+protocol NotificationManager {
     func scheduleAlarm(alarm: Alarm)
     func cancelAlarm(id: UUID)
+    func requestPermission()
 }
 
-class NotificationManager: NSObject, UNUserNotificationCenterDelegate, NotificationManaging {
-    static let shared = NotificationManager()
+class NotificationManagerImpl: NSObject, UNUserNotificationCenterDelegate, NotificationManager {
+    static let shared = NotificationManagerImpl()
     
     override private init() {
         super.init()

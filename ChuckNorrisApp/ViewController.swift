@@ -289,7 +289,7 @@ class ViewController: UIViewController {
     
     func openCreateAlarm() {
         let childContainer = Container(parent: SwinjectStoryboard.defaultContainer)
-        let alarmViewModel = childContainer.resolve(AlarmViewModel.self)!
+        let alarmViewModel = childContainer.resolve(AlarmViewModel.self) as! AlarmViewModelImpl
         let editView = AlarmEditView(viewModel: alarmViewModel, alarm: nil)
         let hostingController = UIHostingController(rootView: editView)
         present(hostingController, animated: true, completion: nil)
@@ -311,7 +311,7 @@ class ViewController: UIViewController {
     
     func openAlarms(showAddAlarmInitially: Bool) {
         let childContainer = Container(parent: SwinjectStoryboard.defaultContainer)
-        let viewModel = childContainer.resolve(AlarmViewModel.self)!
+        let viewModel = childContainer.resolve(AlarmViewModel.self) as! AlarmViewModelImpl
         let alarmView = AlarmListView(showAddAlarmInitially: showAddAlarmInitially, viewModel: viewModel)
         let hostingController = UIHostingController(rootView: alarmView)
         hostingController.modalPresentationStyle = .fullScreen
@@ -350,13 +350,13 @@ extension SwinjectStoryboard {
         defaultContainer.register(AlarmRepository.self) { resolver in
             AlarmRepositoryImpl(context: resolver.resolve(NSManagedObjectContext.self)!)
         }
-        defaultContainer.register(NotificationManaging.self) { _ in
-            NotificationManager.shared
+        defaultContainer.register(NotificationManager.self) { _ in
+            NotificationManagerImpl.shared
         }
         defaultContainer.register(AlarmViewModel.self) { resolver in
-            AlarmViewModel(
+            AlarmViewModelImpl(
                 repository: resolver.resolve(AlarmRepository.self)!,
-                notificationManager: resolver.resolve(NotificationManaging.self)!,
+                notificationManager: resolver.resolve(NotificationManager.self)!,
                 speechService: resolver.resolve(SpeechService.self)!
             )
         }

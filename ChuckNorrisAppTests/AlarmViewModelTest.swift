@@ -42,11 +42,12 @@ final class AlarmRepositoryMock: AlarmRepository {
     }
 }
 
-final class NotificationManagerMock: NotificationManaging {
+final class NotificationManagerMock: NotificationManager {
     var scheduleAlarmCalled = false
     var scheduledAlarm: Alarm?
     var cancelAlarmCalled = false
     var cancelledId: UUID?
+    var requestPermissionCalled = false
     
     func scheduleAlarm(alarm: Alarm) {
         scheduleAlarmCalled = true
@@ -58,16 +59,21 @@ final class NotificationManagerMock: NotificationManaging {
         cancelledId = id
     }
     
+    func requestPermission() {
+        requestPermissionCalled = true
+    }
+    
     func reset() {
         scheduleAlarmCalled = false
         scheduledAlarm = nil
         cancelAlarmCalled = false
         cancelledId = nil
+        requestPermissionCalled = false
     }
 }
 
 final class AlarmViewModelTest: XCTestCase {
-    private var viewModel: AlarmViewModel!
+    private var viewModel: AlarmViewModelImpl!
     private var repository = AlarmRepositoryMock()
     private var notificationManager = NotificationManagerMock()
     
@@ -75,7 +81,7 @@ final class AlarmViewModelTest: XCTestCase {
         super.setUp()
         repository.reset()
         notificationManager.reset()
-        viewModel = AlarmViewModel(
+        viewModel = AlarmViewModelImpl(
             repository: repository,
             notificationManager: notificationManager,
             speechService: SpeechService(speechSynthesizer: AVSpeechSynthesizer())

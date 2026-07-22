@@ -10,14 +10,14 @@ import AVFoundation
 
 struct AlarmEditView: View {
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var viewModel: AlarmViewModel
+    @ObservedObject var viewModel: AlarmViewModelImpl
     
     @State private var date: Date
     @State private var selectedDays: Set<Int> = []
     
     var existingAlarm: Alarm?
     
-    init(viewModel: AlarmViewModel, alarm: Alarm? = nil) {
+    init(viewModel: AlarmViewModelImpl, alarm: Alarm? = nil) {
         self.viewModel = viewModel
         self.existingAlarm = alarm
         
@@ -120,9 +120,9 @@ struct MultipleSelectionRow: View {
 struct AlarmEditView_Previews: PreviewProvider {
     static var previews: some View {
         let mockRepository = MockAlarmRepository()
-        let viewModel = AlarmViewModel(
+        let viewModel = AlarmViewModelImpl(
             repository: mockRepository,
-            notificationManager: NotificationManager.shared,
+            notificationManager: NotificationManagerImpl.shared,
             speechService: SpeechService(speechSynthesizer: AVSpeechSynthesizer())
         )
         AlarmEditView(viewModel: viewModel, alarm: nil)

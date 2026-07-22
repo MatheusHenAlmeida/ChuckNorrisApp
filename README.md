@@ -69,7 +69,7 @@ graph TD
 
 * **Dependency Injection**: Centrally managed using the **Swinject** container and loaded via Storyboard (`SwinjectStoryboard`).
 * **Hybrid Layout**: The primary main view and hamburger menu slide drawer are written in UIKit, whereas the Alarms and About screens are written in SwiftUI, seamlessly presented using `UIHostingController`.
-* **Testing Isolation**: Key dependencies are decoupled through protocols (such as `NotificationManaging`), allowing clean, decoupled testing using **Native Manual Mocks**.
+* **Testing Isolation**: Key dependencies are decoupled through protocols (such as `NotificationManager`), allowing clean, decoupled testing using **Native Manual Mocks**.
 
 ---
 

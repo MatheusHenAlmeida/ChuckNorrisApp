@@ -9,16 +9,26 @@ import Foundation
 import Combine
 import AVFoundation
 
-class AlarmViewModel: ObservableObject {
+protocol AlarmViewModel {
+    var alarms: [Alarm] { get set }
+    func fetchAlarms()
+    func addAlarm(hour: Int, minute: Int, days: [Int], isEnabled: Bool)
+    func updateAlarm(_ alarm: Alarm)
+    func deleteAlarm(at offsets: IndexSet)
+    func deleteAlarm(_ alarm: Alarm)
+    func toggleAlarm(_ alarm: Alarm)
+}
+
+class AlarmViewModelImpl: ObservableObject, AlarmViewModel {
     @Published var alarms: [Alarm] = []
     
     private let repository: AlarmRepository
-    private let notificationManager: NotificationManaging
+    private let notificationManager: NotificationManager
     private let speechService: SpeechService
     
     init(
         repository: AlarmRepository,
-        notificationManager: NotificationManaging,
+        notificationManager: NotificationManager,
         speechService: SpeechService
     ) {
         self.repository = repository
