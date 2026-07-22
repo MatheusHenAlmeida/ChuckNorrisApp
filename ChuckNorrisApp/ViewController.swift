@@ -21,7 +21,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var loadingView: UIView!
     
     var mainViewModel: MainViewModelType?
-    var speechService: SpeechService?
     
     private var dimmingView: UIView!
     private var sideMenuContainerView: UIView!
@@ -70,7 +69,7 @@ class ViewController: UIViewController {
                 let jokeText = joke.value ?? DefaultMessages.tryItLater
                 myLabel.text = jokeText
                 
-                speechService?.speech(message: jokeText)
+                mainViewModel?.speech(message: jokeText)
             } else {
                 myLabel.text = DefaultMessages.tryItLater
             }
@@ -81,7 +80,7 @@ class ViewController: UIViewController {
     func displayJoke(text: String, speak: Bool) {
         myLabel.text = text
         if speak {
-            speechService?.speech(message: text)
+            mainViewModel?.speech(message: text)
         }
     }
 
@@ -327,6 +326,24 @@ class ViewController: UIViewController {
     }
 }
 
+struct DefaultMessages {
+    static let tryItLater = NSLocalizedString("try_it_later", comment: "Default message when joke cannot be fetched")
+}
+
+#if DEBUG
+extension ViewController {
+    public func clickAskForJokeButton() {
+        askForJokeAction()
+    }
+    
+    public func getLabel() async -> String? {
+        return myLabel.text
+    }
+}
+#endif
+
+// MARK: Default DI Container
+
 extension SwinjectStoryboard {
     @objc class func setup() {
         defaultContainer.register(ChuckNorrisService.self) { _ in
@@ -336,7 +353,10 @@ extension SwinjectStoryboard {
             ChuckNorrisWebClientImpl(webService: resolver.resolve(ChuckNorrisService.self)!)
         }
         defaultContainer.register(MainViewModelType.self) { resolver in
-            MainViewModel(webClient: resolver.resolve(ChuckNorrisWebClient.self)!)
+            MainViewModel(
+                webClient: resolver.resolve(ChuckNorrisWebClient.self)!,
+                speechService: resolver.resolve(SpeechService.self)!
+            )
         }
         defaultContainer.register(SpeechService.self) { _ in
             SpeechService(speechSynthesizer: AVSpeechSynthesizer())
@@ -362,23 +382,6 @@ extension SwinjectStoryboard {
         }
         defaultContainer.storyboardInitCompleted(ViewController.self) { resolver, viewController in
             viewController.mainViewModel = resolver.resolve(MainViewModelType.self)
-            viewController.speechService = resolver.resolve(SpeechService.self)
         }
     }
 }
-
-struct DefaultMessages {
-    static let tryItLater = NSLocalizedString("try_it_later", comment: "Default message when joke cannot be fetched")
-}
-
-#if DEBUG
-extension ViewController {
-    public func clickAskForJokeButton() {
-        askForJokeAction()
-    }
-    
-    public func getLabel() async -> String? {
-        return myLabel.text
-    }
-}
-#endif
