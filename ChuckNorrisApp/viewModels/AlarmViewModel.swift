@@ -7,16 +7,19 @@
 
 import Foundation
 import Combine
+import AVFoundation
 
 class AlarmViewModel: ObservableObject {
     @Published var alarms: [Alarm] = []
     
     private let repository: AlarmRepository
     private let notificationManager: NotificationManaging
+    private let speechService: SpeechService
     
-    init(repository: AlarmRepository = AlarmRepositoryImpl(), notificationManager: NotificationManaging = NotificationManager.shared) {
+    init(repository: AlarmRepository = AlarmRepositoryImpl(), notificationManager: NotificationManaging = NotificationManager.shared, speechService: SpeechService = SpeechService(speechSynthesizer: AVSpeechSynthesizer())) {
         self.repository = repository
         self.notificationManager = notificationManager
+        self.speechService = speechService
         fetchAlarms()
     }
     
