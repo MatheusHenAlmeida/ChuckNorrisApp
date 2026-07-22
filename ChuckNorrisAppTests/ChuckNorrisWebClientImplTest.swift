@@ -8,7 +8,7 @@
 import XCTest
 @testable import ChuckNorrisApp
 
-final class ChuckNorrisServiceMock: ChuckNorrisService {
+final class ChuckNorrisServiceMock: ChuckNorrisService, @unchecked Sendable {
     var getRandomJokeReturnValue: JokeResponse?
     var getRandomJokeCalled = false
     var getRandomJokeShouldThrow = false

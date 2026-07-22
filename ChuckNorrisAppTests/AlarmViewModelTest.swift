@@ -72,6 +72,7 @@ final class NotificationManagerMock: NotificationManager {
     }
 }
 
+@MainActor
 final class AlarmViewModelTest: XCTestCase {
     private var viewModel: AlarmViewModelImpl!
     private var repository = AlarmRepositoryMock()

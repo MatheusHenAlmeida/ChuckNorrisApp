@@ -7,10 +7,12 @@
 
 import Foundation
 
+@MainActor
 protocol MainViewModel {
     func getJoke() async throws -> JokeResponse?
 }
 
+@MainActor
 class MainViewModelImpl: MainViewModel {
     var webClient: ChuckNorrisWebClient
     

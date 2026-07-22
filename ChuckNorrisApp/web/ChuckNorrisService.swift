@@ -8,12 +8,12 @@
 import Foundation
 import Alamofire
 
-protocol ChuckNorrisService {
+protocol ChuckNorrisService: Sendable {
     func getRandomJoke() async throws -> JokeResponse?
 }
 
-class ChuckNorrisServiceImpl: ChuckNorrisService {
-    private var baseUrl: String
+class ChuckNorrisServiceImpl: ChuckNorrisService, @unchecked Sendable {
+    private let baseUrl: String
     
     init(baseUrl: String) {
         self.baseUrl = baseUrl

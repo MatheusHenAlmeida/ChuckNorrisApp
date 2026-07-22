@@ -17,7 +17,7 @@ protocol NotificationManager {
 }
 
 class NotificationManagerImpl: NSObject, UNUserNotificationCenterDelegate, NotificationManager {
-    static let shared = NotificationManagerImpl()
+    nonisolated(unsafe) static let shared = NotificationManagerImpl()
     
     override private init() {
         super.init()

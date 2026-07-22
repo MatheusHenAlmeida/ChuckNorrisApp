@@ -8,7 +8,7 @@
 import XCTest
 @testable import ChuckNorrisApp
 
-final class ChuckNorrisWebClientMock: ChuckNorrisWebClient {
+final class ChuckNorrisWebClientMock: ChuckNorrisWebClient, @unchecked Sendable {
     var getJokeReturnValue: JokeResponse?
     var getJokeCalled = false
     var getJokeShouldThrow = false
@@ -22,6 +22,7 @@ final class ChuckNorrisWebClientMock: ChuckNorrisWebClient {
     }
 }
 
+@MainActor
 final class MainViewModelImplTest: XCTestCase {
     
     private var mainViewModelImpl: MainViewModelImpl? = nil

@@ -22,12 +22,14 @@ final class MainViewModelMock: MainViewModel {
     }
 }
 
+@MainActor
 final class ViewControllerTest: XCTestCase {
 
     private var viewController: ViewController? = nil
     private var mainViewModel = MainViewModelMock()
     
-    override func setUpWithError() throws {
+    override func setUp() async throws {
+        try await super.setUp()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         self.viewController = storyboard.instantiateViewController(withIdentifier: "MainStoryboard") as? ViewController
                 
@@ -40,11 +42,11 @@ final class ViewControllerTest: XCTestCase {
     func testAskForJokeButtom_mustReturnJoke() async throws {
         mainViewModel.getJokeReturnValue = JokeResponse(id: "1", iconUrl: "url", value: "Some joke")
         
-        let loadingBeforeApiResolves = await viewController?.loadingView.isHidden
-        await viewController?.clickAskForJokeButton()
-        sleep(2)
-        let joke = await viewController?.myLabel.text
-        let loadingAfterApiResolves = await viewController?.loadingView.isHidden
+        let loadingBeforeApiResolves = viewController?.loadingView.isHidden
+        viewController?.clickAskForJokeButton()
+        try await Task.sleep(nanoseconds: 2_000_000_000)
+        let joke = viewController?.myLabel.text
+        let loadingAfterApiResolves = viewController?.loadingView.isHidden
         
         XCTAssertEqual("Some joke", joke)
         XCTAssertFalse(loadingBeforeApiResolves == false)
@@ -52,7 +54,7 @@ final class ViewControllerTest: XCTestCase {
         XCTAssertTrue(mainViewModel.getJokeCalled)
     }
 
-    override func tearDownWithError() throws {
-        // No-op
+    override func tearDown() async throws {
+        try await super.tearDown()
     }
 }

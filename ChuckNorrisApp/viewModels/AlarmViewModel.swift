@@ -9,6 +9,7 @@ import Foundation
 import Combine
 import AVFoundation
 
+@MainActor
 protocol AlarmViewModel {
     var alarms: [Alarm] { get set }
     func fetchAlarms()
@@ -19,6 +20,7 @@ protocol AlarmViewModel {
     func toggleAlarm(_ alarm: Alarm)
 }
 
+@MainActor
 class AlarmViewModelImpl: ObservableObject, AlarmViewModel {
     @Published var alarms: [Alarm] = []
     
