@@ -23,20 +23,20 @@ final class ChuckNorrisWebClientMock: ChuckNorrisWebClient, @unchecked Sendable 
 }
 
 @MainActor
-final class MainViewModelImplTest: XCTestCase {
+final class MainViewModelTest: XCTestCase {
     
-    private var mainViewModelImpl: MainViewModelImpl? = nil
+    private var mainViewModel: MainViewModel? = nil
     private var chuckNorrisWebClient = ChuckNorrisWebClientMock()
 
     override func setUpWithError() throws {
         chuckNorrisWebClient = ChuckNorrisWebClientMock()
-        mainViewModelImpl = MainViewModelImpl(webClient: chuckNorrisWebClient)
+        mainViewModel = MainViewModel(webClient: chuckNorrisWebClient)
     }
 
     func testGetJoke_mustReturnJoke() async throws {
         chuckNorrisWebClient.getJokeReturnValue = JokeResponse(id: "1", iconUrl: "url", value: "Some joke")
         
-        let joke = try? await mainViewModelImpl?.getJoke()
+        let joke = try? await mainViewModel?.getJoke()
         
         XCTAssertEqual("1", joke?.id)
         XCTAssertEqual("url", joke?.iconUrl)
