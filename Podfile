@@ -12,7 +12,6 @@ target 'ChuckNorrisApp' do
 
   target 'ChuckNorrisAppTests' do
     inherit! :search_paths
-    pod 'MockingbirdFramework', '~> 0.20'
   end
 
   target 'ChuckNorrisAppUITests' do
