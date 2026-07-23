@@ -8,9 +8,10 @@
 import UIKit
 import Swinject
 import SwinjectStoryboard
-import FirebaseRemoteConfigInternal
 
 class SplashViewController: UIViewController {
+
+    var viewModel: SplashViewModelType?
 
     private let activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .large)
@@ -55,11 +56,8 @@ class SplashViewController: UIViewController {
 
     private func loadRemoteConfigAndProceed() {
         Task { [weak self] in
-            let remoteConfig = RemoteConfig.remoteConfig()
-            let featureFlagsService = FeatureFlagsService(remoteConfig: remoteConfig)
-            
             do {
-                try await featureFlagsService.start()
+                try await self?.viewModel?.loadFeatureFlags()
                 self?.navigateToMainScreen()
             } catch {
                 self?.activityIndicator.isHidden = true

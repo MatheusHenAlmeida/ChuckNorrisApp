@@ -14,6 +14,8 @@
 		7410D6CD3012443F0019A752 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 7410D6CC3012443F0019A752 /* FirebaseRemoteConfig */; };
 		7410D6CF3012485A0019A752 /* FeatureFlagsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7410D6CE3012484B0019A752 /* FeatureFlagsService.swift */; };
 		7410D6D3301251AC0019A752 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7410D6D2301251AC0019A752 /* SplashViewController.swift */; };
+		7410D6D4301251AD0019A752 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7410D6D5301251AD0019A752 /* SplashViewModel.swift */; };
+		7410D6D6301251AE0019A752 /* SplashViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7410D6D7301251AE0019A752 /* SplashViewModelTest.swift */; };
 		741B84892BB34B9200B2CB88 /* MainViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741B84882BB34B9200B2CB88 /* MainViewModelTest.swift */; };
 		741B848B2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741B848A2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift */; };
 		745E21402E5C9A9800517F23 /* SpeechService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745E213F2E5C9A9800517F23 /* SpeechService.swift */; };
@@ -73,6 +75,8 @@
 		7410D6C9301243DA0019A752 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7410D6CE3012484B0019A752 /* FeatureFlagsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureFlagsService.swift; sourceTree = "<group>"; };
 		7410D6D2301251AC0019A752 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		7410D6D5301251AD0019A752 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
+		7410D6D7301251AE0019A752 /* SplashViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModelTest.swift; sourceTree = "<group>"; };
 		741B84882BB34B9200B2CB88 /* MainViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTest.swift; sourceTree = "<group>"; };
 		741B848A2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuckNorrisWebClientImplTest.swift; sourceTree = "<group>"; };
 		745E213F2E5C9A9800517F23 /* SpeechService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechService.swift; sourceTree = "<group>"; };
@@ -228,6 +232,7 @@
 		74926FC12B9612A00058D874 /* ChuckNorrisAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				7410D6D7301251AE0019A752 /* SplashViewModelTest.swift */,
 				741B84882BB34B9200B2CB88 /* MainViewModelTest.swift */,
 				741B848A2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift */,
 				74A5637B2BDB3E9800CB0AF1 /* ViewControllerTest.swift */,
@@ -269,6 +274,7 @@
 		74926FF12B9658950058D874 /* viewModels */ = {
 			isa = PBXGroup;
 			children = (
+				7410D6D5301251AD0019A752 /* SplashViewModel.swift */,
 				74A2A6402F4DDB4D00ECDC1D /* AlarmViewModel.swift */,
 				74926FF22B9658A60058D874 /* MainViewModel.swift */,
 			);
@@ -605,6 +611,7 @@
 				74926FAC2B96129F0058D874 /* AppDelegate.swift in Sources */,
 				7410D6D3301251AC0019A752 /* SplashViewController.swift in Sources */,
 				74926FAE2B96129F0058D874 /* SceneDelegate.swift in Sources */,
+				7410D6D4301251AD0019A752 /* SplashViewModel.swift in Sources */,
 				74926FF32B9658A60058D874 /* MainViewModel.swift in Sources */,
 				745E21402E5C9A9800517F23 /* SpeechService.swift in Sources */,
 				74E400012E5C9A9800517F23 /* SystemHelper.swift in Sources */,
@@ -615,6 +622,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7410D6D6301251AE0019A752 /* SplashViewModelTest.swift in Sources */,
 				741B848B2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift in Sources */,
 				741B84892BB34B9200B2CB88 /* MainViewModelTest.swift in Sources */,
 				74A5637C2BDB3E9800CB0AF1 /* ViewControllerTest.swift in Sources */,

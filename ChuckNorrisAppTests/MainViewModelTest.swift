@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import AVFoundation
 @testable import ChuckNorrisApp
 
 final class ChuckNorrisWebClientMock: ChuckNorrisWebClient, @unchecked Sendable {
@@ -30,7 +31,8 @@ final class MainViewModelTest: XCTestCase {
 
     override func setUpWithError() throws {
         chuckNorrisWebClient = ChuckNorrisWebClientMock()
-        mainViewModel = MainViewModel(webClient: chuckNorrisWebClient)
+        let speechService = SpeechService(speechSynthesizer: AVSpeechSynthesizer())
+        mainViewModel = MainViewModel(webClient: chuckNorrisWebClient, speechService: speechService)
     }
 
     func testGetJoke_mustReturnJoke() async throws {

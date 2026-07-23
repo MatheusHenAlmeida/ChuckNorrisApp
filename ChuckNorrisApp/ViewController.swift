@@ -351,6 +351,12 @@ extension SwinjectStoryboard {
         defaultContainer.register(FeatureFlagsServiceType.self) { _ in
             return FeatureFlagsService(remoteConfig: RemoteConfig.remoteConfig())
         }
+        defaultContainer.register(SplashViewModelType.self) { resolver in
+            SplashViewModel(featureFlagsService: resolver.resolve(FeatureFlagsServiceType.self)!)
+        }
+        defaultContainer.storyboardInitCompleted(SplashViewController.self) { resolver, viewController in
+            viewController.viewModel = resolver.resolve(SplashViewModelType.self)
+        }
         defaultContainer.register(ChuckNorrisService.self) { resolver in
             let flags = resolver.resolve(FeatureFlagsServiceType.self)!
             let baseUrl = flags.getJokesURL()

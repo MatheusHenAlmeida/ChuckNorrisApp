@@ -9,6 +9,7 @@ import FirebaseRemoteConfig
 
 private let apiHostDefault = "https://api.chucknorris.io/jokes"
 
+@MainActor
 protocol FeatureFlagsServiceType {
     func start() async
     func getJokesURL() -> String

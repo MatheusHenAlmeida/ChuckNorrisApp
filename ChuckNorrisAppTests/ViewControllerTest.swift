@@ -20,6 +20,10 @@ final class MainViewModelMock: MainViewModelType {
         }
         return getJokeReturnValue
     }
+    
+    func speech(message: String) {
+        // Mock implementation
+    }
 }
 
 @MainActor
