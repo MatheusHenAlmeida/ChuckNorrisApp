@@ -13,7 +13,7 @@ import SwiftUI
 import GoogleMobileAds
 import CoreData
 import FirebaseCore
-import FirebaseRemoteConfig
+import FirebaseRemoteConfigInternal
 
 class ViewController: UIViewController {
 
@@ -349,33 +349,14 @@ extension ViewController {
 extension SwinjectStoryboard {
     @objc class func setup() {
         // Register Firebase Remote Config
-        defaultContainer.register(RemoteConfig.self) { _ in
-            if FirebaseApp.app() == nil {
-                FirebaseApp.configure()
-            }
-            let rc = RemoteConfig.remoteConfig()
-            let settings = RemoteConfigSettings()
-            #if DEBUG
-            settings.minimumFetchInterval = 0
-            #else
-            settings.minimumFetchInterval = 3600
-            #endif
-            rc.configSettings = settings
-            rc.setDefaults(["jokes_url": "https://api.chucknorris.io/jokes" as NSObject])
-            rc.fetchAndActivate { status, error in
-                if let error = error {
-                    debugPrint("Error fetching config: \(error)")
-                } else {
-                    let value = rc["jokes_url"].stringValue
-                    debugPrint("Config value: \(value)")
-                }
-            }
-            return rc
+        defaultContainer.register(FeatureFlagsServiceType.self) { _ in
+            let featureFlagsService = FeatureFlagsService(remoteConfig: RemoteConfig.remoteConfig())
+            featureFlagsService.start()
+            return featureFlagsService
         }
         defaultContainer.register(ChuckNorrisService.self) { resolver in
-            let rc = resolver.resolve(RemoteConfig.self)!
-            let baseUrl = rc["jokes_url"].stringValue ?? ""
-            return ChuckNorrisServiceImpl(baseUrl: baseUrl)
+            let featureFlagsService = resolver.resolve(FeatureFlagsServiceType.self)!
+            return ChuckNorrisServiceImpl(baseUrl: featureFlagsService.getJokesURL())
         }
         defaultContainer.register(ChuckNorrisWebClient.self) { resolver in
             ChuckNorrisWebClientImpl(webService: resolver.resolve(ChuckNorrisService.self)!)

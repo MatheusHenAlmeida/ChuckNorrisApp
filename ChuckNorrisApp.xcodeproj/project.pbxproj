@@ -12,6 +12,7 @@
 		2D81B00085997777D0154534 /* Pods_ChuckNorrisApp_ChuckNorrisAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53849B6865AD3B6C4D326D02 /* Pods_ChuckNorrisApp_ChuckNorrisAppUITests.framework */; };
 		7410D6CA301243DA0019A752 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7410D6C9301243DA0019A752 /* GoogleService-Info.plist */; };
 		7410D6CD3012443F0019A752 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 7410D6CC3012443F0019A752 /* FirebaseRemoteConfig */; };
+		7410D6CF3012485A0019A752 /* FeatureFlagsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7410D6CE3012484B0019A752 /* FeatureFlagsService.swift */; };
 		741B84892BB34B9200B2CB88 /* MainViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741B84882BB34B9200B2CB88 /* MainViewModelTest.swift */; };
 		741B848B2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741B848A2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift */; };
 		745E21402E5C9A9800517F23 /* SpeechService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745E213F2E5C9A9800517F23 /* SpeechService.swift */; };
@@ -69,6 +70,7 @@
 		53849B6865AD3B6C4D326D02 /* Pods_ChuckNorrisApp_ChuckNorrisAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChuckNorrisApp_ChuckNorrisAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7405279F300176CF00465A5A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7410D6C9301243DA0019A752 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7410D6CE3012484B0019A752 /* FeatureFlagsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureFlagsService.swift; sourceTree = "<group>"; };
 		741B84882BB34B9200B2CB88 /* MainViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTest.swift; sourceTree = "<group>"; };
 		741B848A2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuckNorrisWebClientImplTest.swift; sourceTree = "<group>"; };
 		745E213F2E5C9A9800517F23 /* SpeechService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechService.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 		745E213E2E5C99BA00517F23 /* services */ = {
 			isa = PBXGroup;
 			children = (
+				7410D6CE3012484B0019A752 /* FeatureFlagsService.swift */,
 				74A2A6442F4DDB7000ECDC1D /* AlarmRepository.swift */,
 				74A2A6452F4DDB7000ECDC1D /* CoreDataManager.swift */,
 				74A2A6462F4DDB7000ECDC1D /* NotificationManager.swift */,
@@ -589,6 +592,7 @@
 				74926FB02B96129F0058D874 /* ViewController.swift in Sources */,
 				74A2A6412F4DDB4D00ECDC1D /* AlarmViewModel.swift in Sources */,
 				74926FE72B9617620058D874 /* ChuckNorrisWebClient.swift in Sources */,
+				7410D6CF3012485A0019A752 /* FeatureFlagsService.swift in Sources */,
 				74926FF52B9659D50058D874 /* ChuckNorrisService.swift in Sources */,
 				74A2A6472F4DDB7000ECDC1D /* NotificationManager.swift in Sources */,
 				74A2A6482F4DDB7000ECDC1D /* AlarmRepository.swift in Sources */,
