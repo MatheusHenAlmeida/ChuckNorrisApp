@@ -7,10 +7,10 @@
 import FirebaseCore
 import FirebaseRemoteConfig
 
-private let apiHostDefault = "https://api.chucknorris.io/"
+private let apiHostDefault = "https://api.chucknorris.io/jokes"
 
 protocol FeatureFlagsServiceType {
-    func start()
+    func start() async
     func getJokesURL() -> String
 }
 
@@ -22,7 +22,7 @@ class FeatureFlagsService: FeatureFlagsServiceType {
         self.remoteConfig = remoteConfig
     }
     
-    func start() {
+    func start() async {
         if FirebaseApp.app() == nil {
             FirebaseApp.configure()
         }
@@ -34,12 +34,12 @@ class FeatureFlagsService: FeatureFlagsServiceType {
         #endif
         remoteConfig.configSettings = settings
         remoteConfig.setDefaults(["jokes_url": apiHostDefault as NSObject])
-        remoteConfig.fetchAndActivate { status, error in
-            if let error = error {
-                debugPrint("Error fetching config: \(error)")
-            } else {
-                debugPrint("Remote Config initialized")
-            }
+        
+        do {
+            let status = try await remoteConfig.fetchAndActivate()
+            debugPrint("Remote Config fetch status: \(status)")
+        } catch {
+            debugPrint("Error fetching Remote Config: \(error)")
         }
     }
     

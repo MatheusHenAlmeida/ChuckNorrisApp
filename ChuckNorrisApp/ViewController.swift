@@ -348,15 +348,13 @@ extension ViewController {
 
 extension SwinjectStoryboard {
     @objc class func setup() {
-        // Register Firebase Remote Config
         defaultContainer.register(FeatureFlagsServiceType.self) { _ in
-            let featureFlagsService = FeatureFlagsService(remoteConfig: RemoteConfig.remoteConfig())
-            featureFlagsService.start()
-            return featureFlagsService
+            return FeatureFlagsService(remoteConfig: RemoteConfig.remoteConfig())
         }
         defaultContainer.register(ChuckNorrisService.self) { resolver in
-            let featureFlagsService = resolver.resolve(FeatureFlagsServiceType.self)!
-            return ChuckNorrisServiceImpl(baseUrl: featureFlagsService.getJokesURL())
+            let flags = resolver.resolve(FeatureFlagsServiceType.self)!
+            let baseUrl = flags.getJokesURL()
+            return ChuckNorrisServiceImpl(baseUrl: baseUrl)
         }
         defaultContainer.register(ChuckNorrisWebClient.self) { resolver in
             ChuckNorrisWebClientImpl(webService: resolver.resolve(ChuckNorrisService.self)!)
