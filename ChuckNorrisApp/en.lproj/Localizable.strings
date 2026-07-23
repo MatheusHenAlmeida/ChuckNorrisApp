@@ -6,6 +6,7 @@
 /* Default messages */
 "try_it_later" = "Try it later";
 "time_for_chuck_norris_joke" = "Time for a Chuck Norris Joke!";
+"something_went_wrong_try_again_later" = "Something went wrong, please try again";
 
 /* Side menu items */
 "menu_create_alarm" = "Create an alarm";

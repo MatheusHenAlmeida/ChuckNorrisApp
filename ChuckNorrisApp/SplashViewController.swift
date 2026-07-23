@@ -18,6 +18,17 @@ class SplashViewController: UIViewController {
         indicator.translatesAutoresizingMaskIntoConstraints = false
         return indicator
     }()
+    
+    private let errorLabel: UILabel = {
+        let label = UILabel()
+        label.text = NSLocalizedString("something_went_wrong_try_again_later", comment: "Error message for remote config connection failure")
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.textColor = .white
+        label.numberOfLines = 0
+        label.isHidden = true
+        return label
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,10 +40,14 @@ class SplashViewController: UIViewController {
         view.backgroundColor = UIColor(red: 0.929, green: 0.557, blue: 0.310, alpha: 1.0)
         
         view.addSubview(activityIndicator)
+        view.addSubview(errorLabel)
         
         NSLayoutConstraint.activate([
+            errorLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            errorLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            activityIndicator.topAnchor.constraint(equalTo: view.centerYAnchor)
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
         
         activityIndicator.startAnimating()
@@ -45,8 +60,10 @@ class SplashViewController: UIViewController {
             
             do {
                 try await featureFlagsService.start()
-                guard let weakSelf = self else { return }
-                weakSelf.navigateToMainScreen()
+                self?.navigateToMainScreen()
+            } catch {
+                self?.activityIndicator.isHidden = true
+                self?.errorLabel.isHidden = false
             }
         }
     }
