@@ -6,7 +6,11 @@ The **Chuck Norris App** is a native iOS application that blends legendary Chuck
 
 ## 🚀 Key Features
 
-* **Joke Fetching**: Dynamically fetches random jokes in real-time by consuming the public `api.chucknorris.io` endpoint.
+* **Joke Fetching**: Dynamically fetches random jokes in real-time by consuming `api.chucknorris.io` (or a custom API host fetched dynamically via Remote Config).
+* **Firebase Remote Config & Splash Screen**:
+  * Initializes Firebase Remote Config during app startup on a dedicated **Splash Screen**.
+  * Dynamically manages feature flags and configuration values (such as `jokes_url`).
+  * Displays user-friendly error handling if remote configuration fails.
 * **Text-to-Speech (TTS)**: Leverages voice synthesis via `AVSpeechSynthesizer` to narrate Chuck Norris jokes out loud.
 * **Alarm Manager**:
   * Create, edit, and delete multiple custom alarms persisted locally using **Core Data**.
@@ -14,7 +18,7 @@ The **Chuck Norris App** is a native iOS application that blends legendary Chuck
   * Local notification scheduling via `NotificationManager` that triggers the synthesized voice of the joke.
 * **Internationalization (i18n)**: Out-of-the-box support for both **English** and **Portuguese** using localized key files.
 * **Simulated Monetization**: Integrated Google AdMob banners.
-* **Secrets Isolation**: Sensitives AdMob keys and unit IDs are isolated locally in `.xcconfig` configurations ignored by Git.
+* **Secrets Isolation**: Sensitive AdMob keys and configuration details are isolated locally in `.xcconfig` configurations ignored by Git.
 
 ---
 
@@ -29,28 +33,32 @@ graph TD
         VC[ViewController - UIKit]
         ALV[AlarmListView - SwiftUI]
         AEV[AlarmEditView - SwiftUI]
+        SVC[SplashViewController - UIKit]
     end
     
     subgraph ViewModels ["ViewModels"]
+        SVM[SplashViewModel]
         MVM[MainViewModel]
         AVM[AlarmViewModel]
     end
     
     subgraph Services ["Services & Core Layers"]
-        CS[ChuckNorrisService - API Service]
-        WC[ChuckNorrisWebClient]
+        FFS[FeatureFlagsService]
+        FRC[Firebase Remote Config]
         SS[SpeechService - TTS Engine]
+        WC[ChuckNorrisWebClient]
+        CS[ChuckNorrisService - API Service]
         NM[NotificationManager - Local Notifications]
         AR[AlarmRepository - Local Persistence]
         CD[CoreDataManager - Core Data]
-        
     end
     
     subgraph Utils ["Utils"]
         SH[SystemHelper]
     end
 
-    %% UI to ViewModel / Helper relations
+    %% UI to ViewModel / Service relations
+    SVC --> SVM
     VC --> MVM
     VC --> SH
     ALV --> AVM
@@ -58,20 +66,24 @@ graph TD
     AV --> SH
     
     %% ViewModel relations
-    MVM --> WC
+    SVM --> FFS
     MVM --> SS
+    MVM --> WC
     AVM --> AR
     AVM --> NM
     AVM --> SS
     
     %% Service & Data relations
+    %%WC --> FFS
     WC --> CS
+    FFS --> FRC
     AR --> CD
 ```
 
 * **Dependency Injection**: Centrally managed using the **Swinject** container and loaded via Storyboard (`SwinjectStoryboard`).
-* **Hybrid Layout**: The primary main view and hamburger menu slide drawer are written in UIKit, whereas the Alarms and About screens are written in SwiftUI, seamlessly presented using `UIHostingController`.
-* **Testing Isolation**: Key dependencies are decoupled through protocols (such as `NotificationManager`), allowing clean, decoupled testing using **Native Manual Mocks**.
+* **Hybrid Layout**: The initial splash controller, main view, and hamburger menu slide drawer are built with UIKit, whereas Alarms and About screens are built using SwiftUI and presented seamlessly via `UIHostingController`.
+* **Remote Configuration**: Managed via `FeatureFlagsService`, which fetches and activates dynamic flags (e.g. `jokes_url`) before presenting the primary interface.
+* **Testing Isolation**: Key dependencies are decoupled through protocols (such as `NotificationManager` and `FeatureFlagsServiceType`), allowing clean, decoupled testing using **Native Manual Mocks**.
 
 ---
 

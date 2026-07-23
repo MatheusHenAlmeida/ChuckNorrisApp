@@ -12,6 +12,8 @@ import AVFoundation
 import SwiftUI
 import GoogleMobileAds
 import CoreData
+import FirebaseCore
+import FirebaseRemoteConfigInternal
 
 class ViewController: UIViewController {
 
@@ -346,8 +348,19 @@ extension ViewController {
 
 extension SwinjectStoryboard {
     @objc class func setup() {
-        defaultContainer.register(ChuckNorrisService.self) { _ in
-            ChuckNorrisServiceImpl(baseUrl: "https://api.chucknorris.io/jokes")
+        defaultContainer.register(FeatureFlagsServiceType.self) { _ in
+            return FeatureFlagsService(remoteConfig: RemoteConfig.remoteConfig())
+        }
+        defaultContainer.register(SplashViewModelType.self) { resolver in
+            SplashViewModel(featureFlagsService: resolver.resolve(FeatureFlagsServiceType.self)!)
+        }
+        defaultContainer.storyboardInitCompleted(SplashViewController.self) { resolver, viewController in
+            viewController.viewModel = resolver.resolve(SplashViewModelType.self)
+        }
+        defaultContainer.register(ChuckNorrisService.self) { resolver in
+            let flags = resolver.resolve(FeatureFlagsServiceType.self)!
+            let baseUrl = flags.getJokesURL()
+            return ChuckNorrisServiceImpl(baseUrl: baseUrl)
         }
         defaultContainer.register(ChuckNorrisWebClient.self) { resolver in
             ChuckNorrisWebClientImpl(webService: resolver.resolve(ChuckNorrisService.self)!)
@@ -385,3 +398,4 @@ extension SwinjectStoryboard {
         }
     }
 }
+
