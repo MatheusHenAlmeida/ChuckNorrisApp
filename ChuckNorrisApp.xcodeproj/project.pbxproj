@@ -10,6 +10,8 @@
 		08D85D0BBF8D42150A83CCC9 /* Pods_ChuckNorrisAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACA55F82B7EFEADE20F9B147 /* Pods_ChuckNorrisAppTests.framework */; };
 		124290C3D3CB8879A6C3CB38 /* Pods_ChuckNorrisApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0543A94258DDF4377727E7E1 /* Pods_ChuckNorrisApp.framework */; };
 		2D81B00085997777D0154534 /* Pods_ChuckNorrisApp_ChuckNorrisAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53849B6865AD3B6C4D326D02 /* Pods_ChuckNorrisApp_ChuckNorrisAppUITests.framework */; };
+		7410D6CA301243DA0019A752 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7410D6C9301243DA0019A752 /* GoogleService-Info.plist */; };
+		7410D6CD3012443F0019A752 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 7410D6CC3012443F0019A752 /* FirebaseRemoteConfig */; };
 		741B84892BB34B9200B2CB88 /* MainViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741B84882BB34B9200B2CB88 /* MainViewModelTest.swift */; };
 		741B848B2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741B848A2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift */; };
 		745E21402E5C9A9800517F23 /* SpeechService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745E213F2E5C9A9800517F23 /* SpeechService.swift */; };
@@ -66,6 +68,7 @@
 		43FD62CAAE656190C851A28E /* Pods-ChuckNorrisAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChuckNorrisAppTests.release.xcconfig"; path = "Target Support Files/Pods-ChuckNorrisAppTests/Pods-ChuckNorrisAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		53849B6865AD3B6C4D326D02 /* Pods_ChuckNorrisApp_ChuckNorrisAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChuckNorrisApp_ChuckNorrisAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7405279F300176CF00465A5A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		7410D6C9301243DA0019A752 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		741B84882BB34B9200B2CB88 /* MainViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTest.swift; sourceTree = "<group>"; };
 		741B848A2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChuckNorrisWebClientImplTest.swift; sourceTree = "<group>"; };
 		745E213F2E5C9A9800517F23 /* SpeechService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechService.swift; sourceTree = "<group>"; };
@@ -113,6 +116,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				124290C3D3CB8879A6C3CB38 /* Pods_ChuckNorrisApp.framework in Frameworks */,
+				7410D6CD3012443F0019A752 /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +213,7 @@
 				74926FB12B96129F0058D874 /* Main.storyboard */,
 				74926FB42B9612A00058D874 /* Assets.xcassets */,
 				74926FB62B9612A00058D874 /* LaunchScreen.storyboard */,
+				7410D6C9301243DA0019A752 /* GoogleService-Info.plist */,
 				74926FB92B9612A00058D874 /* Info.plist */,
 			);
 			path = ChuckNorrisApp;
@@ -377,6 +382,9 @@
 				Base,
 			);
 			mainGroup = 74926F9F2B96129F0058D874;
+			packageReferences = (
+				7410D6CB3012443F0019A752 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 74926FA92B96129F0058D874 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -395,6 +403,7 @@
 			files = (
 				74926FB82B9612A00058D874 /* LaunchScreen.storyboard in Resources */,
 				745E21432E5C9EC500517F23 /* Localizable.strings in Resources */,
+				7410D6CA301243DA0019A752 /* GoogleService-Info.plist in Resources */,
 				74926FB52B9612A00058D874 /* Assets.xcassets in Resources */,
 				74926FB32B96129F0058D874 /* Main.storyboard in Resources */,
 			);
@@ -959,6 +968,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7410D6CB3012443F0019A752 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 12.16.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7410D6CC3012443F0019A752 /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7410D6CB3012443F0019A752 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 74926FA02B96129F0058D874 /* Project object */;
 }

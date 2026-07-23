@@ -8,6 +8,7 @@
 import UIKit
 import Swinject
 import GoogleMobileAds
+import FirebaseCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         MobileAds.shared.start(completionHandler: nil)
         _ = NotificationManagerImpl.shared
+        FirebaseApp.configure()
         return true
     }
 
