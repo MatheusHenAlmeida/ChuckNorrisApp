@@ -18,6 +18,7 @@
 		7410D6D6301251AE0019A752 /* SplashViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7410D6D7301251AE0019A752 /* SplashViewModelTest.swift */; };
 		741B84892BB34B9200B2CB88 /* MainViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741B84882BB34B9200B2CB88 /* MainViewModelTest.swift */; };
 		741B848B2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741B848A2BB3511B00B2CB88 /* ChuckNorrisWebClientImplTest.swift */; };
+		743F52603016963500431F6A /* Clarity in Frameworks */ = {isa = PBXBuildFile; productRef = 743F525F3016963500431F6A /* Clarity */; };
 		745E21402E5C9A9800517F23 /* SpeechService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745E213F2E5C9A9800517F23 /* SpeechService.swift */; };
 		745E21432E5C9EC500517F23 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 745E21412E5C9EC500517F23 /* Localizable.strings */; };
 		74926FAC2B96129F0058D874 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74926FAB2B96129F0058D874 /* AppDelegate.swift */; };
@@ -123,6 +124,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				743F52603016963500431F6A /* Clarity in Frameworks */,
 				124290C3D3CB8879A6C3CB38 /* Pods_ChuckNorrisApp.framework in Frameworks */,
 				7410D6CD3012443F0019A752 /* FirebaseRemoteConfig in Frameworks */,
 			);
@@ -396,6 +398,7 @@
 			mainGroup = 74926F9F2B96129F0058D874;
 			packageReferences = (
 				7410D6CB3012443F0019A752 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				743F525E3016963500431F6A /* XCRemoteSwiftPackageReference "clarity-apps" */,
 			);
 			productRefGroup = 74926FA92B96129F0058D874 /* Products */;
 			projectDirPath = "";
@@ -994,6 +997,14 @@
 				minimumVersion = 12.16.0;
 			};
 		};
+		743F525E3016963500431F6A /* XCRemoteSwiftPackageReference "clarity-apps" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/microsoft/clarity-apps";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 3.5.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1001,6 +1012,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7410D6CB3012443F0019A752 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseRemoteConfig;
+		};
+		743F525F3016963500431F6A /* Clarity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 743F525E3016963500431F6A /* XCRemoteSwiftPackageReference "clarity-apps" */;
+			productName = Clarity;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

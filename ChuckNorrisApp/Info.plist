@@ -33,6 +33,8 @@
 	</array>
 	<key>GADApplicationIdentifier</key>
 	<string>$(AD_APP_ID)</string>
+	<key>ClarityID</key>
+	<string>$(CLARITY_ID)</string>
 	<key>AdUnitID</key>
 	<string>$(AD_UNIT_ID)</string>
 </dict>
