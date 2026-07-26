@@ -11,6 +11,7 @@ The **Chuck Norris App** is a native iOS application that blends legendary Chuck
   * Initializes Firebase Remote Config during app startup on a dedicated **Splash Screen**.
   * Dynamically manages feature flags and configuration values (such as `jokes_url`).
   * Displays user-friendly error handling if remote configuration fails.
+* **Microsoft Clarity Analytics**: Integrated **Microsoft Clarity SDK** initialized on startup in `AppDelegate` for session replay and analytics tracking.
 * **Text-to-Speech (TTS)**: Leverages voice synthesis via `AVSpeechSynthesizer` to narrate Chuck Norris jokes out loud.
 * **Alarm Manager**:
   * Create, edit, and delete multiple custom alarms persisted locally using **Core Data**.
@@ -18,7 +19,7 @@ The **Chuck Norris App** is a native iOS application that blends legendary Chuck
   * Local notification scheduling via `NotificationManager` that triggers the synthesized voice of the joke.
 * **Internationalization (i18n)**: Out-of-the-box support for both **English** and **Portuguese** using localized key files.
 * **Simulated Monetization**: Integrated Google AdMob banners.
-* **Secrets Isolation**: Sensitive AdMob keys and configuration details are isolated locally in `.xcconfig` configurations ignored by Git.
+* **Secrets Isolation**: Sensitive AdMob keys, Microsoft Clarity IDs, and configuration details are isolated locally in `.xcconfig` configurations ignored by Git.
 
 ---
 
@@ -45,6 +46,7 @@ graph TD
     subgraph Services ["Services & Core Layers"]
         FFS[FeatureFlagsService]
         FRC[Firebase Remote Config]
+        MCS[Microsoft Clarity Analytics]
         SS[SpeechService - TTS Engine]
         WC[ChuckNorrisWebClient]
         CS[ChuckNorrisService - API Service]
@@ -82,7 +84,7 @@ graph TD
 
 * **Dependency Injection**: Centrally managed using the **Swinject** container and loaded via Storyboard (`SwinjectStoryboard`).
 * **Hybrid Layout**: The initial splash controller, main view, and hamburger menu slide drawer are built with UIKit, whereas Alarms and About screens are built using SwiftUI and presented seamlessly via `UIHostingController`.
-* **Remote Configuration**: Managed via `FeatureFlagsService`, which fetches and activates dynamic flags (e.g. `jokes_url`) before presenting the primary interface.
+* **Remote Configuration & Analytics**: Remote configuration is managed via `FeatureFlagsService` on startup, while session analytics and user insight session replays are initialized via Microsoft Clarity in `AppDelegate`.
 * **Testing Isolation**: Key dependencies are decoupled through protocols (such as `NotificationManager` and `FeatureFlagsServiceType`), allowing clean, decoupled testing using **Native Manual Mocks**.
 
 ---
@@ -104,7 +106,7 @@ pod install
    ```bash
    cp Secrets.template.xcconfig Secrets.xcconfig
    ```
-2. Open `Secrets.xcconfig` and input your real credentials or keep the test defaults (this file is automatically ignored by Git).
+2. Open `Secrets.xcconfig` and input your real credentials (such as `AD_APP_ID`, `AD_UNIT_ID`, and `CLARITY_ID`) or keep the test defaults (this file is automatically ignored by Git).
 
 ### Step 3: Compile and Run the App
 1. Open the generated **`ChuckNorrisApp.xcworkspace`** workspace in Xcode.

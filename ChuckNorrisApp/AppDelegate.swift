@@ -9,6 +9,7 @@ import UIKit
 import Swinject
 import GoogleMobileAds
 import FirebaseCore
+import Clarity
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,7 +19,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         MobileAds.shared.start(completionHandler: nil)
         _ = NotificationManagerImpl.shared
         FirebaseApp.configure()
+        startMicrosoftClarity()
         return true
+    }
+    
+    private func startMicrosoftClarity() {
+        let projectId = Bundle.main.object(forInfoDictionaryKey: "ClarityID") as? String
+        if let projectId {
+            let clarityConfig = ClarityConfig(projectId: projectId)
+            ClaritySDK.initialize(config: clarityConfig)
+        }
     }
 
     // MARK: UISceneSession Lifecycle
