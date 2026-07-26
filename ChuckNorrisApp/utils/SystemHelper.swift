@@ -33,7 +33,7 @@ class SystemHelper {
         let version = getAppVersion()
         let build = getAppBuild()
         let format = NSLocalizedString("about_version_format", comment: "Format for app version and build")
-        return String(format: format, version, build)
+        return String(format: format, version)
     }
 }
 
