@@ -63,6 +63,10 @@ final class NotificationManagerMock: NotificationManager {
         requestPermissionCalled = true
     }
     
+    func consumePendingJokePayload() -> (text: String, speak: Bool)? {
+        return nil
+    }
+    
     func reset() {
         scheduleAlarmCalled = false
         scheduledAlarm = nil

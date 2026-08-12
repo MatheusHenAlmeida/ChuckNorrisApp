@@ -14,10 +14,22 @@ protocol NotificationManager {
     func scheduleAlarm(alarm: Alarm)
     func cancelAlarm(id: UUID)
     func requestPermission()
+    func consumePendingJokePayload() -> (text: String, speak: Bool)?
 }
 
 class NotificationManagerImpl: NSObject, UNUserNotificationCenterDelegate, NotificationManager {
     nonisolated(unsafe) static let shared = NotificationManagerImpl()
+    
+    private(set) var pendingJokePayload: (text: String, speak: Bool)?
+    
+    func setPendingJoke(text: String, speak: Bool) {
+        self.pendingJokePayload = (text, speak)
+    }
+    
+    func consumePendingJokePayload() -> (text: String, speak: Bool)? {
+        defer { self.pendingJokePayload = nil }
+        return self.pendingJokePayload
+    }
     
     override private init() {
         super.init()
@@ -179,21 +191,46 @@ class NotificationManagerImpl: NSObject, UNUserNotificationCenterDelegate, Notif
             let shouldSpeak = (action == "TELL_JOKE_ACTION")
             
             DispatchQueue.main.async {
-                guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                      let window = scene.windows.first(where: { $0.isKeyWindow }),
-                      let rootVC = window.rootViewController as? ViewController else {
-                    return
-                }
-                
-                if rootVC.presentedViewController != nil {
-                    rootVC.dismiss(animated: true) {
-                        rootVC.displayJoke(text: joke, speak: shouldSpeak)
-                    }
-                } else {
-                    rootVC.displayJoke(text: joke, speak: shouldSpeak)
-                }
+                NotificationManagerImpl.shared.handleNotificationResponse(joke: joke, shouldSpeak: shouldSpeak)
             }
         }
         completionHandler()
+    }
+    
+    @MainActor
+    private func handleNotificationResponse(joke: String, shouldSpeak: Bool) {
+        guard let scene = UIApplication.shared.connectedScenes.first(where: {
+            $0.activationState == .foregroundActive || $0.activationState == .foregroundInactive
+        }) as? UIWindowScene ?? UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = scene.windows.first(where: { $0.isKeyWindow }) ?? scene.windows.first else {
+            setPendingJoke(text: joke, speak: shouldSpeak)
+            return
+        }
+        
+        if let viewController = window.findViewController {
+            if viewController.presentedViewController != nil {
+                viewController.dismiss(animated: true) {
+                    viewController.displayJoke(text: joke, speak: shouldSpeak)
+                }
+            } else {
+                viewController.displayJoke(text: joke, speak: shouldSpeak)
+            }
+        } else {
+            setPendingJoke(text: joke, speak: shouldSpeak)
+        }
+    }
+}
+
+private extension UIWindow {
+    @MainActor
+    var findViewController: ViewController? {
+        var current = rootViewController
+        while let vc = current {
+            if let target = vc as? ViewController {
+                return target
+            }
+            current = vc.presentedViewController
+        }
+        return nil
     }
 }

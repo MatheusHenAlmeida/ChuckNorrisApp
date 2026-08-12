@@ -39,6 +39,17 @@ class ViewController: UIViewController {
         setButton()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        checkPendingNotificationJoke()
+    }
+    
+    private func checkPendingNotificationJoke() {
+        if let payload = NotificationManagerImpl.shared.consumePendingJokePayload() {
+            displayJoke(text: payload.text, speak: payload.speak)
+        }
+    }
+    
     private func setIds() {
         askForJokeButton.accessibilityIdentifier = "ask_joke_button"
         tellJokeButton.accessibilityIdentifier = "tell_joke_button"
