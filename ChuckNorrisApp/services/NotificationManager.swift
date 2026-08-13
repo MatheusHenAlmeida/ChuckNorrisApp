@@ -15,6 +15,11 @@ protocol NotificationManager {
     func cancelAlarm(id: UUID)
     func requestPermission()
     func consumePendingJokePayload() -> (text: String, speak: Bool)?
+    func setPendingJoke(text: String, speak: Bool)
+}
+
+extension NotificationManager {
+    func setPendingJoke(text: String, speak: Bool) {}
 }
 
 class NotificationManagerImpl: NSObject, UNUserNotificationCenterDelegate, NotificationManager {
