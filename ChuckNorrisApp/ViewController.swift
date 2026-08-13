@@ -23,6 +23,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var loadingView: UIView!
     
     var mainViewModel: MainViewModelType?
+    var notificationManager: NotificationManager = NotificationManagerImpl.shared
     
     private var dimmingView: UIView!
     private var sideMenuContainerView: UIView!
@@ -45,7 +46,7 @@ class ViewController: UIViewController {
     }
     
     private func checkPendingNotificationJoke() {
-        if let payload = NotificationManagerImpl.shared.consumePendingJokePayload() {
+        if let payload = notificationManager.consumePendingJokePayload() {
             displayJoke(text: payload.text, speak: payload.speak)
         }
     }
@@ -406,6 +407,9 @@ extension SwinjectStoryboard {
         }
         defaultContainer.storyboardInitCompleted(ViewController.self) { resolver, viewController in
             viewController.mainViewModel = resolver.resolve(MainViewModelType.self)
+            if let notificationManager = resolver.resolve(NotificationManager.self) {
+                viewController.notificationManager = notificationManager
+            }
         }
     }
 }
