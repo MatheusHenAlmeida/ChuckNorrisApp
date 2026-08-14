@@ -21,10 +21,12 @@ class NotificationManagerImpl: NSObject, UNUserNotificationCenterDelegate, Notif
     nonisolated(unsafe) static let shared = NotificationManagerImpl()
     
     var webClient: ChuckNorrisWebClient?
+    var alarmRepository: AlarmRepository?
     private(set) var pendingJokePayload: (text: String, speak: Bool)?
     
-    init(webClient: ChuckNorrisWebClient? = nil) {
+    init(webClient: ChuckNorrisWebClient? = nil, alarmRepository: AlarmRepository? = nil) {
         self.webClient = webClient
+        self.alarmRepository = alarmRepository
         super.init()
         UNUserNotificationCenter.current().delegate = self
         setupNotificationCategories()
@@ -72,7 +74,7 @@ class NotificationManagerImpl: NSObject, UNUserNotificationCenterDelegate, Notif
     }
     
     private func checkAndDeleteSingleRunAlarm(id: UUID) {
-        let repository: AlarmRepository = AlarmRepositoryImpl(context: CoreDataManager.shared.context)
+        let repository = self.alarmRepository ?? AlarmRepositoryImpl(context: CoreDataManager.shared.context)
         let alarms = repository.getAll()
         if let alarm = alarms.first(where: { $0.id == id }) {
             if alarm.days.isEmpty {
@@ -83,17 +85,18 @@ class NotificationManagerImpl: NSObject, UNUserNotificationCenterDelegate, Notif
     }
     
     func cleanUpExpiredSingleRunAlarms() {
+        let repository = self.alarmRepository
         UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
             let pendingIds = Set(requests.map { $0.identifier })
             
-            let repository: AlarmRepository = AlarmRepositoryImpl(context: CoreDataManager.shared.context)
-            let alarms = repository.getAll()
+            let activeRepository = repository ?? AlarmRepositoryImpl(context: CoreDataManager.shared.context)
+            let alarms = activeRepository.getAll()
             
             for alarm in alarms {
                 if alarm.days.isEmpty && alarm.isEnabled {
                     if !pendingIds.contains(alarm.id.uuidString) {
                         print("Cleaning up expired single-run alarm: \(alarm.id)")
-                        repository.delete(id: alarm.id)
+                        activeRepository.delete(id: alarm.id)
                     }
                 }
             }
