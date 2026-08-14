@@ -395,8 +395,10 @@ extension SwinjectStoryboard {
         defaultContainer.register(AlarmRepository.self) { resolver in
             AlarmRepositoryImpl(context: resolver.resolve(NSManagedObjectContext.self)!)
         }
-        defaultContainer.register(NotificationManager.self) { _ in
-            NotificationManagerImpl.shared
+        defaultContainer.register(NotificationManager.self) { resolver in
+            let manager = NotificationManagerImpl.shared
+            manager.webClient = resolver.resolve(ChuckNorrisWebClient.self)
+            return manager
         }
         defaultContainer.register(AlarmViewModelType.self) { resolver in
             AlarmViewModel(

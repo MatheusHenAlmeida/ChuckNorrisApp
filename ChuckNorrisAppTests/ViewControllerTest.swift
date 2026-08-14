@@ -60,7 +60,7 @@ final class ViewControllerTest: XCTestCase {
 
     func testPendingNotificationJoke_consumedOnViewDidAppear() async throws {
         let expectedJoke = "Chuck Norris can count to infinity twice."
-        NotificationManagerImpl.shared.setPendingJoke(text: expectedJoke, speak: false)
+        NotificationManagerImpl.shared.pendingJokePayload = (expectedJoke, false)
         
         viewController?.viewDidAppear(false)
         
