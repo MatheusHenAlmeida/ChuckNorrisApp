@@ -118,8 +118,7 @@ class NotificationManagerImpl: NSObject, UNUserNotificationCenterDelegate, Notif
         Task {
             var jokeText = NSLocalizedString("time_for_chuck_norris_joke", comment: "Default body text for Chuck Norris joke alarm notification")
             do {
-                let activeClient = client ?? ChuckNorrisWebClientImpl(webService: ChuckNorrisServiceImpl(baseUrl: "https://api.chucknorris.io/jokes"))
-                if let joke = try await activeClient.getJoke(), let val = joke.value {
+                if let joke = try await client?.getJoke(), let val = joke.value {
                     jokeText = val
                 }
             } catch {
