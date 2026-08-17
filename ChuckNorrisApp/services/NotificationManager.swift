@@ -74,29 +74,26 @@ class NotificationManagerImpl: NSObject, UNUserNotificationCenterDelegate, Notif
     }
     
     private func checkAndDeleteSingleRunAlarm(id: UUID) {
-        let repository = self.alarmRepository ?? AlarmRepositoryImpl(context: CoreDataManager.shared.context)
-        let alarms = repository.getAll()
+        let alarms = alarmRepository?.getAll() ?? []
         if let alarm = alarms.first(where: { $0.id == id }) {
             if alarm.days.isEmpty {
                 print("Deleting single-run alarm: \(id)")
-                repository.delete(id: id)
+                alarmRepository?.delete(id: id)
             }
         }
     }
     
     func cleanUpExpiredSingleRunAlarms() {
-        let repository = self.alarmRepository
-        UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
+        UNUserNotificationCenter.current().getPendingNotificationRequests { [weak self] requests in
             let pendingIds = Set(requests.map { $0.identifier })
             
-            let activeRepository = repository ?? AlarmRepositoryImpl(context: CoreDataManager.shared.context)
-            let alarms = activeRepository.getAll()
+            let alarms = self?.alarmRepository?.getAll() ?? []
             
             for alarm in alarms {
                 if alarm.days.isEmpty && alarm.isEnabled {
                     if !pendingIds.contains(alarm.id.uuidString) {
                         print("Cleaning up expired single-run alarm: \(alarm.id)")
-                        activeRepository.delete(id: alarm.id)
+                        self?.alarmRepository?.delete(id: alarm.id)
                     }
                 }
             }
