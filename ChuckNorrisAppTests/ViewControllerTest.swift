@@ -24,6 +24,14 @@ final class MainViewModelMock: MainViewModelType {
     func speech(message: String) {
         // Mock implementation
     }
+    
+    var consumePendingJokeReturnValue: String?
+    var consumePendingJokeCalled = false
+    
+    func consumePendingJoke() -> String? {
+        consumePendingJokeCalled = true
+        return consumePendingJokeReturnValue
+    }
 }
 
 @MainActor
@@ -60,12 +68,12 @@ final class ViewControllerTest: XCTestCase {
 
     func testPendingNotificationJoke_consumedOnViewDidAppear() async throws {
         let expectedJoke = "Chuck Norris can count to infinity twice."
-        NotificationManagerImpl.shared.pendingJokePayload = (expectedJoke, false)
+        mainViewModel.consumePendingJokeReturnValue = expectedJoke
         
         viewController?.viewDidAppear(false)
         
         XCTAssertEqual(viewController?.myLabel.text, expectedJoke)
-        XCTAssertNil(NotificationManagerImpl.shared.consumePendingJokePayload())
+        XCTAssertTrue(mainViewModel.consumePendingJokeCalled)
     }
 
     override func tearDown() async throws {

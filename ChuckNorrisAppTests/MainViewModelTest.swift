@@ -28,11 +28,17 @@ final class MainViewModelTest: XCTestCase {
     
     private var mainViewModel: MainViewModel? = nil
     private var chuckNorrisWebClient = ChuckNorrisWebClientMock()
+    private var notificationManager = NotificationManagerMock()
 
     override func setUpWithError() throws {
         chuckNorrisWebClient = ChuckNorrisWebClientMock()
+        notificationManager = NotificationManagerMock()
         let speechService = SpeechService(speechSynthesizer: AVSpeechSynthesizer())
-        mainViewModel = MainViewModel(webClient: chuckNorrisWebClient, speechService: speechService)
+        mainViewModel = MainViewModel(
+            webClient: chuckNorrisWebClient,
+            speechService: speechService,
+            notificationManager: notificationManager
+        )
     }
 
     func testGetJoke_mustReturnJoke() async throws {
@@ -44,6 +50,35 @@ final class MainViewModelTest: XCTestCase {
         XCTAssertEqual("url", joke?.iconUrl)
         XCTAssertEqual("Some joke", joke?.value)
         XCTAssertTrue(chuckNorrisWebClient.getJokeCalled)
+    }
+    
+    func testConsumePendingJoke_whenHasPayload_returnsText() {
+        notificationManager.pendingJokePayload = ("Chuck Norris counted to infinity.", false)
+        
+        let result = mainViewModel?.consumePendingJoke()
+        
+        XCTAssertEqual(result, "Chuck Norris counted to infinity.")
+        XCTAssertTrue(notificationManager.consumePendingJokePayloadCalled)
+        XCTAssertNil(notificationManager.pendingJokePayload)
+    }
+    
+    func testConsumePendingJoke_whenHasPayloadWithSpeak_returnsText() {
+        notificationManager.pendingJokePayload = ("Chuck Norris speaks.", true)
+        
+        let result = mainViewModel?.consumePendingJoke()
+        
+        XCTAssertEqual(result, "Chuck Norris speaks.")
+        XCTAssertTrue(notificationManager.consumePendingJokePayloadCalled)
+        XCTAssertNil(notificationManager.pendingJokePayload)
+    }
+    
+    func testConsumePendingJoke_whenNoPayload_returnsNil() {
+        notificationManager.pendingJokePayload = nil
+        
+        let result = mainViewModel?.consumePendingJoke()
+        
+        XCTAssertNil(result)
+        XCTAssertTrue(notificationManager.consumePendingJokePayloadCalled)
     }
     
     override func tearDown() {
