@@ -14,17 +14,34 @@ protocol NotificationManager {
     func scheduleAlarm(alarm: Alarm)
     func cancelAlarm(id: UUID)
     func requestPermission()
+    func consumePendingJokePayload() -> (text: String, speak: Bool)?
 }
 
+// TODO: Mover ações do AlarmRepository e do ChuckNorrisWebClient para ViewModel, se possível
 class NotificationManagerImpl: NSObject, UNUserNotificationCenterDelegate, NotificationManager {
     nonisolated(unsafe) static let shared = NotificationManagerImpl()
     
-    override private init() {
+    var webClient: ChuckNorrisWebClient?
+    var alarmRepository: AlarmRepository?
+    private(set) var pendingJokePayload: (text: String, speak: Bool)?
+    
+    init(webClient: ChuckNorrisWebClient? = nil, alarmRepository: AlarmRepository? = nil) {
+        self.webClient = webClient
+        self.alarmRepository = alarmRepository
         super.init()
         UNUserNotificationCenter.current().delegate = self
         setupNotificationCategories()
         setupLifecycleObservers()
         cleanUpExpiredSingleRunAlarms()
+    }
+    
+    func setPendingJoke(text: String, speak: Bool) {
+        self.pendingJokePayload = (text, speak)
+    }
+    
+    func consumePendingJokePayload() -> (text: String, speak: Bool)? {
+        defer { self.pendingJokePayload = nil }
+        return self.pendingJokePayload
     }
     
     private func setupNotificationCategories() {
@@ -47,39 +64,37 @@ class NotificationManagerImpl: NSObject, UNUserNotificationCenterDelegate, Notif
     private func setupLifecycleObservers() {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(handleAppForeground),
-            name: UIApplication.willEnterForegroundNotification,
+            selector: #selector(appDidBecomeActive),
+            name: UIApplication.didBecomeActiveNotification,
             object: nil
         )
     }
     
-    @objc private func handleAppForeground() {
+    @objc private func appDidBecomeActive() {
         cleanUpExpiredSingleRunAlarms()
     }
     
     private func checkAndDeleteSingleRunAlarm(id: UUID) {
-        let repository: AlarmRepository = AlarmRepositoryImpl(context: CoreDataManager.shared.context)
-        let alarms = repository.getAll()
+        let alarms = alarmRepository?.getAll() ?? []
         if let alarm = alarms.first(where: { $0.id == id }) {
             if alarm.days.isEmpty {
                 print("Deleting single-run alarm: \(id)")
-                repository.delete(id: id)
+                alarmRepository?.delete(id: id)
             }
         }
     }
     
     func cleanUpExpiredSingleRunAlarms() {
-        UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
+        UNUserNotificationCenter.current().getPendingNotificationRequests { [weak self] requests in
             let pendingIds = Set(requests.map { $0.identifier })
             
-            let repository: AlarmRepository = AlarmRepositoryImpl(context: CoreDataManager.shared.context)
-            let alarms = repository.getAll()
+            let alarms = self?.alarmRepository?.getAll() ?? []
             
             for alarm in alarms {
                 if alarm.days.isEmpty && alarm.isEnabled {
                     if !pendingIds.contains(alarm.id.uuidString) {
                         print("Cleaning up expired single-run alarm: \(alarm.id)")
-                        repository.delete(id: alarm.id)
+                        self?.alarmRepository?.delete(id: alarm.id)
                     }
                 }
             }
@@ -100,49 +115,26 @@ class NotificationManagerImpl: NSObject, UNUserNotificationCenterDelegate, Notif
         // Cancel existing notifications for this alarm ID (we will use ID + identifiers)
         cancelAlarm(id: alarm.id)
         
+        let client = self.webClient
         Task {
             var jokeText = NSLocalizedString("time_for_chuck_norris_joke", comment: "Default body text for Chuck Norris joke alarm notification")
             do {
-                let service = ChuckNorrisServiceImpl(baseUrl: "https://api.chucknorris.io/jokes")
-                let client = ChuckNorrisWebClientImpl(webService: service)
-                if let joke = try await client.getJoke(), let val = joke.value {
+                if let joke = try await client?.getJoke(), let val = joke.value {
                     jokeText = val
                 }
             } catch {
                 print("Error fetching joke for alarm notification: \(error)")
             }
             
-            let content = UNMutableNotificationContent()
-            content.title = NSLocalizedString("time_for_chuck_norris_joke", comment: "Title for Chuck Norris joke alarm notification")
-            content.body = jokeText
-            content.sound = .default
-            content.categoryIdentifier = "ALARM_CATEGORY"
-            content.userInfo = [
-                "alarmId": alarm.id.uuidString,
-                "joke": jokeText
-            ]
+            let content = buildNotificationContent(alarmId: alarm.id.uuidString, joke: jokeText)
             
             if alarm.days.isEmpty {
-                // One-time alarm (Next occurrence)
-                var dateComponents = DateComponents()
-                dateComponents.hour = alarm.hour
-                dateComponents.minute = alarm.minute
-                
-                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-                let request = UNNotificationRequest(identifier: alarm.id.uuidString, content: content, trigger: trigger)
+                let request = createNotificationRequest(alarm: alarm, content: content)
                 
                 try? await UNUserNotificationCenter.current().add(request)
             } else {
-                // Recurring alarm for each day
                 for day in alarm.days {
-                    var dateComponents = DateComponents()
-                    dateComponents.hour = alarm.hour
-                    dateComponents.minute = alarm.minute
-                    dateComponents.weekday = day // 1 = Sunday matches UNCalendarNotificationTrigger
-                    
-                    let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-                    // Unique identifier for each day instance: UUID-Day
-                    let request = UNNotificationRequest(identifier: "\(alarm.id.uuidString)-\(day)", content: content, trigger: trigger)
+                    let request = createNotificationRequest(alarm: alarm, content: content, forDay: day)
                     
                     try? await UNUserNotificationCenter.current().add(request)
                 }
@@ -179,21 +171,81 @@ class NotificationManagerImpl: NSObject, UNUserNotificationCenterDelegate, Notif
             let shouldSpeak = (action == "TELL_JOKE_ACTION")
             
             DispatchQueue.main.async {
-                guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                      let window = scene.windows.first(where: { $0.isKeyWindow }),
-                      let rootVC = window.rootViewController as? ViewController else {
-                    return
-                }
-                
-                if rootVC.presentedViewController != nil {
-                    rootVC.dismiss(animated: true) {
-                        rootVC.displayJoke(text: joke, speak: shouldSpeak)
-                    }
-                } else {
-                    rootVC.displayJoke(text: joke, speak: shouldSpeak)
-                }
+                NotificationManagerImpl.shared.handleNotificationResponse(joke: joke, shouldSpeak: shouldSpeak)
             }
         }
         completionHandler()
     }
+    
+    @MainActor
+    private func handleNotificationResponse(joke: String, shouldSpeak: Bool) {
+        guard let scene = UIApplication.shared.connectedScenes.first(where: {
+            $0.activationState == .foregroundActive || $0.activationState == .foregroundInactive
+        }) as? UIWindowScene ?? UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = scene.windows.first(where: { $0.isKeyWindow }) ?? scene.windows.first else {
+            self.pendingJokePayload = (joke, shouldSpeak)
+            return
+        }
+        
+        if let viewController = window.findViewController {
+            if viewController.presentedViewController != nil {
+                viewController.dismiss(animated: true) {
+                    viewController.displayJoke(text: joke, speak: shouldSpeak)
+                }
+            } else {
+                viewController.displayJoke(text: joke, speak: shouldSpeak)
+            }
+        } else {
+            self.pendingJokePayload = (joke, shouldSpeak)
+        }
+    }
+}
+
+private extension UIWindow {
+    @MainActor
+    var findViewController: ViewController? {
+        var current = rootViewController
+        while let vc = current {
+            if let target = vc as? ViewController {
+                return target
+            }
+            current = vc.presentedViewController
+        }
+        return nil
+    }
+}
+
+// MARK: - Internal Helpers
+private func buildNotificationContent(alarmId: String, joke: String) -> UNNotificationContent {
+    let content = UNMutableNotificationContent()
+    content.title = NSLocalizedString("time_for_chuck_norris_joke", comment: "Title for Chuck Norris joke alarm notification")
+    content.body = joke
+    content.sound = .default
+    content.categoryIdentifier = "ALARM_CATEGORY"
+    content.userInfo = [
+        "alarmId": alarmId,
+        "joke": joke
+    ]
+    
+    return content
+}
+
+private func createNotificationRequest(alarm: Alarm, content: UNNotificationContent, forDay day: Int? = nil) -> UNNotificationRequest {
+    var dateComponents = DateComponents()
+    dateComponents.hour = alarm.hour
+    dateComponents.minute = alarm.minute
+    if let day {
+        dateComponents.weekday = day // 1 = Sunday matches UNCalendarNotificationTrigger
+    }
+    
+    let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: day != nil)
+    var uniqueIdentifier = ""
+    if let day {
+        uniqueIdentifier = "\(alarm.id.uuidString)-\(day)"
+    } else {
+        uniqueIdentifier = alarm.id.uuidString
+    }
+    let request = UNNotificationRequest(identifier: uniqueIdentifier, content: content, trigger: trigger)
+    
+    return request
 }

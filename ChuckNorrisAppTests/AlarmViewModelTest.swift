@@ -48,6 +48,8 @@ final class NotificationManagerMock: NotificationManager {
     var cancelAlarmCalled = false
     var cancelledId: UUID?
     var requestPermissionCalled = false
+    var pendingJokePayload: (text: String, speak: Bool)?
+    var consumePendingJokePayloadCalled = false
     
     func scheduleAlarm(alarm: Alarm) {
         scheduleAlarmCalled = true
@@ -63,12 +65,20 @@ final class NotificationManagerMock: NotificationManager {
         requestPermissionCalled = true
     }
     
+    func consumePendingJokePayload() -> (text: String, speak: Bool)? {
+        consumePendingJokePayloadCalled = true
+        defer { pendingJokePayload = nil }
+        return pendingJokePayload
+    }
+    
     func reset() {
         scheduleAlarmCalled = false
         scheduledAlarm = nil
         cancelAlarmCalled = false
         cancelledId = nil
         requestPermissionCalled = false
+        pendingJokePayload = nil
+        consumePendingJokePayloadCalled = false
     }
 }
 

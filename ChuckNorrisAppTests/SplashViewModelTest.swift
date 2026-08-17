@@ -28,7 +28,7 @@ final class SplashViewModelTest: XCTestCase {
         let mockService = MockFeatureFlagsService()
         let viewModel = SplashViewModel(featureFlagsService: mockService)
         
-        try await viewModel.loadRemoteConfig()
+        try await viewModel.loadFeatureFlags()
         
         XCTAssertTrue(mockService.startCalled)
     }

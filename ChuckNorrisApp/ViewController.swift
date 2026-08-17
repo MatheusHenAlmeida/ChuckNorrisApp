@@ -39,6 +39,17 @@ class ViewController: UIViewController {
         setButton()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        checkPendingNotificationJoke()
+    }
+    
+    private func checkPendingNotificationJoke() {
+        if let jokeText = mainViewModel?.consumePendingJoke() {
+            myLabel.text = jokeText
+        }
+    }
+    
     private func setIds() {
         askForJokeButton.accessibilityIdentifier = "ask_joke_button"
         tellJokeButton.accessibilityIdentifier = "tell_joke_button"
@@ -368,7 +379,8 @@ extension SwinjectStoryboard {
         defaultContainer.register(MainViewModelType.self) { resolver in
             MainViewModel(
                 webClient: resolver.resolve(ChuckNorrisWebClient.self)!,
-                speechService: resolver.resolve(SpeechService.self)!
+                speechService: resolver.resolve(SpeechService.self)!,
+                notificationManager: resolver.resolve(NotificationManager.self)!
             )
         }
         defaultContainer.register(SpeechService.self) { _ in
@@ -383,8 +395,11 @@ extension SwinjectStoryboard {
         defaultContainer.register(AlarmRepository.self) { resolver in
             AlarmRepositoryImpl(context: resolver.resolve(NSManagedObjectContext.self)!)
         }
-        defaultContainer.register(NotificationManager.self) { _ in
-            NotificationManagerImpl.shared
+        defaultContainer.register(NotificationManager.self) { resolver in
+            let manager = NotificationManagerImpl.shared
+            manager.webClient = resolver.resolve(ChuckNorrisWebClient.self)
+            manager.alarmRepository = resolver.resolve(AlarmRepository.self)
+            return manager
         }
         defaultContainer.register(AlarmViewModelType.self) { resolver in
             AlarmViewModel(
