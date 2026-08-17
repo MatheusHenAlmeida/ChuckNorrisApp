@@ -17,6 +17,7 @@ protocol NotificationManager {
     func consumePendingJokePayload() -> (text: String, speak: Bool)?
 }
 
+// TODO: Mover ações do AlarmRepository e do ChuckNorrisWebClient para ViewModel, se possível
 class NotificationManagerImpl: NSObject, UNUserNotificationCenterDelegate, NotificationManager {
     nonisolated(unsafe) static let shared = NotificationManagerImpl()
     
